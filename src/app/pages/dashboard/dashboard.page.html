@@ -1,0 +1,100 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button>
+      <ion-icon slot="icon-only" md="search" color="primary"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <!-- <ion-title>Dashboard</ion-title> -->
+</ion-toolbar>
+<ion-content>
+
+
+  <ion-grid>
+
+    <!-- Scrollable Segment -->
+    <ion-segment scrollable value="heart">
+      <ion-segment-button value="home">
+        Device 1
+      </ion-segment-button>
+      <ion-segment-button value="heart">
+        Device 2
+      </ion-segment-button>
+      <ion-segment-button value="pin">
+        Device 3
+      </ion-segment-button>
+      <ion-segment-button value="star">
+        Device 4
+      </ion-segment-button>
+      <ion-segment-button value="call">
+        Device 5
+      </ion-segment-button>
+      <ion-segment-button value="globe">
+        Device 6
+      </ion-segment-button>
+      <ion-segment-button value="basket">
+        Device 7
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Suhu</ion-card-subtitle>
+          </ion-card-header>
+          
+          <ion-card-content>
+            <ion-avatar>
+              <img src="/assets/images/temperature.png">
+            </ion-avatar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Suhu Air</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-avatar>
+              <img src="/assets/images/temperature.png">
+            </ion-avatar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>TDS</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-avatar>
+              <img src="/assets/images/temperature.png">
+            </ion-avatar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>PH</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-avatar>
+              <img src="/assets/images/temperature.png">
+            </ion-avatar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

@@ -1,45 +1,56 @@
-<ion-toolbar>
+<ion-toolbar color="primary">
   <ion-buttons slot="start">
     <ion-menu-button></ion-menu-button>
   </ion-buttons>
   <ion-buttons slot="end">
     <ion-button>
-      <ion-icon slot="icon-only" md="search" color="primary"></ion-icon>
+      <ion-icon slot="icon-only" md="search"></ion-icon>
     </ion-button>
   </ion-buttons>
   <!-- <ion-title>Dashboard</ion-title> -->
 </ion-toolbar>
+<ion-toolbar color="primary">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Home
+        <ion-buttons style="float: right; margin-top: -10px;">
+        <ion-button >
+          <ion-icon slot="icon-only" name="settings-outline" color="primary"></ion-icon>
+        </ion-button>
+        </ion-buttons>
+      </ion-card-title>
+      <ion-card-subtitle><ion-badge color="primary">Hidroponik</ion-badge> <ion-badge color="primary" style="margin-left: 5px;">Cabai</ion-badge> <ion-badge color="primary" style="margin-left: 5px;"> 4 Active Device </ion-badge>
+      </ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div>      
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-toolbar>
 <ion-content>
-
+ 
+  
 
   <ion-grid>
-
     <!-- Scrollable Segment -->
-    <ion-segment scrollable value="heart">
-      <ion-segment-button value="home">
-        Device 1
-      </ion-segment-button>
-      <ion-segment-button value="heart">
-        Device 2
-      </ion-segment-button>
-      <ion-segment-button value="pin">
-        Device 3
-      </ion-segment-button>
-      <ion-segment-button value="star">
-        Device 4
-      </ion-segment-button>
-      <ion-segment-button value="call">
-        Device 5
-      </ion-segment-button>
-      <ion-segment-button value="globe">
-        Device 6
-      </ion-segment-button>
-      <ion-segment-button value="basket">
-        Device 7
-      </ion-segment-button>
-    </ion-segment>
+  <ion-segment scrollable value="heart" color="primary">
+    <ion-segment-button value="home">
+      Device 1
+    </ion-segment-button>
+    <ion-segment-button value="heart">
+      Device 2
+    </ion-segment-button>
+    <ion-segment-button value="pin">
+      Device 3
+    </ion-segment-button>
+    <ion-segment-button value="star">
+      Device 4
+    </ion-segment-button>
+  </ion-segment>
 
-    <ion-row>
+    <ion-row style="margin-top:10px;">
       <ion-col size="6">
         <ion-card>
           <ion-card-header>
@@ -47,9 +58,16 @@
           </ion-card-header>
           
           <ion-card-content>
-            <ion-avatar>
-              <img src="/assets/images/temperature.png">
-            </ion-avatar>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-img src="/assets/images/temperature.png" style="height: 50px;"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <div style="margin-top: 10px;">30 °C</div>
+                </ion-col>
+              </ion-row>
+              </ion-grid>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -61,9 +79,16 @@
           </ion-card-header>
 
           <ion-card-content>
-            <ion-avatar>
-              <img src="/assets/images/temperature.png">
-            </ion-avatar>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-img src="/assets/images/water-temperature.png" style="height: 50px;"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <div style="margin-top: 10px;">30 °C</div>
+                </ion-col>
+              </ion-row>
+              </ion-grid>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -71,13 +96,20 @@
       <ion-col size="6">
         <ion-card>
           <ion-card-header>
-            <ion-card-subtitle>TDS</ion-card-subtitle>
+            <ion-card-subtitle>Kelembaban</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
-            <ion-avatar>
-              <img src="/assets/images/temperature.png">
-            </ion-avatar>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-img src="/assets/images/humidity.png" style="height: 50px;"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <div style="margin-top: 10px;">70 %</div>
+                </ion-col>
+              </ion-row>
+              </ion-grid>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -88,13 +120,39 @@
             <ion-card-subtitle>PH</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <ion-avatar>
-              <img src="/assets/images/temperature.png">
-            </ion-avatar>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-img src="/assets/images/temperature.png" style="height: 50px;"></ion-img>
+                </ion-col>
+                <ion-col>
+                  <div style="margin-top: 10px;">30 C</div>
+                </ion-col>
+              </ion-row>
+              </ion-grid>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
 
   </ion-grid>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="schedule">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Home</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="map">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="about">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Akun</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

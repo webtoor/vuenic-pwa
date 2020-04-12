@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -11,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SigninPage implements OnInit {
   formLogin: FormGroup;
   submitted = false;
-  constructor(public menu: MenuController, private formBuilder: FormBuilder) { 
+  constructor(public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
 
@@ -28,7 +30,15 @@ export class SigninPage implements OnInit {
         return;
     }
     console.log(this.formLogin.value)
-
+    this.authService.Postlogin(this.formLogin.value, 'login').subscribe(res => {
+      console.log(res)
+      if(res.access_token) {
+        localStorage.setItem('bitponic-pwa', JSON.stringify(res));
+        this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
+      }
+    }, (err) => {
+      //this.presentToast("Server sedang dalam perbaikan, silakan coba lagi nanti :(");
+    });
   
   }
   get f() { return this.formLogin.controls; }

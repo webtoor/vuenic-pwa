@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -11,14 +11,14 @@ import { Router } from '@angular/router';
 })
 
 export class SigninPage implements OnInit {
-  formLogin: FormGroup;
+  loginForm: FormGroup;
   submitted = false;
-  constructor(public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
+  constructor(public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
 
   ngOnInit() {
-    this.formLogin = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       'email' : [null, [Validators.required, Validators.email]],
       'password' : [null, Validators.required],
     });
@@ -26,21 +26,30 @@ export class SigninPage implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (this.formLogin.invalid) {
+    if (this.loginForm.invalid) {
         return;
     }
-    console.log(this.formLogin.value)
-    this.authService.Postlogin(this.formLogin.value, 'login').subscribe(res => {
+    console.log(this.loginForm.value)
+    this.authService.Postlogin(this.loginForm.value, 'login').subscribe(res => {
       console.log(res)
       if(res.access_token) {
         localStorage.setItem('bitponic-pwa', JSON.stringify(res));
         this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
+      }else{
+        this.presentToast('Anda memasukkan Email dan Password yang salah. Isi dengan data yang benar dan coba lagi',);
       }
     }, (err) => {
       //this.presentToast("Server sedang dalam perbaikan, silakan coba lagi nanti :(");
     });
   
   }
-  get f() { return this.formLogin.controls; }
-
+  get f() { return this.loginForm.controls; }
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
 }

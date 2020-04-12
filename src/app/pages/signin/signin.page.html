@@ -20,7 +20,7 @@
     <ion-label position="stacked">Password</ion-label>
     <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
   </ion-item>
-  <div *ngIf="submitted && f.email.errors" class="invalid-feedback" style="margin-top:-10px;">
+  <div *ngIf="submitted && f.password.errors" class="invalid-feedback" style="margin-top:-10px;">
     <div *ngIf="f.password.errors.required">Password harus diisi guys :(</div>
   </div>
 

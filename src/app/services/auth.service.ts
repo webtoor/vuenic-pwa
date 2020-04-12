@@ -13,12 +13,7 @@ export class AuthService {
   constructor(private http:HttpClient) { }
 
   Postlogin(data, type): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept' : 'application/json',
-      })
-    };
-    return this.http.post<any>(apiUrl+type, data, httpOptions)
+    return this.http.post<any>(apiUrl+type, data)
     .pipe(
       tap(_ => this.log('login')),
       catchError(this.handleError('login', []))

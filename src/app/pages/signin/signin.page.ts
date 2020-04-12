@@ -35,11 +35,9 @@ export class SigninPage implements OnInit {
       if(res.access_token) {
         localStorage.setItem('bitponic-pwa', JSON.stringify(res));
         this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
-      }else{
+      }else if(res.error){
         this.presentToast('Anda memasukkan Email dan Password yang salah. Isi dengan data yang benar dan coba lagi',);
       }
-    }, (err) => {
-      //this.presentToast("Server sedang dalam perbaikan, silakan coba lagi nanti :(");
     });
   
   }

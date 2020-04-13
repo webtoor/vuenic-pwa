@@ -8,17 +8,20 @@ let apiUrl = "http://localhost:8000/api/v1/";  //LOCAL
 @Injectable({
   providedIn: 'root'
 })
-export class UserProjectService {
+export class DeviceSensorService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { 
+  }
 
-  getUserProject(type): Observable<any> {
+  getDeviceSensor(type): Observable<any> {
     return this.http.get<any>(apiUrl+type)
     .pipe(
-      tap(_ => this.log('get-user-project')),
-      catchError(this.handleError('get-user-project', []))
+      tap(_ => this.log('get-device-sensor')),
+      catchError(this.handleError('get-device-sensor', []))
     );
   }
+
+  
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -23,13 +23,13 @@ isLoading = false;
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = localStorage.getItem('bitponic-pwa');
-
+    const token = JSON.parse(localStorage.getItem('bitponic-pwa'));
+      //console.log(token['access_token'])
 
     if (token['access_token']) {
         request = request.clone({
         setHeaders: {
-            'Authorization': token['access_token']
+            'Authorization': 'Bearer ' + token['access_token']
         }
         });
     }
@@ -45,12 +45,12 @@ isLoading = false;
     request = request.clone({
         headers: request.headers.set('Accept', 'application/json')
     });
-    this.showLoader();
+    //this.showLoader();
     return next.handle(request).pipe(
         map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-            console.log('event--->>>', event);
-            this.hideLoader();
+           // console.log('event--->>>', event);
+            //this.hideLoader();
         }
         return event;
         }),
@@ -59,13 +59,13 @@ isLoading = false;
             if (error.error.success === false) {
                 this.presentToast('Login failed');
             } else {
-                this.router.navigate(['login', {replaceUrl : true}]);
+                this.router.navigate(['signin', {replaceUrl : true}]);
             }
         }
         if(error.status === 0){
             this.presentToast("Gangguan Koneksi, Pastikan anda terkoneksi dengan internet");
         }
-        this.hideLoader();
+        //this.hideLoader();
         return throwError(error);
         }));
     }

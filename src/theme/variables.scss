@@ -5,6 +5,7 @@
 :root {
 
   --ion-background-color:#FFFFFF;
+  --ion-font-family: 'OpenSans-Regular';
 
   /** primary **/
   --ion-color-primary: #3880ff;
@@ -227,9 +228,19 @@
     --ion-toolbar-background: #1f1f1f;
 
     --ion-tab-bar-background: #1f1f1f;
+
   }
 
   ion-title.title-large {
     --color: white;
   }
+
+
+}
+
+@font-face {
+  font-family: 'OpenSans-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/OpenSans-Regular.ttf');
 }

@@ -1,3 +1,4 @@
+<ion-header class="ion-no-border">
 <ion-toolbar color="primary">
   <ion-buttons slot="start">
     <ion-menu-button></ion-menu-button>
@@ -9,6 +10,12 @@
   </ion-buttons>
   <!-- <ion-title>Dashboard</ion-title> -->
 </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
 <ion-toolbar color="primary">
   <ion-card>
     <ion-card-header>
@@ -21,33 +28,30 @@
         </ion-buttons>
       </ion-card-title>
       <ion-card-subtitle>
-        <ion-badge color="primary">{{projectType}}</ion-badge> 
-        <ion-badge color="primary" style="margin-left: 5px;">Cabai</ion-badge> 
-        <ion-badge color="primary" style="margin-left: 5px;"> {{projectDevice}} Active Device </ion-badge>
+        <ion-badge color="primary" *ngIf="projectType">{{projectType}}</ion-badge> 
+        <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityName">{{commodityName}}</ion-badge> 
+        <ion-badge color="primary" style="margin-left: 5px;" *ngIf="projectDevice"> {{projectDevice}} Active Device </ion-badge>
       </ion-card-subtitle>
     </ion-card-header>
-    
     <ion-card-content>
-      <div>      
+      <div>    
+        <ion-icon name="location-sharp" color="dark"></ion-icon>  {{projectLocation?.address}} {{projectLocation?.districts.subdistrict_name}}, {{projectLocation?.districts.city}}, {{projectLocation?.districts.province}}  
       </div>
     </ion-card-content>
   </ion-card>
 </ion-toolbar>
-
-
-<ion-content>
   <ion-grid>
     <!-- Scrollable Segment -->
-  <ion-segment scrollable value="heart" color="primary" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
+  <ion-segment scrollable value="heart" color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
     <div *ngFor="let device of deviceSegment; let i=index;" >
     <ion-segment-button value="{{device.id}}" layout="icon-end">
-      <ion-badge color="dark">{{i+1}}</ion-badge>
-      <ion-label>Device</ion-label>
+      <sup><ion-badge color="danger">{{i+1}}</ion-badge></sup>
+      <ion-label>IoT-Device</ion-label>
     </ion-segment-button>
   </div>
   </ion-segment>
 
-    <ion-row style="margin-top:10px;">
+    <ion-row style="margin-top:1px;">
       <ion-col size="6" *ngFor="let sensor of deviceSensor">
         <ion-card>
           <ion-card-header>
@@ -66,10 +70,10 @@
                 </ion-col>
                 <ion-col>
                   <div style="margin-top: 10px;">
-                    {{sensor.data_sensor.sensor_value | number:'2.0-0'}} 
-                    <b *ngIf="sensor.sensor_id == 1">%</b> 
-                    <b *ngIf="sensor.sensor_id == 2">°C</b>
-                    <b *ngIf="sensor.sensor_id == 3">°C</b>
+                    <b style="font-size: 21px;">{{sensor.data_sensor.sensor_value | number:'2.0-0'}} </b>
+                    <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b> 
+                    <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
+                    <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>
                 </div>
                 </ion-col>
               </ion-row>

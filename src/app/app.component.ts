@@ -14,17 +14,17 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Dashboard',
-      url: '/folder/Dashboard',
+      url: '/tabs/dashboard',
       icon: 'calendar'
     },
     {
       title: 'Profile',
-      url: '/folder/Profile',
+      url: '/tabs/profile',
       icon: 'person-circle'
     },
     {
       title: 'About',
-      url: '/folder/About',
+      url: '/tabs/about',
       icon: 'information-circle'
     },
    /*  {

@@ -35,18 +35,18 @@ const routes: Routes = [
           }
         ]
       },
-  /*     {
+      {
         path: '',
         redirectTo: '/tabs/dashboard',
         pathMatch: 'full'
-      } */
+      }
     ]
   },
-  {
+/*   {
     path: '',
     redirectTo: '/tabs/dashboard',
     pathMatch: 'full'
-  }
+  } */
 ];
 
 @NgModule({

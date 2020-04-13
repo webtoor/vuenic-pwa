@@ -12,18 +12,20 @@ import { takeWhile, takeUntil } from 'rxjs/operators';
 export class DashboardPage implements OnInit {
   subscription: Subscription
   projectName : String;
+  commodityName : String;
   projectType : String;
   projectDevice : Number;
+  projectLocation;
   deviceSegment;
   segmentDefault;
   deviceSensor; 
-  public intervallTimer = interval(1000);
+  public intervallTimer = interval(60 * 1000);
   private alive = true;
   constructor(public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
    }
 
   ngOnInit() {
-    console.log('ngOnInit')
+    //console.log('ngOnInit')
     this.getUserProject();
   }
 
@@ -33,18 +35,21 @@ export class DashboardPage implements OnInit {
 
   ionViewDidEnter(){
     this.alive = true;
-    console.log('ionViewWillEnter')
+    //console.log('ionViewWillEnter')
     this.setInterval()
   }
 
   getUserProject(){
     this.httpService.getUserProject('user-project').subscribe(res => {
-      //console.log(res);
+      console.log(res);
       if(res.status == "1"){
         this.projectName = res.data.project_name;
         this.projectType = res.data.project.name;
+        this.commodityName = res.data.commodity.name;
         this.projectDevice = res.data.project_device.length;
         this.deviceSegment = res.data.project_device;
+        this.projectLocation = res.data.project_location;
+
         this.segmentDefault = res.data.project_device[0]["id"]
       }
     });

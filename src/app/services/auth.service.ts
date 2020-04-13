@@ -38,4 +38,8 @@ export class AuthService {
   private log(message: string) {
     console.log(message);
   }
+
+  isAuthenticated(){
+    return localStorage.getItem('bitponic-pwa');
+  }
 }

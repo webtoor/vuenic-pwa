@@ -1,8 +1,9 @@
 import { Component, OnInit, NgZone} from '@angular/core';
 import { UserProjectService } from '../../services/user-project.service';
+import { MenuController } from '@ionic/angular';
 import { DeviceSensorService } from '../../services/device-sensor.service';
 import { interval, Subscription } from 'rxjs';
-import { takeWhile, takeUntil } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ export class DashboardPage implements OnInit {
   deviceSensor; 
   public intervallTimer = interval(60 * 1000);
   private alive = true;
-  constructor(public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
+  constructor(public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
+    this.menu.enable(true);
    }
 
   ngOnInit() {

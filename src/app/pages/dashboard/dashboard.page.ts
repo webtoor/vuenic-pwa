@@ -20,8 +20,7 @@ export class DashboardPage implements OnInit {
   deviceSegment;
   segmentDefault;
   deviceSensor; 
-  public intervallTimer = interval(60 * 1000);
-  private alive = true;
+  public alive = true;
   constructor(public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
    }
@@ -51,7 +50,6 @@ export class DashboardPage implements OnInit {
         this.projectDevice = res.data.project_device.length;
         this.deviceSegment = res.data.project_device;
         this.projectLocation = res.data.project_location;
-
         this.segmentDefault = res.data.project_device[0]["id"]
       }
     });
@@ -59,12 +57,13 @@ export class DashboardPage implements OnInit {
 
   segmentChanged(value){
     this.segmentDefault = value
-    this.getSensorData(this.segmentDefault);
     this.setInterval();
   }
 
   setInterval(){
-    this.subscription = this.intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
+    this.getSensorData(this.segmentDefault);
+    const intervallTimer = interval(6000);
+    this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
   getSensorData(device_id){
@@ -79,6 +78,8 @@ export class DashboardPage implements OnInit {
             this.alive = true;
           }
        });
+      }else{
+        this.alive = false;
       }
     });
   }

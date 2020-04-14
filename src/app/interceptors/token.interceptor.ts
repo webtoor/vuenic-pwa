@@ -24,9 +24,9 @@ isLoading = false;
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = JSON.parse(localStorage.getItem('bitponic-pwa'));
-      //console.log(token['access_token'])
+    //console.log(token)
 
-    if (token['access_token']) {
+    if (token) {
         request = request.clone({
         setHeaders: {
             'Authorization': 'Bearer ' + token['access_token']
@@ -59,6 +59,7 @@ isLoading = false;
             if (error.error.success === false) {
                 this.presentToast('Login failed');
             } else {
+                //this.dashboardPage.alive = false;
                 this.router.navigate(['signin', {replaceUrl : true}]);
             }
         }

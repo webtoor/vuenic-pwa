@@ -5,13 +5,12 @@ import { AuthGuardService } from './guards/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-   /*  redirectTo: 'folder/Inbox', */
-    redirectTo: 'signin',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {
     path: 'signin',
-    loadChildren: () => import('./pages/signin/signin.module').then( m => m.SigninPageModule)
+    loadChildren: () => import('./pages/signin/signin.module').then( m => m.SigninPageModule),
   },
   {
     path: '',
@@ -22,7 +21,7 @@ const routes: Routes = [
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
-  {
+ /*  {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule),
     canActivate : [AuthGuardService]
@@ -36,7 +35,7 @@ const routes: Routes = [
     path: 'about',
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule),
     canActivate : [AuthGuardService]
-  }
+  } */
 ];
 
 @NgModule({

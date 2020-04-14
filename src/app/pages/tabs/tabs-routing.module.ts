@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../dashboard/dashboard.module#DashboardPageModule'
+            loadChildren: () => import('../dashboard/dashboard.module').then( m => m.DashboardPageModule),
           }
         ]
       },
@@ -22,7 +22,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../profile/profile.module#ProfilePageModule'
+            loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule),
           }
         ]
       },
@@ -31,7 +31,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../about/about.module#AboutPageModule'
+            loadChildren: () => import('../about/about.module').then( m => m.AboutPageModule),
           }
         ]
       },

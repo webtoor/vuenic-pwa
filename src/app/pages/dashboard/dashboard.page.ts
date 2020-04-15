@@ -26,7 +26,6 @@ export class DashboardPage implements OnInit {
    }
 
   ngOnInit() {
-    //console.log('ngOnInit')
     this.getUserProject();
   }
 
@@ -36,7 +35,6 @@ export class DashboardPage implements OnInit {
 
   ionViewDidEnter(){
     this.alive = true;
-    //console.log('ionViewWillEnter')
     this.setInterval()
   }
 
@@ -57,12 +55,12 @@ export class DashboardPage implements OnInit {
 
   segmentChanged(value){
     this.segmentDefault = value
+    this.getSensorData(this.segmentDefault);
     this.setInterval();
   }
 
   setInterval(){
-    this.getSensorData(this.segmentDefault);
-    const intervallTimer = interval(6000);
+    const intervallTimer = interval(60000 * 10);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
@@ -70,14 +68,15 @@ export class DashboardPage implements OnInit {
     this.httpDeviceSensor.getDeviceSensor('device-sensor/'+ device_id).subscribe(res => {
      console.log(res.data);
       if(res.status == "1"){
-        this._ngZone.run(() => {      
-          this.deviceSensor = res.data
-          if(this.deviceSensor.length == 0){
-            this.alive = false;
-          }else{
-            this.alive = true;
-          }
-       });
+        this.deviceSensor = res.data
+        if(this.deviceSensor.length == 0){
+          this.alive = false;
+        }else{
+          this.alive = true;
+        }
+       /*  this._ngZone.run(() => {      
+         
+       }); */
       }else{
         this.alive = false;
       }

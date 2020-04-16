@@ -28,15 +28,13 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <div>    
-        <ion-icon name="location-sharp" color="dark"></ion-icon>  {{projectLocation?.address}} {{projectLocation?.districts.subdistrict_name}}, {{projectLocation?.districts.city}}, {{projectLocation?.districts.province}}  
+      <div *ngIf="projectLocation">    
+        <ion-icon name="location-sharp" color="dark"></ion-icon>{{projectLocation?.address}} {{projectLocation?.districts.subdistrict_name}}, {{projectLocation?.districts.city}}, {{projectLocation?.districts.province}} 
       </div>
     </ion-card-content>
   </ion-card>
 </ion-toolbar>
 </ion-header>
-
-
 
 <ion-content>
 
@@ -52,7 +50,8 @@
   </div>
   </ion-segment>
 
-    <ion-row >
+  <div *ngIf="deviceSensor?.length > 0; else emptySensor">
+    <ion-row>
       <ion-col size="6" *ngFor="let sensor of deviceSensor">
         <ion-card>
           <ion-card-header>
@@ -144,8 +143,15 @@
           </ion-card-content>
         </ion-card>
       </ion-col> -->
-    </ion-row>
-
-  </ion-grid>
   
+    </ion-row>
+  </div>
+    <ng-template #emptySensor>
+      <div style="text-align: center;">
+        <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 20%;"></ion-img>
+        <h5 style="font-size: 13px; margin-top:15px;">IoT-Device Anda belum terkoneksi</h5>
+      </div>
+    </ng-template>
+  </ion-grid>
+ 
 </ion-content>

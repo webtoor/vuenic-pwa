@@ -1,88 +1,99 @@
 <ion-header class="ion-no-border">
-<ion-toolbar color="primary">
-  <ion-buttons slot="start">
-    <ion-menu-button></ion-menu-button>
-  </ion-buttons>
-  <ion-buttons slot="end">
-    <ion-button>
-      <ion-icon slot="icon-only" md="search"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <!-- <ion-title>Dashboard</ion-title> -->
-</ion-toolbar>
-<ion-toolbar color="primary" style="margin-top:-13px;">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title> 
-        {{projectName}}
-        <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px">
-        <ion-button >
-          <ion-icon slot="icon-only" name="settings-outline" color="primary"></ion-icon>
-        </ion-button>
-        </ion-buttons>
-      </ion-card-title>
-      <ion-card-subtitle>
-        <ion-badge color="primary" *ngIf="projectType">{{projectType}}</ion-badge> 
-        <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityName">{{commodityName}}</ion-badge> 
-        <ion-badge color="primary" style="margin-left: 5px;" *ngIf="projectDevice"> {{projectDevice}} Active Device </ion-badge>
-      </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <div *ngIf="projectLocation">    
-        <ion-icon name="location-sharp" color="dark"></ion-icon>{{projectLocation?.address}} {{projectLocation?.districts.subdistrict_name}}, {{projectLocation?.districts.city}}, {{projectLocation?.districts.province}} 
-      </div>
-    </ion-card-content>
-  </ion-card>
-</ion-toolbar>
+  <ion-toolbar color="primary" style="height: 150px;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" md="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center"><img src="/assets/images/logo.png" height="50px;" style="margin-top: 20px;"></ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="x" style="margin-top:-90px;">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <b>{{projectName}}</b>
+          <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px">
+            <ion-button>
+              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-card-title>
+        <ion-card-subtitle>
+          <ion-badge color="primary" *ngIf="projectType"><b>{{projectType}}</b></ion-badge>
+          <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityName"><b>{{commodityName}}</b></ion-badge>
+          <ion-badge color="yellow-light" style="margin-left: 5px;" *ngIf="projectDevice"><b>{{projectDevice}} </b>
+            Device Aktif</ion-badge>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="projectLocation">
+          <ion-icon name="location-sharp" color="dark"></ion-icon>{{projectLocation?.address}}
+          {{projectLocation?.districts.subdistrict_name}}, {{projectLocation?.districts.city}},
+          {{projectLocation?.districts.province}}
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
-
-  <ion-grid>
-    <!-- Scrollable Segment -->
-  <ion-segment scrollable value="heart" color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
-    <div *ngFor="let device of deviceSegment; let i=index;" >
+<!-- Scrollable Segment -->
+<ion-segment class="ion-padding-start ion-padding-end" scrollable value="heart" color="dark" (ionChange)="segmentChanged($event.detail.value)"
+  value="{{segmentDefault}}">
+  <div *ngFor="let device of deviceSegment; let i=index;">
     <ion-segment-button value="{{device.id}}" layout="icon-end">
-      <sup><ion-badge color="danger">{{i+1}}</ion-badge></sup>
+      <sup>
+        <ion-badge color="yellow-light">{{i+1}}</ion-badge>
+      </sup>
       <ion-label>IoT-Device</ion-label>
     </ion-segment-button>
   </div>
-  </ion-segment>
+</ion-segment>
 
-  <div *ngIf="deviceSensor?.length > 0; else emptySensor">
-    <ion-row>
-      <ion-col size="6" *ngFor="let sensor of deviceSensor">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle *ngIf="sensor.sensor_id == 1">Kelembaban</ion-card-subtitle>
-            <ion-card-subtitle *ngIf="sensor.sensor_id == 2">Suhu</ion-card-subtitle>
-            <ion-card-subtitle *ngIf="sensor.sensor_id == 3">Suhu Air</ion-card-subtitle>
-          </ion-card-header>
-          
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                    <ion-img *ngIf="sensor.sensor_id == 1" src="/assets/images/humidity.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 2" src="/assets/images/temperature.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/water-temperature.png"  style="height: 50px;"></ion-img>
-                </ion-col>
-                <ion-col>
-                  <div style="margin-top: 10px;">
-                    <b style="font-size: 21px;">{{sensor.data_sensor.sensor_value | number:'2.0-0'}} </b>
-                    <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b> 
-                    <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
-                    <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>
-                </div>
-                </ion-col>
-              </ion-row>
+
+<ion-content >
+
+
+  <ion-grid>
+
+
+    <div *ngIf="deviceSensor?.length > 0; else emptySensor">
+      <ion-row>
+        <ion-col size="6" *ngFor="let sensor of deviceSensor">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 1">Kelembaban</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 2">Suhu</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 3">Suhu Air</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-img *ngIf="sensor.sensor_id == 1" src="/assets/images/humidity.png" style="height: 50px;">
+                    </ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 2" src="/assets/images/temperature.png" style="height: 50px;">
+                    </ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/water-temperature.png"
+                      style="height: 50px;"></ion-img>
+                  </ion-col>
+                  <ion-col>
+                    <div style="margin-top: 10px;">
+                      <b style="font-size: 21px;">{{sensor.data_sensor.sensor_value | number:'2.0-0'}} </b>
+                      <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b>
+                      <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
+                      <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>
+                    </div>
+                  </ion-col>
+                </ion-row>
               </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
-     <!--  <ion-col size="6">
+        <!--  <ion-col size="6">
         <ion-card>
           <ion-card-header>
             <ion-card-subtitle>Suhu Air</ion-card-subtitle>
@@ -143,9 +154,9 @@
           </ion-card-content>
         </ion-card>
       </ion-col> -->
-  
-    </ion-row>
-  </div>
+
+      </ion-row>
+    </div>
     <ng-template #emptySensor>
       <div style="text-align: center;">
         <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 20%;"></ion-img>
@@ -153,5 +164,5 @@
       </div>
     </ng-template>
   </ion-grid>
- 
+
 </ion-content>

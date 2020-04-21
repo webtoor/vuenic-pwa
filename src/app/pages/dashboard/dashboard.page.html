@@ -24,7 +24,7 @@
         <ion-card-subtitle>
           <ion-badge color="primary" *ngIf="projectType"><b>{{projectType}}</b></ion-badge>
           <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityName"><b>{{commodityName}}</b></ion-badge>
-          <ion-badge color="yellow-light" style="margin-left: 5px;" *ngIf="projectDevice"><b>{{projectDevice}} </b>
+          <ion-badge color="danger" style="margin-left: 5px;" *ngIf="projectDevice"><b>{{projectDevice}} </b>
             Device Aktif</ion-badge>
         </ion-card-subtitle>
       </ion-card-header>
@@ -44,7 +44,7 @@
   <div *ngFor="let device of deviceSegment; let i=index;">
     <ion-segment-button value="{{device.id}}" layout="icon-end">
       <sup>
-        <ion-badge color="yellow-light">{{i+1}}</ion-badge>
+        <ion-badge color="danger">{{i+1}}</ion-badge>
       </sup>
       <ion-label>IoT-Device</ion-label>
     </ion-segment-button>
@@ -159,8 +159,8 @@
     </div>
     <ng-template #emptySensor>
       <div style="text-align: center;">
-        <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 20%;"></ion-img>
-        <h5 style="font-size: 13px; margin-top:15px;">IoT-Device Anda belum terkoneksi</h5>
+        <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 18%;"></ion-img>
+        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">IoT-Device Anda belum terkoneksi</ion-badge></h5>
       </div>
     </ng-template>
   </ion-grid>

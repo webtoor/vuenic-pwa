@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { EventsService } from './services/events.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
+  emailShow :string;
   public appPages = [
     {
       title: 'Dashboard',
@@ -48,8 +50,17 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private events:EventsService
   ) {
+    const token = JSON.parse(localStorage.getItem('petanic-pwa'));
+    if(token){
+      this.emailShow = token.email;
+    }
+    this.events.subscribe('email', (email) => {
+      this.emailShow = email;
+      console.log(this.emailShow);
+    });
     this.initializeApp();
   }
 

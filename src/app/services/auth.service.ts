@@ -41,6 +41,6 @@ export class AuthService {
   }
 
   isAuthenticated(){
-    return localStorage.getItem('bitponic-pwa');
+    return localStorage.getItem('petanic-pwa');
   }
 }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
+import { EventsService } from '../../services/events.service';
 
 @Component({
   selector: 'app-signin',
@@ -14,7 +15,7 @@ import { LoaderService } from '../../services/loader.service';
 export class SigninPage implements OnInit {
   loginForm: FormGroup;
   submitted = false;
-  constructor(public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
+  constructor(public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
 
@@ -35,7 +36,8 @@ export class SigninPage implements OnInit {
     this.authService.Postlogin(this.loginForm.value, 'login').subscribe(res => {
       console.log(res)
       if(res.access_token) {
-        localStorage.setItem('bitponic-pwa', JSON.stringify(res));
+        localStorage.setItem('petanic-pwa', JSON.stringify(res));
+        this.events.publish('email', res.email);
         this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
         this.loading.dismiss();
       }else if(res.error){

@@ -23,7 +23,7 @@ isLoading = false;
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = JSON.parse(localStorage.getItem('bitponic-pwa'));
+    const token = JSON.parse(localStorage.getItem('petanic-pwa'));
     //console.log(token)
 
     if (token) {

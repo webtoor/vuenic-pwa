@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-let apiUrl = "http://localhost:8000/api/v1/";  //LOCAL
-//let apiUrl = "https://www.petanic.com/api/v1/";  //Production
+/* let apiUrl = "http://localhost:8000/api/v1/";  */ //LOCAL
+let apiUrl = "https://www.petanic.com/api/v1/";  //Production
 
 @Injectable({
   providedIn: 'root'

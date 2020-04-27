@@ -60,7 +60,7 @@ export class DashboardPage implements OnInit {
   }
 
   setInterval(){
-    const intervallTimer = interval(60000 * 10);
+    const intervallTimer = interval(60000 * 1);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
@@ -69,7 +69,7 @@ export class DashboardPage implements OnInit {
      console.log(res.data);
       if(res.status == "1"){
         this.deviceSensor = res.data
-        if(this.deviceSensor.length == 0){
+        if(this.deviceSensor.length == 0 || this.deviceSensor.data_sensor == null){
           this.alive = false;
         }else{
           this.alive = true;

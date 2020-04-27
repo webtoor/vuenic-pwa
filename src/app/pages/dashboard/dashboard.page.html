@@ -25,7 +25,7 @@
           <ion-badge color="primary" *ngIf="projectType"><b>{{projectType}}</b></ion-badge>
           <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityName"><b>{{commodityName}}</b></ion-badge>
           <ion-badge color="danger" style="margin-left: 5px;" *ngIf="projectDevice"><b>{{projectDevice}} </b>
-            Device Aktif</ion-badge>
+            Device</ion-badge>
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
@@ -58,7 +58,7 @@
   <ion-grid>
 
 
-    <div *ngIf="deviceSensor?.length > 0; else emptySensor">
+    <div *ngIf="deviceSensor?.length > 0 && deviceSensor?.data_sensor != null; else emptySensor">
       <ion-row>
         <ion-col size="6" *ngFor="let sensor of deviceSensor">
           <ion-card>
@@ -160,7 +160,7 @@
     <ng-template #emptySensor>
       <div style="text-align: center;">
         <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 18%;"></ion-img>
-        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">IoT-Device Anda belum terkoneksi</ion-badge></h5>
+        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">Data tidak tersedia</ion-badge></h5>
       </div>
     </ng-template>
   </ion-grid>

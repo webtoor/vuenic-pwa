@@ -60,6 +60,7 @@ isLoading = false;
                 this.presentToast('Login failed');
             } else {
                 //this.dashboardPage.alive = false;
+                localStorage.clear();
                 this.router.navigate(['signin', {replaceUrl : true}]);
             }
         }

@@ -66,25 +66,26 @@
               <ion-card-subtitle *ngIf="sensor.sensor_id == 1">Kelembaban</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 2">Suhu</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 3">Suhu Air</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 4">pH</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
               <ion-grid>
                 <ion-row>
                   <ion-col>
-                    <ion-img *ngIf="sensor.sensor_id == 1" src="/assets/images/humidity.png" style="height: 50px;">
-                    </ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 2" src="/assets/images/temperature.png" style="height: 50px;">
-                    </ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/water-temperature.png"
-                      style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 1" src="/assets/images/humidity.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 2" src="/assets/images/temperature.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/water-temperature.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 4" src="/assets/images/ph.png" style="height: 50px;"></ion-img>
+
                   </ion-col>
                   <ion-col>
                     <div style="margin-top: 10px;">
-                      <b style="font-size: 21px;">{{sensor.data_sensor.sensor_value | number:'2.0-0'}} </b>
+                      <b style="font-size: 21px;">{{sensor.data_sensor.sensor_value | number:'0.0-0'}} </b>
                       <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b>
                       <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
                       <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>
+                      <b *ngIf="sensor.sensor_id == 4"><sup>pH</sup></b>
                     </div>
                   </ion-col>
                 </ion-row>

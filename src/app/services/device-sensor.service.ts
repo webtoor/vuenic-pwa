@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, interval } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-/* let apiUrl = "http://localhost:8000/api/v1/"; */  //LOCAL
-let apiUrl = "https://www.petanic.com/api/v1/";  //Production
+//LOCAL
+/* let apiUrl = "http://localhost:8000/v1/"; */  
+//PROD
+let apiUrl = "https://api.petanic.com/v1/";  
 
 @Injectable({
   providedIn: 'root'

@@ -38,9 +38,9 @@
     </ion-card>
   </ion-toolbar>
 </ion-header>
+
 <!-- Scrollable Segment -->
-<ion-segment class="ion-padding-start ion-padding-end" scrollable value="heart" color="dark" (ionChange)="segmentChanged($event.detail.value)"
-  value="{{segmentDefault}}">
+<ion-segment class="ion-padding-start ion-padding-end" scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
   <div *ngFor="let device of deviceSegment; let i=index;">
     <ion-segment-button value="{{device.id}}" layout="icon-end">
       <sup>
@@ -52,13 +52,9 @@
 </ion-segment>
 
 
-<ion-content >
-
-
+<ion-content>
   <ion-grid>
-
-
-    <div *ngIf="(deviceSensor?.length > 0) && (deviceSensor?.data_sensor !== null); else emptySensor">
+    <div *ngIf="deviceSensor?.length > 0; else emptySensor">
       <ion-row>
         <ion-col size="6" *ngFor="let sensor of deviceSensor">
           <ion-card>
@@ -81,7 +77,7 @@
                   </ion-col>
                   <ion-col>
                     <div style="margin-top: 10px;">
-                      <b style="font-size: 21px;">{{sensor.data_sensor.sensor_value | number:'0.0-0'}} </b>
+                      <b style="font-size: 21px;" *ngIf="sensor.data_sensor != null;">{{sensor.data_sensor.sensor_value | number:'0.0-0'}} </b>
                       <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b>
                       <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
                       <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>
@@ -93,75 +89,12 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-
-        <!--  <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Suhu Air</ion-card-subtitle>
-          </ion-card-header>
-
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                    <ion-img src="/assets/images/water-temperature.png" style="height: 50px;"></ion-img>
-                </ion-col>
-                <ion-col>
-                  <div style="margin-top: 10px;">30 °C</div>
-                </ion-col>
-              </ion-row>
-              </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Kelembaban</ion-card-subtitle>
-          </ion-card-header>
-
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                    <ion-img src="/assets/images/humidity.png" style="height: 50px;"></ion-img>
-                </ion-col>
-                <ion-col>
-                  <div style="margin-top: 10px;">70 %</div>
-                </ion-col>
-              </ion-row>
-              </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>PH</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                    <ion-img src="/assets/images/temperature.png" style="height: 50px;"></ion-img>
-                </ion-col>
-                <ion-col>
-                  <div style="margin-top: 10px;">30 C</div>
-                </ion-col>
-              </ion-row>
-              </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-col> -->
-
       </ion-row>
     </div>
     <ng-template #emptySensor>
       <div style="text-align: center;">
         <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 18%;"></ion-img>
-        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">Data tidak tersedia</ion-badge></h5>
+        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">Data Tidak Tersedia</ion-badge></h5>
       </div>
     </ng-template>
   </ion-grid>

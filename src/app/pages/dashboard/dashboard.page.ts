@@ -49,18 +49,20 @@ export class DashboardPage implements OnInit {
         this.deviceSegment = res.data.project_device;
         this.projectLocation = res.data.project_location;
         this.segmentDefault = res.data.project_device[0]["id"]
+        this.getSensorData(this.segmentDefault);
       }
     });
   }
 
   segmentChanged(value){
+    //console.log('segmentChanged')
     this.segmentDefault = value
     this.getSensorData(this.segmentDefault);
     this.setInterval();
   }
 
   setInterval(){
-    const intervallTimer = interval(60000 * 1);
+    const intervallTimer = interval(60000 * 10);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
@@ -69,7 +71,8 @@ export class DashboardPage implements OnInit {
      //console.log(res.data);
       if(res.status == "1"){
         this.deviceSensor = res.data
-        if(this.deviceSensor.length == 0 || this.deviceSensor.data_sensor == null){
+        if(this.deviceSensor.length == 0 || this.deviceSensor[0]["data_sensor"] == null){
+          //console.log('sensor-false')
           this.alive = false;
         }else{
           this.alive = true;

@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "bitponic-pwa",
+  "appName": "vuenic-pwa",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

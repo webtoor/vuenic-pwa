@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "Petanic",
+      "name": "Vuenic",
       "installMode": "prefetch",
       "resources": {
         "files": [

@@ -40,8 +40,8 @@ export class DashboardPage implements OnInit {
 
   getUserProject(){
     this.httpService.getUserProject('user-project').subscribe(res => {
-      //console.log(res);
-      if(res.status == "1"){
+      console.log(res);
+      if(res.status == 200){
         this.projectName = res.data.project_name;
         this.projectType = res.data.project.name;
         this.commodityName = res.data.commodity.name;

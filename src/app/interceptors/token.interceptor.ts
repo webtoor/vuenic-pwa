@@ -23,7 +23,7 @@ isLoading = false;
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = JSON.parse(localStorage.getItem('petanic-pwa'));
+    const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
     //console.log(token)
 
     if (token) {

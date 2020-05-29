@@ -4,9 +4,9 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 //LOCAL
-/* let apiUrl = "http://localhost:8000/v1/"; */  
+let apiUrl = "http://localhost:8000/v1/";  
 //PROD
-let apiUrl = "https://api.petanic.com/v1/";  
+/* let apiUrl = "https://api.petanic.com/v1/";  */ 
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,6 @@ export class AuthService {
   }
 
   isAuthenticated(){
-    return localStorage.getItem('petanic-pwa');
+    return localStorage.getItem('vuenic-pwa');
   }
 }

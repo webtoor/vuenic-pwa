@@ -34,9 +34,9 @@ export class SigninPage implements OnInit {
     //console.log(this.loginForm.value)
     this.loading.present();
     this.authService.Postlogin(this.loginForm.value, 'login').subscribe(res => {
-      //console.log(res)
+      console.log(res)
       if(res.access_token) {
-        localStorage.setItem('petanic-pwa', JSON.stringify(res));
+        localStorage.setItem('vuenic-pwa', JSON.stringify(res));
         this.events.publish('email', res.email);
         this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
         this.loading.dismiss();

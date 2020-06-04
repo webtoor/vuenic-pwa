@@ -1,0 +1,41 @@
+<ion-content class="ion-padding">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+  <ion-item class="marginTop">
+    <ion-label position="stacked">Nama Lengkap</ion-label>
+    <ion-input type="email" placeholder="Masukan Nama Lengkap" formControlName="fullname"></ion-input>
+  </ion-item>
+  <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback" style="margin-top:-10px;">
+    <div *ngIf="f.fullname.errors.required">Nama Lengkap harus diisi guys :(</div>
+  </div>
+
+  <ion-item class="marginTop">
+    <ion-label position="stacked">Nomor Ponsel</ion-label>
+    <ion-input type="text" placeholder="Masukan Nomor Ponsel" formControlName="phonenumber"></ion-input>
+  </ion-item>
+  <div *ngIf="submitted && f.phonenumber.errors" class="invalid-feedback" style="margin-top:-10px;">
+    <div *ngIf="f.phonenumber.errors.required">Nomor Ponsel harus diisi guys :(</div>
+  </div>
+
+  <ion-item class="marginTop">
+    <ion-label position="stacked">Email</ion-label>
+    <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+  </ion-item>
+  <div *ngIf="submitted && f.email.errors" class="invalid-feedback" style="margin-top:-10px;">
+    <div *ngIf="f.email.errors.required">Email harus diisi guys :(</div>
+    <div *ngIf="f.email.errors.email">Format email tidak valid</div> 
+  </div>
+
+  <ion-item class="marginTop">
+    <ion-label position="stacked">Password</ion-label>
+    <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+  </ion-item>
+  <div *ngIf="submitted && f.password.errors" class="invalid-feedback" style="margin-top:-10px;">
+    <div *ngIf="f.password.errors.required">Password harus diisi guys :(</div>
+  </div>
+
+  <div class="ion-text-center" style="margin-top:40px">
+    <ion-button expand="block" type="submit" style="height:40px" >MASUK</ion-button>
+  </div>
+  </form>
+</ion-content>

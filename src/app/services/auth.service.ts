@@ -4,9 +4,9 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 //LOCAL
-let apiUrl = "http://localhost:8000/v1/";  
+let apiUrl = "http://localhost:8080/v1/";  
 //PROD
-/* let apiUrl = "https://api.petanic.com/v1/";  */ 
+//let apiUrl = "https://api.vuenic.com/v1/";  
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,14 @@ export class AuthService {
     .pipe(
       tap(_ => this.log('login')),
       catchError(this.handleError('login', []))
+    );
+  }
+
+  Postsignup(data, type): Observable<any> {
+    return this.http.post<any>(apiUrl+type, data)
+    .pipe(
+      tap(_ => this.log('signup')),
+      catchError(this.handleError('signup', []))
     );
   }
 

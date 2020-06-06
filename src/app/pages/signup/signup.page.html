@@ -1,3 +1,12 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="margin-top:0px;" color="white" class="ion-text-center">
+    <ion-button slot="start" expand="full" fill="clear" (click)="signinPage()">
+      <ion-icon color="danger" slot="start" name="arrow-back-circle-outline"></ion-icon>
+           <div style="font-weight: bolder;color:#eb445a;">LOGIN</div>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
@@ -11,7 +20,7 @@
 
   <ion-item class="marginTop">
     <ion-label position="stacked">Nomor Ponsel</ion-label>
-    <ion-input type="text" placeholder="Masukan Nomor Ponsel" formControlName="phonenumber"></ion-input>
+    <ion-input type="number" placeholder="Masukan Nomor Ponsel" formControlName="phonenumber"></ion-input>
   </ion-item>
   <div *ngIf="submitted && f.phonenumber.errors" class="invalid-feedback" style="margin-top:-10px;">
     <div *ngIf="f.phonenumber.errors.required">Nomor Ponsel harus diisi guys :(</div>
@@ -35,7 +44,7 @@
   </div>
 
   <div class="ion-text-center" style="margin-top:40px">
-    <ion-button expand="block" type="submit" style="height:40px" >MASUK</ion-button>
+    <ion-button expand="block" type="submit" style="height:40px" >DAFTAR</ion-button>
   </div>
   </form>
 </ion-content>

@@ -56,4 +56,8 @@ export class SigninPage implements OnInit {
     });
     toast.present();
   }
+
+  signupPage(){
+    this.router.navigate(['/signup'])
+  }
 }

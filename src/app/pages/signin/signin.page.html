@@ -1,11 +1,14 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title></ion-title>
+  <ion-toolbar style="margin-top:0px;" color="white" class="ion-text-center">
+    <ion-button slot="end" expand="full" fill="clear" (click)="signupPage()">
+      <ion-icon color="danger" slot="end" name="arrow-forward-circle-outline"></ion-icon>
+           <div style="font-weight: bolder;color:#eb445a;">DAFTAR</div>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="ion-text-center">
+  <div class="ion-text-center" style="margin-top: 70px;">
     <img src="/assets/images/logo.png" height="80px;" style="margin-bottom:-5px;">
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">

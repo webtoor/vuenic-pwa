@@ -4,6 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { DeviceSensorService } from '../../services/device-sensor.service';
 import { interval, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,7 @@ export class DashboardPage implements OnInit {
   segmentDefault;
   deviceSensor; 
   public alive = true;
-  constructor(public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
+  constructor(public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
    }
 
@@ -86,6 +87,10 @@ export class DashboardPage implements OnInit {
         this.alive = false;
       }
     });
+  }
+
+  createProject(){
+    this.router.navigate(["tabs/dashboard/create-project"])
   }
 
 }

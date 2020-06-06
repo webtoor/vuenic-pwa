@@ -1,9 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>create-project</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Buat Proyek</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Jenis Proyek</ion-label>
+      <ion-select okText="" placeholder="Pilih Jenis Projek yang akan dibuat" cancelText="" interface="action-sheet">
+        <ion-select-option value="1">Hidroponik</ion-select-option>
+        <ion-select-option value="2">Aquaponik</ion-select-option>
+        <ion-select-option value="3">Aeroponik</ion-select-option>
+        <ion-select-option value="4">Aquaculture</ion-select-option>
+        <ion-select-option value="5">Pertanian Konvensional</ion-select-option>
+        <ion-select-option value="6">Perikanan</ion-select-option>
+        <ion-select-option value="7">Peternakan</ion-select-option>
+        <ion-select-option value="8">Pencemaran Lingkungan</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
 </ion-content>
+  

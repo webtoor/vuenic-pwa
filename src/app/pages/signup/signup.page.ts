@@ -48,7 +48,7 @@ export class SignupPage implements OnInit {
       if(res.status == 201) {
         this.submitted = false;
         this.signupForm.reset()
-        this.presentToast("Terima kasih. Anda telah berhasil daftar. Silakan Login", "bottom");
+        this.presentToast("Terima kasih. Anda telah berhasil daftar. Silakan Login", "top");
         this.signinPage()
         this.loading.dismiss();
       }else if(res.error){

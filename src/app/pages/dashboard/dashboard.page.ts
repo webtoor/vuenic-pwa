@@ -35,7 +35,9 @@ export class DashboardPage implements OnInit {
 
   ionViewDidEnter(){
     this.alive = true;
-    this.setInterval()
+    if(this.projectName){
+      this.setInterval()
+    }
   }
 
   getUserProject(){

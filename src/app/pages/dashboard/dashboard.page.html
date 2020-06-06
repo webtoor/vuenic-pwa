@@ -1,4 +1,5 @@
 <ion-header class="ion-no-border">
+  <div *ngIf="projectName">
   <ion-toolbar color="primary" style="height: 150px;">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -37,9 +38,11 @@
       </ion-card-content>
     </ion-card>
   </ion-toolbar>
+</div>
 </ion-header>
 
 <!-- Scrollable Segment -->
+<div *ngIf="projectName">
 <ion-segment class="ion-padding-start ion-padding-end" scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
   <div *ngFor="let device of deviceSegment; let i=index;">
     <ion-segment-button value="{{device.id}}" layout="icon-end">
@@ -50,9 +53,11 @@
     </ion-segment-button>
   </div>
 </ion-segment>
+</div>
 
 
 <ion-content>
+  <div *ngIf="projectName; else emptyProject">
   <ion-grid>
     <div *ngIf="deviceSensor?.length > 0; else emptySensor">
       <ion-row>
@@ -77,7 +82,7 @@
                   </ion-col>
                   <ion-col>
                     <div style="margin-top: 10px;">
-                      <b style="font-size: 21px;" *ngIf="sensor.data_sensor != null;">{{sensor.data_sensor.sensor_value | number:'0.0-1'}} </b>
+                      <b style="font-size: 21px;" *ngIf="sensor.data_sensor != null;">{{sensor.data_sensor.sensor_value | number:'0.0-0'}} </b>
                       <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b>
                       <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
                       <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>
@@ -98,5 +103,22 @@
       </div>
     </ng-template>
   </ion-grid>
+</div>
+
+
+<!-- EMPTY PROJECT -->
+<ng-template #emptyProject>
+  <div class="ion-text-center" style="margin-left: -150px;">
+    <ion-fab vertical="center">
+      <ion-button>
+        <ion-icon name="add-circle" style="padding-right:5px;"></ion-icon>
+        Buat Proyek
+      </ion-button>
+    </ion-fab>
+  </div>
+</ng-template>
+<!-- EMPTY PROJECT -->
 
 </ion-content>
+
+  

@@ -10,6 +10,20 @@
 <ion-content class="ion-padding">
   <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
     <ion-item>
+      <ion-label position="stacked">Provinsi</ion-label>
+      <ion-select (ionChange)="getCity($event)" formControlName="province_id" okText="" placeholder="Pilih Provinsi" cancelText="" interface="action-sheet">
+        <ion-select-option *ngFor="let province of provinces" value="{{province.id}}">{{province.province}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kota/Kecamatan</ion-label>
+      <ion-select  formControlName="province_id" okText="" placeholder="Pilih Provinsi" cancelText="" interface="action-sheet">
+        <ion-select-option *ngFor="let province of provinces" value="{{province.id}}">{{province.province}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="stacked">Pilih Proyek</ion-label>
       <ion-select (ionChange)="getProjectType($event)" formControlName="project_id" okText="" placeholder="Pilih Proyek" cancelText="" interface="action-sheet">
         <ion-select-option *ngFor="let project of projects" value="{{project.id}}">{{project.name}}</ion-select-option>
@@ -25,7 +39,7 @@
 
     <ion-item>
       <ion-label position="stacked">Pilih Komoditas</ion-label>
-      <ion-select formControlName="commodity_id" okText="" placeholder="Pilih Komoditas" cancelText="" interface="action-sheet">
+      <ion-select (ionChange)="getCommodityType($event)" formControlName="commodity_id" okText="" placeholder="Pilih Komoditas" cancelText="" interface="action-sheet">
         <ion-select-option *ngFor="let commodity of commodities" value="{{commodity.id}}">{{commodity.name}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -36,6 +50,10 @@
         <ion-select-option *ngFor="let commodity_type of commodity_types" value="{{commodity_type.id}}">{{commodity_type.name}}</ion-select-option>
       </ion-select>
     </ion-item>
+
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
+    </div>
   </form>
 </ion-content>
   

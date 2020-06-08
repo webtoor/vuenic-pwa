@@ -9,6 +9,8 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class CreateProjectPage implements OnInit {
   createProjectForm: FormGroup;
+  provinces;
+  cities;
   projects;
   project_id;
   project_types;
@@ -16,6 +18,7 @@ export class CreateProjectPage implements OnInit {
   commodity_types;
   constructor(private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
+      'province_id' : [null, [Validators.required]],
       'project_id' : [null, [Validators.required]],
       'project_type_id' : [{
         value: null,
@@ -33,7 +36,26 @@ export class CreateProjectPage implements OnInit {
    }
 
   ngOnInit() {
+    this.getProvince();
     this.getProject()
+  }
+
+  getProvince(){
+    this.httpService.GetRequest('province').subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+        this.provinces = res.data
+      }
+    });
+  }
+
+  getCity(event){
+    this.httpService.GetRequest('city/'+ event.detail.id).subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+        this.cities = res.data
+      }
+    });
   }
 
   getProject(){
@@ -49,6 +71,8 @@ export class CreateProjectPage implements OnInit {
     console.log(event.detail.value)
     this.project_id = event.detail.value
     this.createProjectForm.get('project_type_id').reset();
+    this.createProjectForm.get('commodity_id').reset();
+    this.createProjectForm.get('commodity_type_id').reset();
     this.httpService.GetRequest('project-type/' + this.project_id).subscribe(res => {
       //console.log(res);
       if(res.status == 200){
@@ -73,17 +97,19 @@ export class CreateProjectPage implements OnInit {
     }
   }
 
- /*  getCommodityType(event){
+  getCommodityType(event){
     console.log(event.detail.value)
     let commodity_id = event.detail.value
-    this.createProjectForm.get('commodity_id').reset();
+    this.createProjectForm.get('commodity_type_id').reset();
+    if(commodity_id){
       this.httpService.GetRequest('commodity-type/' + commodity_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
-          this.createProjectForm.get('commodity_id').enable();
-          this.commodities = res.data
+          this.createProjectForm.get('commodity_type_id').enable();
+          this.commodity_types = res.data
         }
       });
-  } */
+    }
+  }
 
 }

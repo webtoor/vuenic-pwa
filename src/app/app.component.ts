@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private events:EventsService
   ) {
-    const token = JSON.parse(localStorage.getItem('petanic-pwa'));
+    const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
     if(token){
       this.emailShow = token.email;
     }

@@ -11,6 +11,7 @@ export class CreateProjectPage implements OnInit {
   createProjectForm: FormGroup;
   provinces;
   cities;
+  districts;
   projects;
   project_id;
   project_types;
@@ -20,6 +21,10 @@ export class CreateProjectPage implements OnInit {
     this.createProjectForm = this.formBuilder.group({
       'province_id' : [null, [Validators.required]],
       'city_id' : [{
+        value: null,
+        disabled : true
+      }, Validators.required],
+      'districts_id' : [{
         value: null,
         disabled : true
       }, Validators.required],
@@ -55,6 +60,7 @@ export class CreateProjectPage implements OnInit {
 
   getCity(event){
     this.createProjectForm.get('city_id').reset();
+    this.createProjectForm.get('districts_id').reset();
     this.httpService.GetRequest('city/'+ event.detail.value).subscribe(res => {
       console.log(res);
       if(res.status == 200){
@@ -62,6 +68,21 @@ export class CreateProjectPage implements OnInit {
         this.cities = res.data
       }
     });
+  }
+
+  getDistricts(event){
+    let city_id = event.detail.value
+    this.createProjectForm.get('districts_id').reset();
+    if(city_id){
+      this.httpService.GetRequest('district/'+ event.detail.value).subscribe(res => {
+        console.log(res);
+        if(res.status == 200){
+          this.createProjectForm.get('districts_id').enable();
+          this.districts = res.data
+        }
+      });
+    }
+  
   }
 
   getProject(){
@@ -93,7 +114,7 @@ export class CreateProjectPage implements OnInit {
     let project_type_id = event.detail.value
     this.createProjectForm.get('commodity_id').reset();
     if(project_type_id){
-      this.httpService.GetRequest('commodity/' + this.project_id).subscribe(res => {
+      this.httpService.GetRequest('commodity/' + this.project_id + '/' + project_type_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
           this.createProjectForm.get('commodity_id').enable();

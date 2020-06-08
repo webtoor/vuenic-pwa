@@ -15,6 +15,8 @@ export class DashboardPage implements OnInit {
   subscription: Subscription
   projectName : String;
   commodityName : String;
+  commodityTypeName : String;
+  project: String;
   projectType : String;
   projectDevice : Number;
   projectLocation;
@@ -46,8 +48,10 @@ export class DashboardPage implements OnInit {
       console.log(res);
       if((res.status == 200) && (Object.keys(res.data).length > 0)){
         this.projectName = res.data.project_name;
-        this.projectType = res.data.project.name;
+        this.project = res.data.project.name;
+        this.projectType = res.data.project_type.name;
         this.commodityName = res.data.commodity.name;
+        this.commodityTypeName = res.data.commodity_type.name;
         this.projectDevice = res.data.project_device.length;
         this.deviceSegment = res.data.project_device;
         this.projectLocation = res.data.project_location;

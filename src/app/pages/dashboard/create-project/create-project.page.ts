@@ -19,6 +19,10 @@ export class CreateProjectPage implements OnInit {
   constructor(private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
       'province_id' : [null, [Validators.required]],
+      'city_id' : [{
+        value: null,
+        disabled : true
+      }, Validators.required],
       'project_id' : [null, [Validators.required]],
       'project_type_id' : [{
         value: null,
@@ -50,9 +54,11 @@ export class CreateProjectPage implements OnInit {
   }
 
   getCity(event){
-    this.httpService.GetRequest('city/'+ event.detail.id).subscribe(res => {
+    this.createProjectForm.get('city_id').reset();
+    this.httpService.GetRequest('city/'+ event.detail.value).subscribe(res => {
       console.log(res);
       if(res.status == 200){
+        this.createProjectForm.get('city_id').enable();
         this.cities = res.data
       }
     });

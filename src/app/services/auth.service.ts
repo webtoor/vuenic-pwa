@@ -38,6 +38,13 @@ export class AuthService {
       catchError(this.handleError('get-http-request', []))
     );
   }
+  PostRequest(data, type): Observable<any> {
+    return this.http.post<any>(apiUrl+type, data)
+    .pipe(
+      tap(_ => this.log('post-http-request')),
+      catchError(this.handleError('post-http-request', []))
+    );
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

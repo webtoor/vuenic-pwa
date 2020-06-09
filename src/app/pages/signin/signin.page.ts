@@ -45,9 +45,10 @@ export class SigninPage implements OnInit {
         this.loading.dismiss();
       }
     });
-  
   }
+  
   get f() { return this.loginForm.controls; }
+  
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,

@@ -17,8 +17,11 @@ export class CreateProjectPage implements OnInit {
   project_types;
   commodities;
   commodity_types;
+  submitted = false;
+
   constructor(private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
+      'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
       'city_id' : [{
         value: null,
@@ -28,6 +31,7 @@ export class CreateProjectPage implements OnInit {
         value: null,
         disabled : true
       }, Validators.required],
+      'project_name' : [null, [Validators.required]],
       'project_id' : [null, [Validators.required]],
       'project_type_id' : [{
         value: null,
@@ -45,9 +49,25 @@ export class CreateProjectPage implements OnInit {
    }
 
   ngOnInit() {
-    this.getProvince();
+    //this.getProvince();
     this.getProject()
   }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.createProjectForm.invalid) {
+        return;
+    }
+    console.log(this.createProjectForm.value)
+    this.httpService.PostRequest(this.createProjectForm.value, 'create-project').subscribe(res => {
+      console.log(res)
+      if(res.status == 200){
+        return
+      }
+    });
+  }
+
+  get f() { return this.createProjectForm.controls; }
 
   getProvince(){
     this.httpService.GetRequest('province').subscribe(res => {
@@ -82,7 +102,6 @@ export class CreateProjectPage implements OnInit {
         }
       });
     }
-  
   }
 
   getProject(){
@@ -138,5 +157,7 @@ export class CreateProjectPage implements OnInit {
       });
     }
   }
+
+
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { LoaderService } from '../../../services/loader.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-project',
@@ -18,7 +20,7 @@ export class CreateProjectPage implements OnInit {
   commodities;
   commodity_types;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, public httpService: AuthService) {
+  constructor(public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
@@ -57,11 +59,13 @@ export class CreateProjectPage implements OnInit {
     if (this.createProjectForm.invalid) {
         return;
     }
-    console.log(this.createProjectForm.value)
+    //console.log(this.createProjectForm.value)
+    this.loading.present();
     this.httpService.PostRequest(this.createProjectForm.value, 'create-project').subscribe(res => {
       console.log(res)
       if(res.status == 200){
-        return
+        this.router.navigate(['/tabs/dashboard']);
+        this.loading.dismiss();
       }
     });
   }

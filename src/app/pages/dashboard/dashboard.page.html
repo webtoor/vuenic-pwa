@@ -9,8 +9,8 @@
         <ion-icon slot="icon-only" md="search"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title style="margin-top: 3px;"><!-- <img src="/assets/images/text-with-stroke.png" height="40px;" style="margin-top: 20px;"> -->
-    <b>Hello, User</b>
+    <ion-title class="ion-text-center">
+      <img src="/assets/images/text-white.png" height="25px;" style="margin-top: 10px;">
     </ion-title>
   </ion-toolbar>
   <ion-toolbar color="x" style="margin-top:-100px;">
@@ -20,7 +20,6 @@
           <b>{{projectName}}</b> 
           <ion-badge color="primary" *ngIf="project" style="margin-left: 10px;"><b>{{project}}</b></ion-badge>
           <ion-badge color="primary" *ngIf="projectType" style="margin-left: 5px;"><b>{{projectType}}</b></ion-badge>
-
           <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px">
             <ion-button>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
@@ -74,7 +73,7 @@
               <ion-card-subtitle *ngIf="sensor.sensor_id == 4">pH</ion-card-subtitle>
             </ion-card-header>
 
-            <ion-card-content>
+            <ion-card-content style="padding:0">
               <ion-grid>
                 <ion-row>
                   <ion-col>
@@ -82,11 +81,10 @@
                     <ion-img *ngIf="sensor.sensor_id == 2" src="/assets/images/temperature.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/water-temperature.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 4" src="/assets/images/ph.png" style="height: 50px;"></ion-img>
-
                   </ion-col>
                   <ion-col>
                     <div style="margin-top: 10px;">
-                      <b style="font-size: 21px;" *ngIf="sensor.data_sensor != null;">{{sensor.data_sensor.sensor_value | number:'0.0-0'}} </b>
+                      <b style="font-size: 21px; padding-right: 5px;" *ngIf="sensor.data_sensor != null;">{{sensor.data_sensor.sensor_value|number:'0.0-1'}}</b>
                       <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b>
                       <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
                       <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>

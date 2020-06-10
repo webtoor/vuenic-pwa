@@ -38,7 +38,7 @@ export class DashboardPage implements OnInit {
 
   ionViewDidEnter(){
     this.alive = true;
-    if(this.projectName){
+    if(this.projectName && this.projectDevice){
       this.setInterval()
     }
   }
@@ -52,11 +52,13 @@ export class DashboardPage implements OnInit {
         this.projectType = res.data.project_type.name;
         this.commodityName = res.data.commodity.name;
         this.commodityTypeName = res.data.commodity_type.name;
-        this.projectDevice = res.data.project_device.length;
-        this.deviceSegment = res.data.project_device;
-        this.projectLocation = res.data.project_location;
-        this.segmentDefault = res.data.project_device[0]["id"]
-        this.getSensorData(this.segmentDefault);
+        if(res.data.project_device){
+          this.projectDevice = res.data.project_device.length;
+          this.deviceSegment = res.data.project_device;
+          this.projectLocation = res.data.project_location;
+          this.segmentDefault = res.data.project_device[0]["id"]
+          this.getSensorData(this.segmentDefault);
+        }
       }
     });
   }

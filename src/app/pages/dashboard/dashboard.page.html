@@ -99,9 +99,13 @@
       </ion-row>
     </div>
     <ng-template #emptySensor>
-      <div style="text-align: center;">
-        <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 18%;"></ion-img>
-        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">Data Tidak Tersedia</ion-badge></h5>
+      <div class="ion-text-center" style="margin-left: -200px;">
+        <ion-fab vertical="center" (click)="createDeviceSensor()">
+          <ion-button color="danger">
+            <ion-icon name="add-circle" style="padding-right:5px;"></ion-icon>
+              Device & Sensor
+          </ion-button>
+        </ion-fab>
       </div>
     </ng-template>
   </ion-grid>

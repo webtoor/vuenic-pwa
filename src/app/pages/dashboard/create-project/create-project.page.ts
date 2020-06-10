@@ -18,7 +18,6 @@ export class CreateProjectPage implements OnInit {
   commodities;
   commodity_types;
   submitted = false;
-
   constructor(private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],

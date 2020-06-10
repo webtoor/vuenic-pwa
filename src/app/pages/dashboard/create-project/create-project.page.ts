@@ -44,12 +44,12 @@ export class CreateProjectPage implements OnInit {
       'commodity_type_id' : [{
         value: null,
         disabled : true
-      }, Validators.required],
+      }],
     });
    }
 
   ngOnInit() {
-    //this.getProvince();
+    this.getProvince();
     this.getProject()
   }
 

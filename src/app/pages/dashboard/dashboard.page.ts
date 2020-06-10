@@ -99,4 +99,8 @@ export class DashboardPage implements OnInit {
     this.router.navigate(["tabs/dashboard/create-project"])
   }
 
+  createDeviceSensor(){
+    this.router.navigate(["tabs/dashboard/create-project"])
+  }
+
 }

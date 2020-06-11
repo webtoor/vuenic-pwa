@@ -45,8 +45,9 @@
 </ion-header>
 
 <!-- Scrollable Segment -->
+<!-- class="ion-padding-start ion-padding-end" -->
 <div *ngIf="projectName">
-<ion-segment class="ion-padding-start ion-padding-end" scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
+<ion-segment scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
   <div *ngFor="let device of deviceSegment; let i=index;">
     <ion-segment-button value="{{device.id}}" layout="icon-end">
       <sup>
@@ -62,7 +63,7 @@
 <ion-content>
   <div *ngIf="projectName; else emptyProject">
   <ion-grid>
-    <div *ngIf="deviceSensor?.length > 0; else emptySensor">
+    <div *ngIf="deviceSensor?.length > 0; else emptySensorData">
       <ion-row>
         <ion-col size="6" *ngFor="let sensor of deviceSensor">
           <ion-card>
@@ -98,7 +99,7 @@
         </ion-col>
       </ion-row>
     </div>
-    <ng-template #emptySensor>
+    <ng-template #emptySensorData>
       <div class="ion-text-center" style="margin-left: -200px;">
         <ion-fab vertical="center" (click)="createDeviceSensor(projectID)">
           <ion-button color="danger">

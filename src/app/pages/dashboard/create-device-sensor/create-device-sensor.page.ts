@@ -41,10 +41,10 @@ export class CreateDeviceSensorPage implements OnInit {
     this.loading.present();
     this.httpService.PostRequest(this.createDevSensorForm.value, 'device-sensor').subscribe(res => {
       console.log(res)
-      /* if(res.status == 200){
+      if(res.status == 200){
         this.router.navigate(['/tabs/dashboard']);
         this.loading.dismiss();
-      } */
+      }
     });
   }
 

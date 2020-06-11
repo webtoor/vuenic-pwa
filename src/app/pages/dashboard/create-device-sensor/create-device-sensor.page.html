@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="createDeviceSensor" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createDevSensorForm" (ngSubmit)="onSubmit()">
     <ion-card-header>
       <ion-card-subtitle color="primary"><b>I. Device <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
     </ion-card-header>
@@ -28,7 +28,7 @@
     </ion-item>
 
     <div class="ion-text-center" style="margin-top:40px">
-      <ion-button [disabled]="createDeviceSensor.invalid" expand="block" type="submit" style="height:40px">
+      <ion-button [disabled]="createDevSensorForm.invalid" expand="block" type="submit" style="height:40px">
         SUBMIT
       </ion-button>
     </div>

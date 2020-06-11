@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardPage implements OnInit {
   subscription: Subscription
+  projectID;
   projectName : String;
   commodityName : String;
   commodityTypeName : String;
@@ -47,6 +48,7 @@ export class DashboardPage implements OnInit {
     this.httpService.getUserProject('user-project').subscribe(res => {
       console.log(res);
       if((res.status == 200) && (Object.keys(res.data).length > 0)){
+        this.projectID = res.data.id;
         this.projectName = res.data.project_name;
         this.project = res.data.project.name;
         this.projectType = res.data.project_type.name;
@@ -99,8 +101,9 @@ export class DashboardPage implements OnInit {
     this.router.navigate(["tabs/dashboard/create-project"])
   }
 
-  createDeviceSensor(){
-    this.router.navigate(["tabs/dashboard/create-device-sensor"])
+  createDeviceSensor(projectID){
+    console.log(projectID)
+    this.router.navigate(["tabs/dashboard/create-device-sensor/" + projectID])
   }
 
 }

@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
       icon: 'calendar'
     },
     {
-      title: 'Profile',
-      url: '/tabs/profile',
+      title: 'Akun',
+      url: '/tabs/account',
       icon: 'person-circle'
     },
     {

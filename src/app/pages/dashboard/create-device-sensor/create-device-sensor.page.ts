@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import { Router, ActivatedRoute  } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras  } from '@angular/router';
 
 @Component({
   selector: 'app-create-device-sensor',
@@ -42,7 +42,13 @@ export class CreateDeviceSensorPage implements OnInit {
     this.httpService.PostRequest(this.createDevSensorForm.value, 'device-sensor').subscribe(res => {
       console.log(res)
       if(res.status == 200){
-        this.router.navigate(['/tabs/dashboard']);
+        let navigationExtras: NavigationExtras = {
+          replaceUrl: true,
+          queryParams: {
+            refreshPage: 1,
+          }
+        };
+        this.router.navigate(['/tabs/dashboard'], navigationExtras);
         this.loading.dismiss();
       }
     });

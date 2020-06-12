@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { LoaderService } from '../../../services/loader.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-create-project',
@@ -64,7 +64,13 @@ export class CreateProjectPage implements OnInit {
     this.httpService.PostRequest(this.createProjectForm.value, 'create-project').subscribe(res => {
       console.log(res)
       if(res.status == 200){
-        this.router.navigate(['/tabs/dashboard']);
+        let navigationExtras: NavigationExtras = {
+          replaceUrl: true,
+          queryParams: {
+            refreshPage: 1,
+          }
+        };
+        this.router.navigate(['/tabs/dashboard'], navigationExtras);
         this.loading.dismiss();
       }
     });

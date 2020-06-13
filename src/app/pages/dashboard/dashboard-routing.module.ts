@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('./create-device-sensor/create-device-sensor.module').then( m => m.CreateDeviceSensorPageModule)
   },
   {
-    path: 'conf-device-sensor/:device_id',
+    path: 'conf-device-sensor/:project_device_id',
     loadChildren: () => import('./conf-device-sensor/conf-device-sensor.module').then( m => m.ConfDeviceSensorPageModule)
   }
 ];

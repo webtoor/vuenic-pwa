@@ -74,7 +74,7 @@ export class DashboardPage implements OnInit {
   }
 
   segmentChanged(value){
-    //console.log('segmentChanged')
+    console.log('segmentChanged')
     this.segmentDefault = value
     this.getSensorData(this.segmentDefault);
     this.setInterval();
@@ -112,6 +112,11 @@ export class DashboardPage implements OnInit {
   createDeviceSensor(projectID){
     console.log(projectID)
     this.router.navigate(["tabs/dashboard/create-device-sensor/" + projectID])
+  }
+
+  settingDeviceSensor(sensorID){
+    console.log(sensorID)
+    this.router.navigate(["tabs/dashboard/conf-device-sensor/" + sensorID])
   }
 
 }

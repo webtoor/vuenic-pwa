@@ -10,7 +10,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center">
-      <img src="/assets/images/text-white.png" height="25px;" style="margin-top: 10px;">
+      <img src="/assets/images/text-white.png" height="28px;" style="margin-top: 10px;">
     </ion-title>
   </ion-toolbar>
   <ion-toolbar color="x" style="margin-top:-100px;">
@@ -20,7 +20,7 @@
           <b>{{projectName}}</b> 
           <ion-badge color="primary" *ngIf="project" style="margin-left: 10px;"><b>{{project}}</b></ion-badge>
           <ion-badge color="primary" *ngIf="projectType" style="margin-left: 5px;"><b>{{projectType}}</b></ion-badge>
-          <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px">
+          <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px" (click)="settingUserProject(projectID)">
             <ion-button>
               <ion-icon slot="icon-only" name="options-outline"></ion-icon>
             </ion-button>
@@ -109,7 +109,7 @@
     <ng-template #emptySensorData>
       <div style="text-align: center;">
         <ion-img src="/assets/images/sad_2.png" style="height: 100px; margin-top: 18%;"></ion-img>
-        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">Data Tidak Tersedia</ion-badge></h5>
+        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="yellow-light">Data Belum Tersedia</ion-badge></h5>
       </div>
     </ng-template>
     </div>

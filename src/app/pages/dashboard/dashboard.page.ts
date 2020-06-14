@@ -114,9 +114,15 @@ export class DashboardPage implements OnInit {
     this.router.navigate(["tabs/dashboard/create-device-sensor/" + projectID])
   }
 
+  settingUserProject(ProjectID){
+    console.log(ProjectID)
+    this.router.navigate(["tabs/dashboard/conf-project/" + ProjectID])
+  }
+
   settingDeviceSensor(sensorID){
     console.log(sensorID)
     this.router.navigate(["tabs/dashboard/conf-device-sensor/" + sensorID])
   }
+
 
 }

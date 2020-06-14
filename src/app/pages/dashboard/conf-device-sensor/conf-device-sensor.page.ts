@@ -18,7 +18,7 @@ export class ConfDeviceSensorPage implements OnInit {
   }
 
   getProjectDevice(){
-    this.httpService.GetRequest('my-device-sensor/' + this.project_device_id).subscribe(res => {
+    this.httpService.GetRequest('project_device/' + this.project_device_id).subscribe(res => {
       console.log(res);
       if(res.status == 200){
       }

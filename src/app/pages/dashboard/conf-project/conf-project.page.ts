@@ -8,12 +8,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./conf-project.page.scss'],
 })
 export class ConfProjectPage implements OnInit {
-  user_project_id
+  user_project_id;
   constructor(public httpService: AuthService, public route : ActivatedRoute,) { 
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
   }
 
   ngOnInit() {
+    this.getUserProject()
+  }
+
+  getUserProject(){
+    this.httpService.GetRequest('user-project/' + this.user_project_id).subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+      }
+    });
   }
 
 }

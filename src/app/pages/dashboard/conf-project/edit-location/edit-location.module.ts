@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ConfProjectPageRoutingModule } from './conf-project-routing.module';
+import { EditLocationPageRoutingModule } from './edit-location-routing.module';
 
-import { ConfProjectPage } from './conf-project.page';
+import { EditLocationPage } from './edit-location.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { ConfProjectPage } from './conf-project.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ConfProjectPageRoutingModule
+    EditLocationPageRoutingModule
   ],
-  declarations: [ConfProjectPage]
+  declarations: [EditLocationPage]
 })
-export class ConfProjectPageModule {}
+export class EditLocationPageModule {}

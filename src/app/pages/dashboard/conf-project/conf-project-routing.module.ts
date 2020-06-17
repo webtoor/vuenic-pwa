@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ConfProjectPage
+  },
+  {
+    path: 'edit-location/:user_project_id',
+    loadChildren: () => import('./edit-location/edit-location.module').then( m => m.EditLocationPageModule)
   }
 ];
 

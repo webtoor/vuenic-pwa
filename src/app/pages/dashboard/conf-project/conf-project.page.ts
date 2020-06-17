@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-conf-project',
@@ -22,7 +22,7 @@ export class ConfProjectPage implements OnInit {
   commodity_types;
   cityIsEnabled = true;
 
-  constructor(private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) { 
+  constructor(public router: Router, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) { 
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditProjectForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],
@@ -46,8 +46,11 @@ export class ConfProjectPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getProvince();
-    this.getUserProject();
+   
+  }
+
+  settingUserProject(){
+    this.router.navigate(["tabs/dashboard/conf-project/" + this.user_project_id + "/edit-location/" + this.user_project_id])
   }
   onSubmit() {
     this.submitted = true;

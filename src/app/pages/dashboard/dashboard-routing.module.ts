@@ -23,10 +23,6 @@ const routes: Routes = [
   {
     path: 'conf-project/:user_project_id',
     loadChildren: () => import('./conf-project/conf-project.module').then( m => m.ConfProjectPageModule)
-  },
-  {
-    path: 'edit-location',
-    loadChildren: () => import('./con-project/edit-location/edit-location.module').then( m => m.EditLocationPageModule)
   }
 ];
 

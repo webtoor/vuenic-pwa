@@ -9,15 +9,25 @@
 
 <ion-content class="ion-padding">
 <ion-list lines="inset">
-  <ion-item>
-    <ion-label>Full Lines Item 1</ion-label>
+  <ion-item (click)="settingUserProject()">
+    <ion-label>Ubah Lokasi</ion-label>
+    <ion-buttons slot="end">
+      <ion-button color="danger">
+        <ion-icon slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 
   <ion-item>
-    <ion-label>Full Lines Item 2</ion-label>
+    <ion-label>Ubah Proyek</ion-label>
+    <ion-buttons slot="end">
+      <ion-button color="danger">
+        <ion-icon slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 </ion-list>
-  <form [formGroup]="EditProjectForm" (ngSubmit)="onSubmit()">
+  <!-- <form [formGroup]="EditProjectForm" (ngSubmit)="onSubmit()">
     <ion-card-header>
       <ion-card-subtitle color="primary"><b>I. Lokasi Proyek <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
     </ion-card-header>
@@ -86,7 +96,7 @@
     <div class="ion-text-center" style="margin-top:40px">
       <ion-button [disabled]="EditProjectForm.invalid" expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
     </div>
-  </form>
+  </form> -->
 </ion-content>
   
 

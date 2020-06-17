@@ -3,15 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Edit Lokasi</ion-title>
+    <ion-title>Ubah Lokasi</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form [formGroup]="EditProjectLocationForm" (ngSubmit)="onSubmit()">
-    <ion-card-header>
-      <ion-card-subtitle color="primary"><b>I. Lokasi Proyek <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
-    </ion-card-header>
     <ion-item>
       <ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
       <ion-input type="text" placeholder="Masukan Alamat" formControlName="address"></ion-input>

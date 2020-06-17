@@ -33,6 +33,10 @@ export class EditProjectPage implements OnInit {
   }
 
   ngOnInit() {
+   
+  }
+
+  ionViewDidEnter(){
     this.getProject()
     this.getUserProject()
   }

@@ -49,8 +49,12 @@ export class ConfProjectPage implements OnInit {
    
   }
 
-  settingUserProject(){
+  editLocation(){
     this.router.navigate(["tabs/dashboard/conf-project/" + this.user_project_id + "/edit-location/" + this.user_project_id])
+  }
+
+  editUserProject(){
+    this.router.navigate(["tabs/dashboard/conf-project/" + this.user_project_id + "/edit-project/" + this.user_project_id])
   }
   onSubmit() {
     this.submitted = true;

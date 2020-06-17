@@ -25,14 +25,14 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Kota/Kecamatan <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select (ionChange)="getDistricts($event)" formControlName="city_id" okText="" placeholder="Pilih Kota/Kecamatan" cancelText="" interface="action-sheet">
+      <ion-label position="stacked">Kota/Kabupaten <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getDistricts($event)" formControlName="city_id" okText="" placeholder="Pilih Kota/Kabupaten" cancelText="" interface="action-sheet">
         <ion-select-option *ngFor="let city of cities" [value]="city.id">{{city.type}} {{city.city_name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Kelurahan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-label position="stacked">Kecamatan <ion-text color="danger">*</ion-text></ion-label>
       <ion-select  formControlName="districts_id" okText="" placeholder="Pilih Kelurahan" cancelText="" interface="action-sheet">
         <ion-select-option *ngFor="let district of districts" [value]="district.id">{{district.subdistrict_name}}</ion-select-option>
       </ion-select>

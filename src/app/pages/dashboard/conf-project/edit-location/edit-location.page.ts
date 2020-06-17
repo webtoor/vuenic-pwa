@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-edit-location',
@@ -12,7 +13,7 @@ export class EditLocationPage implements OnInit {
   EditProjectLocationForm : FormGroup;
   user_project_id;
   submitted = false;
-  provinces;
+  provinces : any;
   cities;
   districts;
   projects;
@@ -20,15 +21,16 @@ export class EditLocationPage implements OnInit {
   project_types;
   commodities;
   commodity_types;
-  constructor(private _ngZone: NgZone, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
+  kotaIsEnabled = true;
+  kecamatanIsEnabled = true;
+
+  constructor(public loading: LoaderService, private _ngZone: NgZone, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditProjectLocationForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
       'city_id' : [null, Validators.required],
-      'districts_id' : [{
-        value: null,
-      }, Validators.required]
+      'districts_id' : [null, Validators.required]
     });
    }
 
@@ -62,49 +64,61 @@ export class EditLocationPage implements OnInit {
 
 
   getUserProject(){
+    this.loading.present();
     this.httpService.GetRequest('user-project/' + this.user_project_id).subscribe(res => {
       console.log(res['data']['project_location']['city_id']);
       if(res.status == 200){
-             
-            this.EditProjectLocationForm.patchValue({
-              'address' : res['data']['project_location']['address'],
-              'province_id' : res['data']['project_location']['province_id'],
-              'city_id' : res['data']['project_location']['city_id'],
-              'districts_id' : res['data']['project_location']['districts_id'],
-            }) 
-    
-     
+        this.EditProjectLocationForm.patchValue({
+          'address' : res['data']['project_location']['address'],
+          'province_id' : res['data']['project_location']['province_id'],
+          'city_id' : res['data']['project_location']['city_id'],
+          'districts_id' : res['data']['project_location']['districts_id'],
+        }) 
       }
+      this.loading.dismiss();
     });
   }
 
   getProvince(){
+    this.loading.present();
     this.httpService.GetRequest('province').subscribe(res => {
       console.log(res);
       if(res.status == 200){
         this.provinces = res.data
       }
+      this.loading.dismiss();
     });
   }
 
   getCity(event){
+    this.loading.present();
+    this.kotaIsEnabled = true;
+    this.kecamatanIsEnabled = true;
+    this.cities = null;
     this.httpService.GetRequest('city/'+ event.detail.value).subscribe(res => {
       console.log(res);
       if(res.status == 200){
+          this.kotaIsEnabled = false;
           this.cities = res.data
       }
+      this.loading.dismiss();
     });
   }
 
   getDistricts(event){
+    this.loading.present();
+    this.kecamatanIsEnabled = true;
+    this.districts = null;
     let city_id = event.detail.value
     if(city_id){
       this.httpService.GetRequest('district/'+ event.detail.value).subscribe(res => {
         console.log(res);
         if(res.status == 200){
+          this.kecamatanIsEnabled = false;
           this.districts = res.data
         }
       });
+      this.loading.present();
     }
   }
 }

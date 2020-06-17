@@ -36,6 +36,8 @@ export class EditProjectPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getProject()
+    this.getUserProject()
   }
 
   onSubmit() {
@@ -60,5 +62,75 @@ export class EditProjectPage implements OnInit {
   }
 
   get f() { return this.EditUserProjectForm.controls; }
+
+  getUserProject(){
+    this.httpService.GetRequest('user-project/' + this.user_project_id).subscribe(res => {
+      console.log(res['data']['project_location']['city_id']);
+      if(res.status == 200){
+        console.log("true")
+        this.EditUserProjectForm.patchValue({
+          'project_name' : res['data']['project_name'],
+          'project_id' : res['data']['project_id'],
+          'project_type_id' : res['data']['project_type_id'],
+          'commodity_id' : res['data']['commodity_id'],
+          'commodity_type_id' : res['data']['commodity_type_id'],
+        }) 
+      }
+    });
+  }
+
+  getProject(){
+    this.httpService.GetRequest('project').subscribe(res => {
+      //console.log(res);
+      if(res.status == 200){
+        this.projects = res.data
+      }
+    });
+  }
+
+  getProjectType(event){
+    console.log(event.detail.value)
+    this.project_id = event.detail.value
+    this.EditUserProjectForm.get('project_type_id').reset();
+    this.EditUserProjectForm.get('commodity_id').reset();
+    this.EditUserProjectForm.get('commodity_type_id').reset();
+    this.httpService.GetRequest('project-type/' + this.project_id).subscribe(res => {
+      //console.log(res);
+      if(res.status == 200){
+        this.EditUserProjectForm.get('project_type_id').enable();
+        this.project_types = res.data
+      }
+    });
+  }
+
+  getCommodity(event){
+    console.log(event.detail.value)
+    let project_type_id = event.detail.value
+    this.EditUserProjectForm.get('commodity_id').reset();
+    if(project_type_id){
+      this.httpService.GetRequest('commodity/' + this.project_id + '/' + project_type_id).subscribe(res => {
+        console.log(res);
+        if(res.status == 200){
+          this.EditUserProjectForm.get('commodity_id').enable();
+          this.commodities = res.data
+        }
+      });
+    }
+  }
+
+  getCommodityType(event){
+    console.log(event.detail.value)
+    let commodity_id = event.detail.value
+    this.EditUserProjectForm.get('commodity_type_id').reset();
+    if(commodity_id){
+      this.httpService.GetRequest('commodity-type/' + commodity_id).subscribe(res => {
+        console.log(res);
+        if(res.status == 200){
+          this.EditUserProjectForm.get('commodity_type_id').enable();
+          this.commodity_types = res.data
+        }
+      });
+    }
+  }
 
 }

@@ -1,11 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>edit-project</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ubah Proyek</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<form [formGroup]="EditUserProjectForm" (ngSubmit)="onSubmit()">
+<ion-content class="ion-padding">
+  <form [formGroup]="EditUserProjectForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="stacked">Nama Proyek <ion-text color="danger">*</ion-text></ion-label>
       <ion-input type="text" placeholder="Masukan Nama Proyek" formControlName="project_name"></ion-input>

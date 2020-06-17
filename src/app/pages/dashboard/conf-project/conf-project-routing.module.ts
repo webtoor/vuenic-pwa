@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./edit-location/edit-location.module').then( m => m.EditLocationPageModule)
   },
   {
-    path: 'edit-project',
+    path: 'edit-project/:user_project_id',
     loadChildren: () => import('./edit-project/edit-project.module').then( m => m.EditProjectPageModule)
   }
 ];

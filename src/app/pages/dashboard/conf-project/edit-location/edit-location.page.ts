@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +20,7 @@ export class EditLocationPage implements OnInit {
   project_types;
   commodities;
   commodity_types;
-  constructor(private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
+  constructor(private _ngZone: NgZone, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditProjectLocationForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],
@@ -34,6 +34,7 @@ export class EditLocationPage implements OnInit {
 
   ngOnInit() {
     this.getProvince()
+    this.getUserProject()
   }
 
   onSubmit() {
@@ -59,6 +60,24 @@ export class EditLocationPage implements OnInit {
 
   get f() { return this.EditProjectLocationForm.controls; }
 
+
+  getUserProject(){
+    this.httpService.GetRequest('user-project/' + this.user_project_id).subscribe(res => {
+      console.log(res['data']['project_location']['city_id']);
+      if(res.status == 200){
+             
+            this.EditProjectLocationForm.patchValue({
+              'address' : res['data']['project_location']['address'],
+              'province_id' : res['data']['project_location']['province_id'],
+              'city_id' : res['data']['project_location']['city_id'],
+              'districts_id' : res['data']['project_location']['districts_id'],
+            }) 
+    
+     
+      }
+    });
+  }
+
   getProvince(){
     this.httpService.GetRequest('province').subscribe(res => {
       console.log(res);
@@ -66,5 +85,26 @@ export class EditLocationPage implements OnInit {
         this.provinces = res.data
       }
     });
+  }
+
+  getCity(event){
+    this.httpService.GetRequest('city/'+ event.detail.value).subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+          this.cities = res.data
+      }
+    });
+  }
+
+  getDistricts(event){
+    let city_id = event.detail.value
+    if(city_id){
+      this.httpService.GetRequest('district/'+ event.detail.value).subscribe(res => {
+        console.log(res);
+        if(res.status == 200){
+          this.districts = res.data
+        }
+      });
+    }
   }
 }

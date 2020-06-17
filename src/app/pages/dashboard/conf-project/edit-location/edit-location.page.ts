@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,15 +16,10 @@ export class EditLocationPage implements OnInit {
   provinces : any;
   cities;
   districts;
-  projects;
-  project_id;
-  project_types;
-  commodities;
-  commodity_types;
   kotaIsEnabled = true;
   kecamatanIsEnabled = true;
 
-  constructor(public loading: LoaderService, private _ngZone: NgZone, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
+  constructor(public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditProjectLocationForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],

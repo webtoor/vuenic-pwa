@@ -12,26 +12,23 @@ export class EditProjectPage implements OnInit {
   EditUserProjectForm : FormGroup;
   user_project_id;
   submitted = false;
-  projects;
   project_id;
+  projects;
   project_types;
   commodities;
   commodity_types;
+  project_typesIsEnabled = true;
+  commoditiesIsEnabled = true;
+  commodity_typesIsEnabled = true;
 
   constructor(public router: Router, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) { 
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditUserProjectForm = this.formBuilder.group({
       'project_name' : [null, [Validators.required]],
       'project_id' : [null, [Validators.required]],
-      'project_type_id' : [{
-        value: null,
-      }, Validators.required],
-      'commodity_id' : [{
-        value: null,
-      }, Validators.required],
-      'commodity_type_id' : [{
-        value: null,
-      }],
+      'project_type_id' : [null, Validators.required],
+      'commodity_id' : [null, Validators.required],
+      'commodity_type_id' : [null],
     });
   }
 
@@ -91,13 +88,14 @@ export class EditProjectPage implements OnInit {
   getProjectType(event){
     console.log(event.detail.value)
     this.project_id = event.detail.value
-    this.EditUserProjectForm.get('project_type_id').reset();
-    this.EditUserProjectForm.get('commodity_id').reset();
-    this.EditUserProjectForm.get('commodity_type_id').reset();
+    this.project_typesIsEnabled = true;
+    this.commoditiesIsEnabled = true;
+    this.commodity_typesIsEnabled = true;
+    this.commodities = this.project_types;
     this.httpService.GetRequest('project-type/' + this.project_id).subscribe(res => {
       //console.log(res);
       if(res.status == 200){
-        this.EditUserProjectForm.get('project_type_id').enable();
+        this.project_typesIsEnabled = false;
         this.project_types = res.data
       }
     });
@@ -105,13 +103,16 @@ export class EditProjectPage implements OnInit {
 
   getCommodity(event){
     console.log(event.detail.value)
+    this.commoditiesIsEnabled = true;
+    this.commodity_typesIsEnabled = true;
+    this.commodities = null;
     let project_type_id = event.detail.value
     this.EditUserProjectForm.get('commodity_id').reset();
     if(project_type_id){
       this.httpService.GetRequest('commodity/' + this.project_id + '/' + project_type_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
-          this.EditUserProjectForm.get('commodity_id').enable();
+          this.commoditiesIsEnabled = false;
           this.commodities = res.data
         }
       });
@@ -120,13 +121,15 @@ export class EditProjectPage implements OnInit {
 
   getCommodityType(event){
     console.log(event.detail.value)
+    this.commodity_typesIsEnabled = true;
+    this.commodity_typesIsEnabled = null;
     let commodity_id = event.detail.value
     this.EditUserProjectForm.get('commodity_type_id').reset();
     if(commodity_id){
       this.httpService.GetRequest('commodity-type/' + commodity_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
-          this.EditUserProjectForm.get('commodity_type_id').enable();
+          this.commodity_typesIsEnabled = false;
           this.commodity_types = res.data
         }
       });

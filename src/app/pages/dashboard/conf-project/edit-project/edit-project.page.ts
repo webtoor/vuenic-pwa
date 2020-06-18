@@ -66,7 +66,7 @@ export class EditProjectPage implements OnInit {
 
   getUserProject(){
     this.httpService.GetRequest('user-project/' + this.user_project_id).subscribe(res => {
-      console.log(res['data']['project_location']['city_id']);
+      console.log(res);
       if(res.status == 200){
         console.log("true")
         this.EditUserProjectForm.patchValue({

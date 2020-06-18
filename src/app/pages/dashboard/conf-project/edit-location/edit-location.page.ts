@@ -22,6 +22,7 @@ export class EditLocationPage implements OnInit {
   constructor(private _ngZone: NgZone, /* public loading: LoaderService, */ private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditProjectLocationForm = this.formBuilder.group({
+      'user_project_id' : [parseInt(this.user_project_id), [Validators.required]],
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
       'city_id' : [null, Validators.required],

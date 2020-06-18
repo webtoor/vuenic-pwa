@@ -38,11 +38,20 @@ export class AuthService {
       catchError(this.handleError('get-http-request', []))
     );
   }
+
   PostRequest(data, type): Observable<any> {
     return this.http.post<any>(apiUrl+type, data)
     .pipe(
       tap(_ => this.log('post-http-request')),
       catchError(this.handleError('post-http-request', []))
+    );
+  }
+
+  PutRequest(data, type): Observable<any> {
+    return this.http.put<any>(apiUrl+type, data)
+    .pipe(
+      tap(_ => this.log('put-http-request')),
+      catchError(this.handleError('put-http-request', []))
     );
   }
 

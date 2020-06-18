@@ -64,14 +64,14 @@ export class EditLocationPage implements OnInit {
 
   getUserProject(){
     //this.loading.present();
-    this.httpService.GetRequest('user-project/' + this.user_project_id).subscribe(res => {
-      //console.log(res['data']['project_location']['city_id']);
+    this.httpService.GetRequest('project-location/' + this.user_project_id).subscribe(res => {
+      //console.log(res);
       if(res.status == 200){
         this.EditProjectLocationForm.patchValue({
-          'address' : res['data']['project_location']['address'],
-          'province_id' : res['data']['project_location']['province_id'],
-          'city_id' : res['data']['project_location']['city_id'],
-          'districts_id' : res['data']['project_location']['districts_id'],
+          'address' : res['data']['address'],
+          'province_id' : res['data']['province_id'],
+          'city_id' : res['data']['city_id'],
+          'districts_id' : res['data']['districts_id'],
         }) 
       }
       //this.loading.dismiss();

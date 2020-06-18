@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-edit-project',
@@ -24,6 +24,7 @@ export class EditProjectPage implements OnInit {
   constructor(public router: Router, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) { 
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditUserProjectForm = this.formBuilder.group({
+      'user_project_id' : [parseInt(this.user_project_id), [Validators.required]],
       'project_name' : [null, [Validators.required]],
       'project_id' : [null, [Validators.required]],
       'project_type_id' : [null, Validators.required],
@@ -47,19 +48,18 @@ export class EditProjectPage implements OnInit {
         return;
     }
     console.log(this.EditUserProjectForm.value)
-    /* this.httpService.PostRequest(this.EditUserProjectForm.value, 'create-project').subscribe(res => {
+    this.httpService.PutRequest(this.EditUserProjectForm.value, 'user-project').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
           replaceUrl: true,
-          queryParams: {
+          state : {
             refreshPage: 1,
           }
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);
-        this.loading.dismiss();
       }
-    }); */
+    });
   }
 
   get f() { return this.EditUserProjectForm.controls; }

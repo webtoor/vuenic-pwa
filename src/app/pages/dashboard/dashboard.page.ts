@@ -24,30 +24,35 @@ export class DashboardPage implements OnInit {
   deviceSegment;
   segmentDefault;
   deviceSensor; 
+  refreshPage = 0;
   public alive = true;
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
    }
 
   ngOnInit() {
-    this.getUserProject();
+    this.getUserProject()
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
+      }
+      if(this.refreshPage == 1){
+        console.log("Refresh Page")
+        this.getUserProject()
+      }
+    });
   }
 
   ionViewDidLeave(){
     this.alive = false;
+    this.refreshPage = 0;
   }
 
   ionViewDidEnter(){
-    this.alive = true;
     if(this.projectName && this.projectDevice){
+      this.alive = true;
       this.setInterval()
     }
-    this.route.queryParams.subscribe(params => {
-      let refreshPage = params["refreshPage"];
-      if(refreshPage == 1){
-        this.getUserProject();
-      }
-    });
   }
 
   getUserProject(){
@@ -81,6 +86,7 @@ export class DashboardPage implements OnInit {
   }
 
   setInterval(){
+    console.log("Activate Interval")
     const intervallTimer = interval(60000 * 10);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }

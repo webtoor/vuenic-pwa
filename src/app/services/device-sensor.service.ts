@@ -19,7 +19,7 @@ export class DeviceSensorService {
   getDeviceSensor(type): Observable<any> {
     return this.http.get<any>(apiUrl+type)
     .pipe(
-      tap(_ => this.log('get-device-sensor')),
+      //tap(_ => this.log('get-device-sensor')),
       catchError(this.handleError('get-device-sensor', []))
     );
   }

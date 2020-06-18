@@ -18,7 +18,7 @@ export class UserProjectService {
   getUserProject(type): Observable<any> {
     return this.http.get<any>(apiUrl+type)
     .pipe(
-      tap(_ => this.log('get-user-project')),
+      //tap(_ => this.log('get-user-project')),
       catchError(this.handleError('get-user-project', []))
     );
   }

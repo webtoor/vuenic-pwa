@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 /* import { LoaderService } from 'src/app/services/loader.service'; */
 
 @Component({
@@ -19,10 +19,10 @@ export class EditLocationPage implements OnInit {
   kotaIsEnabled = true;
   kecamatanIsEnabled = true;
 
-  constructor(private _ngZone: NgZone, /* public loading: LoaderService, */ private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
+  constructor(public router : Router, private _ngZone: NgZone, /* public loading: LoaderService, */ private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) {
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditProjectLocationForm = this.formBuilder.group({
-      'user_project_id' : [parseInt(this.user_project_id), [Validators.required]],
+      'project_location_id' : [null, [Validators.required]],
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
       'city_id' : [null, Validators.required],
@@ -45,19 +45,18 @@ export class EditLocationPage implements OnInit {
         return;
     }
     console.log(this.EditProjectLocationForm.value)
-    /* this.httpService.PostRequest(this.EditProjectLocationForm.value, 'create-project').subscribe(res => {
+    this.httpService.PutRequest(this.EditProjectLocationForm.value, 'project-location').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
           replaceUrl: true,
-          queryParams: {
+          state: {
             refreshPage: 1,
           }
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);
-        this.loading.dismiss();
       }
-    }); */
+    });
   }
 
   get f() { return this.EditProjectLocationForm.controls; }
@@ -66,9 +65,10 @@ export class EditLocationPage implements OnInit {
   getUserProject(){
     //this.loading.present();
     this.httpService.GetRequest('project-location/' + this.user_project_id).subscribe(res => {
-      //console.log(res);
+      console.log(res);
       if(res.status == 200){
         this.EditProjectLocationForm.patchValue({
+          'project_location_id' : res['data']['id'],
           'address' : res['data']['address'],
           'province_id' : res['data']['province_id'],
           'city_id' : res['data']['city_id'],
@@ -82,7 +82,7 @@ export class EditLocationPage implements OnInit {
   getProvince(){
     //this.loading.present();
     this.httpService.GetRequest('province').subscribe(res => {
-      console.log(res);
+      //console.log(res);
       if(res.status == 200){
           this.provinces = res.data
       }

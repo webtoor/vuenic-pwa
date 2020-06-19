@@ -25,6 +25,7 @@ export class DashboardPage implements OnInit {
   segmentDefault;
   deviceSensor; 
   refreshPage = 0;
+  user_project_id = 2;
   public alive = true;
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
@@ -35,10 +36,14 @@ export class DashboardPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
+        this.user_project_id = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
       }
       if(this.refreshPage == 1){
-        console.log("Refresh Page")
+        console.log("Refresh Page", this.user_project_id)
         this.getUserProject()
+      }
+      if(this.user_project_id != 0){
+        this.projectDevice = null
       }
     });
   }
@@ -56,7 +61,7 @@ export class DashboardPage implements OnInit {
   }
 
   getUserProject(){
-    this.httpService.getUserProject('user-project').subscribe(res => {
+    this.httpService.getUserProject('user-project/' + this.user_project_id).subscribe(res => {
       console.log(res);
       if((res.status == 200) && (Object.keys(res.data).length > 0)){
         this.projectID = res.data.id;

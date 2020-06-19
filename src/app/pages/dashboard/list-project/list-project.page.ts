@@ -8,10 +8,31 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['./list-project.page.scss'],
 })
 export class ListProjectPage implements OnInit {
-
-  constructor() { }
+  listUserProject
+  constructor(public httpService: AuthService, public router : Router) { }
 
   ngOnInit() {
+    this.getListUserProject()
   }
+
+  getListUserProject(){
+    this.httpService.GetRequest('list-user-project').subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+      this.listUserProject = res["data"]
+      }
+    });
+  }
+
+  showUserProject(user_project_id){
+    console.log(user_project_id)
+    let navigationExtras: NavigationExtras = {
+      replaceUrl: true,
+      state: {
+        refreshPage: 1,
+        userProjectID : user_project_id
+      }
+    };
+    this.router.navigate(['/tabs/dashboard'], navigationExtras);  }
 
 }

@@ -62,7 +62,7 @@ export class DashboardPage implements OnInit {
   }
 
   getUserProject(){
-    this.httpService.getUserProject('user-project/' + this.user_project_id).subscribe(res => {
+    this.httpService.getUserProject('user-project-loc/' + this.user_project_id).subscribe(res => {
       console.log(res);
       if((res.status == 200) && (Object.keys(res.data).length > 0)){
         this.projectID = res.data.id;

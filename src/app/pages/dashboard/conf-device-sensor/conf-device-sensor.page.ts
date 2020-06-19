@@ -9,15 +9,39 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ConfDeviceSensorPage implements OnInit {
   project_device_id
+  apiDevKey;
   constructor(public router: Router,public httpService: AuthService, public route : ActivatedRoute,) { 
     this.project_device_id = this.route.snapshot.paramMap.get('project_device_id');
   }
 
   ngOnInit() {
+    const params = JSON.parse(localStorage.getItem('vuenic-dev-key'));
+    //console.log(params)
+    for(var j=0; j < params.length; j++){
+      if(params[j]["id"] == this.project_device_id){
+        //console.log(params[j]["id"])
+        this.apiDevKey = params[j]["key"]
+      }
+    }
+
   }
 
   editDeviceSensor(){
     this.router.navigate(["tabs/dashboard/conf-device-sensor/" + this.project_device_id + "/edit-device-sensor/" + this.project_device_id])
+  }
+
+  copyTextButton(val: string){
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
   }
 
 }

@@ -44,7 +44,7 @@ export class CreateDeviceSensorPage implements OnInit {
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
           replaceUrl: true,
-          queryParams: {
+          state : {
             refreshPage: 1,
           }
         };

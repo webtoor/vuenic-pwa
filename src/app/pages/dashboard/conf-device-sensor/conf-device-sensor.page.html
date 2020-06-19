@@ -17,5 +17,25 @@
         </ion-button>
       </ion-buttons>
     </ion-item>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>
+          API KEY   
+        <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px" (click)="copyTextButton(apiDevKey)" >
+          <ion-button color="danger" size="small">
+            <ion-icon slot="start" name="copy-outline"></ion-icon>
+            Salin
+          </ion-button>
+        </ion-buttons>
+
+      </ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        {{apiDevKey}}
+      </ion-card-content>
+    </ion-card>
+    
   </ion-list>
 </ion-content>

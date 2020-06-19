@@ -69,6 +69,7 @@ export class DashboardPage implements OnInit {
         }
         this.projectLocation = res.data.project_location;
         if(res.data.project_device){
+          localStorage.setItem('vuenic-dev-key', JSON.stringify(res.data.project_device));
           this.projectDevice = res.data.project_device.length;
           this.deviceSegment = res.data.project_device;
           this.segmentDefault = res.data.project_device[0]["id"]
@@ -125,9 +126,9 @@ export class DashboardPage implements OnInit {
     this.router.navigate(["tabs/dashboard/conf-project/" + ProjectID])
   }
 
-  settingDeviceSensor(sensorID){
-    console.log(sensorID)
-    this.router.navigate(["tabs/dashboard/conf-device-sensor/" + sensorID])
+  settingDeviceSensor(deviceID){
+    //console.log(deviceID)
+    this.router.navigate(["tabs/dashboard/conf-device-sensor/" + deviceID])
   }
 
 

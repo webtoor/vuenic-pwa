@@ -70,6 +70,9 @@
           <ion-icon slot="start" name="options-outline"></ion-icon>
           Pengaturan Device & Sensor
         </ion-button>
+        <ion-button color="danger" size="small" fill="clear" (click)="createDeviceSensor(projectID)">
+          <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+        </ion-button>
       </div>
     <div *ngIf="deviceSensor?.length > 0; else emptySensorData">
       <ion-row>
@@ -80,6 +83,7 @@
               <ion-card-subtitle *ngIf="sensor.sensor_id == 2">Suhu</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 3">Suhu Air</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 4">pH</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 5">TDS</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content style="padding:0">
@@ -90,6 +94,7 @@
                     <ion-img *ngIf="sensor.sensor_id == 2" src="/assets/images/temperature.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/water-temperature.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 4" src="/assets/images/ph.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 5" src="/assets/images/tds.png" style="height: 50px;"></ion-img>
                   </ion-col>
                   <ion-col>
                     <div style="margin-top: 10px;">
@@ -98,6 +103,7 @@
                       <b *ngIf="(sensor.sensor_id == 2) && (sensor.data_sensor != null);else emptySensor2"><sup>°C</sup></b>
                       <b *ngIf="(sensor.sensor_id == 3) && (sensor.data_sensor != null);else emptySensor3"><sup>°C</sup></b>
                       <b *ngIf="(sensor.sensor_id == 4) && (sensor.data_sensor != null);else emptySensor4"><sup>pH</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 5) && (sensor.data_sensor != null);else emptySensor5"><sup>ppm</sup></b>
                     </div>
                   </ion-col>
                 </ion-row>

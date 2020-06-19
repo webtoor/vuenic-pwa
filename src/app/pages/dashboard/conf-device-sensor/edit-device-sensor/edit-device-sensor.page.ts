@@ -56,12 +56,13 @@ export class EditDeviceSensorPage implements OnInit {
       if(res.status == 200){
         this.sensor_array = []
         for(var j=0; j < res['data']['device_sensor'].length; j++){
-          this.sensor_array.push(res['data']['device_sensor'][j]['id'])
+          this.sensor_array.push(res['data']['device_sensor'][j]['sensor_id'])
         }
         this.editDevSensorForm.patchValue({
           'device_id' : res['data']['device_id'],
           'sensor_id' : this.sensor_array,
         }) 
+        console.log(this.sensor_array)
       }
     });
   }

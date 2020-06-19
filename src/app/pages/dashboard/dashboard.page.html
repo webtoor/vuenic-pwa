@@ -94,10 +94,10 @@
                   <ion-col>
                     <div style="margin-top: 10px;">
                       <b style="font-size: 21px; padding-right: 5px;" *ngIf="sensor.data_sensor != null;">{{sensor.data_sensor.sensor_value|number:'0.0-1'}}</b>
-                      <b *ngIf="sensor.sensor_id == 1"><sup>%</sup></b>
-                      <b *ngIf="sensor.sensor_id == 2"><sup>°C</sup></b>
-                      <b *ngIf="sensor.sensor_id == 3"><sup>°C</sup></b>
-                      <b *ngIf="sensor.sensor_id == 4"><sup>pH</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 1) && (sensor.data_sensor != null);else emptySensor1"><sup>%</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 2) && (sensor.data_sensor != null);else emptySensor2"><sup>°C</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 3) && (sensor.data_sensor != null);else emptySensor3"><sup>°C</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 4) && (sensor.data_sensor != null);else emptySensor4"><sup>pH</sup></b>
                     </div>
                   </ion-col>
                 </ion-row>

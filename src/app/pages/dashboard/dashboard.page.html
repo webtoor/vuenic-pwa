@@ -25,7 +25,7 @@
               <ion-icon slot="icon-only" name="options-outline"></ion-icon>
             </ion-button>
           </ion-buttons>
-          
+
         </ion-card-title>
         <ion-card-subtitle>
           <ion-badge color="primary" *ngIf="projectType" style="margin-left: 5px;"><b>{{projectType}}</b></ion-badge>
@@ -48,7 +48,7 @@
 
 <!-- Scrollable Segment -->
 <!-- class="ion-padding-start ion-padding-end" -->
-<div *ngIf="projectName">
+<div *ngIf="projectDevice">
 <ion-segment scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
   <div *ngFor="let device of deviceSegment; let i=index;">
     <ion-segment-button value="{{device.id}}" layout="icon-end">

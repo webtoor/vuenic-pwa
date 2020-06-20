@@ -52,6 +52,7 @@ export class EditLocationPage implements OnInit {
           replaceUrl: true,
           state: {
             refreshPage: 1,
+            userProjectID : this.user_project_id
           }
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);

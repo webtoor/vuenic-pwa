@@ -22,9 +22,13 @@ const routes: Routes = [
     canActivate : [AuthGuardService]
   },
   {
+    path: 'list-project',
+    loadChildren: () => import('./pages/list-project/list-project.module').then( m => m.ListProjectPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },
+  }
   
  /*  {
     path: 'dashboard',

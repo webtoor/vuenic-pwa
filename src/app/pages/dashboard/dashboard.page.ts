@@ -41,10 +41,11 @@ export class DashboardPage implements OnInit {
     
       if(this.refreshPage == 1){
         if(this.user_project_id != 0){
+          console.log(this.user_project_id)
           this.projectDevice = null
           this.deviceSegment = [] 
         }
-        //console.log("Refresh Page")
+        console.log("Refresh Page")
         this.getUserProject()
       }
     });
@@ -53,6 +54,7 @@ export class DashboardPage implements OnInit {
   ionViewDidLeave(){
     this.alive = false;
     this.refreshPage = 0;
+    this.user_project_id = this.user_project_id
   }
 
   ionViewDidEnter(){
@@ -63,6 +65,7 @@ export class DashboardPage implements OnInit {
   }
 
   getUserProject(){
+    console.log(this.user_project_id)
     this.httpService.getUserProject('user-project-loc/' + this.user_project_id).subscribe(res => {
       console.log(res);
       if((res.status == 200) && (Object.keys(res.data).length > 0)){
@@ -139,7 +142,7 @@ export class DashboardPage implements OnInit {
   }
 
   listProject(){
-    this.router.navigate(["tabs/dashboard/list-project"])
+    this.router.navigate(["list-project"])
   }
 
 

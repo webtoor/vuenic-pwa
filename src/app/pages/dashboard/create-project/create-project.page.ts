@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { LoaderService } from '../../../services/loader.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { Location } from "@angular/common";
+
 
 @Component({
   selector: 'app-create-project',
@@ -20,7 +22,7 @@ export class CreateProjectPage implements OnInit {
   commodities;
   commodity_types;
   submitted = false;
-  constructor(public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
+  constructor(private location: Location, public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
@@ -48,6 +50,10 @@ export class CreateProjectPage implements OnInit {
       }],
     });
    }
+
+ /*  backButton(){
+    this.location.back()
+  } */
 
   ngOnInit() {
     this.getProvince();

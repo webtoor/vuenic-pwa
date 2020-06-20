@@ -23,10 +23,6 @@ const routes: Routes = [
   {
     path: 'conf-project/:user_project_id',
     loadChildren: () => import('./conf-project/conf-project.module').then( m => m.ConfProjectPageModule)
-  },
-  {
-    path: 'list-project',
-    loadChildren: () => import('./list-project/list-project.module').then( m => m.ListProjectPageModule)
   }
 ];
 

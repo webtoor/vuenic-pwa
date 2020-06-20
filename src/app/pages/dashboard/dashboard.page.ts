@@ -133,7 +133,7 @@ export class DashboardPage implements OnInit {
 
   settingUserProject(ProjectID){
     console.log(ProjectID)
-    this.router.navigate(["tabs/dashboard/conf-project/" + ProjectID])
+    this.router.navigate(["/conf-project/" + ProjectID])
   }
 
   settingDeviceSensor(deviceID){

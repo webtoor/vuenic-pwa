@@ -30,6 +30,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/create-project/create-project.module').then( m => m.CreateProjectPageModule)
   },
   {
+    path: 'conf-project/:user_project_id',
+    loadChildren: () => import('./pages/conf-project/conf-project.module').then( m => m.ConfProjectPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   }

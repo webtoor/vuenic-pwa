@@ -15,10 +15,6 @@ const routes: Routes = [
   {
     path: 'conf-device-sensor/:project_device_id',
     loadChildren: () => import('./conf-device-sensor/conf-device-sensor.module').then( m => m.ConfDeviceSensorPageModule)
-  },
-  {
-    path: 'conf-project/:user_project_id',
-    loadChildren: () => import('./conf-project/conf-project.module').then( m => m.ConfProjectPageModule)
   }
 ];
 

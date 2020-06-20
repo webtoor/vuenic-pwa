@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="grey-light">
   <div *ngFor="let item of listUserProject">
   <ion-card>
     <ion-card-header>
@@ -22,7 +22,7 @@
           </ion-button>
           </ion-buttons>
 
-          <ion-buttons>
+          <ion-buttons (click)="settingUserProject(item.id)">
             <ion-button>
               <ion-icon slot="icon-only" name="options-outline"></ion-icon>
             </ion-button>

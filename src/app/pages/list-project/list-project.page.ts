@@ -39,4 +39,9 @@ export class ListProjectPage implements OnInit {
   createProject(){
     this.router.navigate(["/create-project"])
   }
+
+  settingUserProject(ProjectID){
+    console.log(ProjectID)
+    this.router.navigate(["/conf-project/" + ProjectID])
+  }
 }

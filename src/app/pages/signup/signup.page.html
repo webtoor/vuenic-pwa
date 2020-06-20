@@ -1,15 +1,17 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar style="margin-top:0px;" color="white" class="ion-text-center">
-    <ion-button slot="start" expand="full" fill="clear" (click)="signinPage()">
-      <ion-icon color="danger" slot="start" name="arrow-back-circle-outline"></ion-icon>
-           <div style="font-weight: bolder;color:#eb445a;">LOGIN</div>
+  <ion-toolbar style="margin-top:0px;" class="ion-text-center">
+    <ion-button slot="start" fill="clear" color="primary" (click)="signinPage()">
+      <ion-icon slot="start" color="danger" name="arrow-back-circle-outline"></ion-icon>
+           LOGIN DISINI
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="ion-text-center" style="margin-top: 0px;">
+    <img src="/assets/images/logo-with-text.png" height="80px;" style="margin-bottom:5px;">
+  </div>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-
   <ion-item class="marginTop">
     <ion-label position="stacked">Nama Lengkap</ion-label>
     <ion-input type="email" placeholder="Masukan Nama Lengkap" formControlName="fullname"></ion-input>

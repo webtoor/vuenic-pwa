@@ -26,6 +26,13 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewDidEnter(){
+    const check = JSON.parse(localStorage.getItem('vuenic-pwa'));
+    if(check){
+      this.router.navigate(["tabs/dashboard"])
+    }
+  }
+
   onSubmit() {
     this.submitted = true;
     if (this.signupForm.invalid) {

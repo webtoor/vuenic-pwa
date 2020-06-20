@@ -23,15 +23,18 @@ const routes: Routes = [
   },
   {
     path: 'list-project',
-    loadChildren: () => import('./pages/list-project/list-project.module').then( m => m.ListProjectPageModule)
+    loadChildren: () => import('./pages/list-project/list-project.module').then( m => m.ListProjectPageModule),
+    canActivate : [AuthGuardService]
   },
   {
     path: 'create-project',
-    loadChildren: () => import('./pages/create-project/create-project.module').then( m => m.CreateProjectPageModule)
+    loadChildren: () => import('./pages/create-project/create-project.module').then( m => m.CreateProjectPageModule),
+    canActivate : [AuthGuardService]
   },
   {
     path: 'conf-project/:user_project_id',
-    loadChildren: () => import('./pages/conf-project/conf-project.module').then( m => m.ConfProjectPageModule)
+    loadChildren: () => import('./pages/conf-project/conf-project.module').then( m => m.ConfProjectPageModule),
+    canActivate : [AuthGuardService]
   },
   {
     path: '**',

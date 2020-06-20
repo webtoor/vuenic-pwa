@@ -104,6 +104,14 @@
   --ion-color-yellow-light-contrast-rgb: 0, 0, 0;
   --ion-color-yellow-light-shade: #d7d8da;
   --ion-color-yellow-light-tint: #f6ff07;
+
+    /** grey-light **/
+    --ion-color-grey-light: #f5f8fa;
+    --ion-color-grey-light-rgb: 82, 96, 255;
+    --ion-color-grey-light-contrast: #f5f8fa;
+    --ion-color-grey-light-contrast-rgb: 255, 255, 255;
+    --ion-color-grey-light-shade: #f5f8fa;
+    --ion-color-grey-light-tint: #f5f8fa;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -289,6 +297,15 @@
   --ion-color-contrast-rgb: var(--ion-color-yellow-light-contrast-rgb);
   --ion-color-shade: var(--ion-color-yellow-light-shade);
   --ion-color-tint: var(--ion-color-yellow-light-tint);
+}
+
+.ion-color-grey-light {
+  --ion-color-base: var(--ion-color-grey-light);
+  --ion-color-base-rgb: var(--ion-color-grey-light-rgb);
+  --ion-color-contrast: var(--ion-color-grey-light-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-grey-light-contrast-rgb);
+  --ion-color-shade: var(--ion-color-grey-light-shade);
+  --ion-color-tint: var(--ion-color-grey-light-tint);
 }
 
 @font-face {

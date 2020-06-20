@@ -38,12 +38,13 @@ export class DashboardPage implements OnInit {
         this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
         this.user_project_id = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
       }
-      if(this.user_project_id != 0){
-        this.projectDevice = null
-        this.deviceSegment = [] 
-      }
+    
       if(this.refreshPage == 1){
-        console.log("Refresh Page")
+        if(this.user_project_id != 0){
+          this.projectDevice = null
+          this.deviceSegment = [] 
+        }
+        //console.log("Refresh Page")
         this.getUserProject()
       }
     });

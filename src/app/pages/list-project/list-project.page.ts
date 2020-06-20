@@ -37,6 +37,6 @@ export class ListProjectPage implements OnInit {
    }
 
   createProject(){
-    this.router.navigate(["tabs/dashboard/create-project"])
+    this.router.navigate(["/create-project"])
   }
 }

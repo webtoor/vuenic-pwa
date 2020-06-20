@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
-import { LoaderService } from '../../../services/loader.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { Location } from "@angular/common";
 

@@ -33,6 +33,10 @@ export class ListProjectPage implements OnInit {
         userProjectID : user_project_id
       }
     };
-    this.router.navigate(['/tabs/dashboard'], navigationExtras);  }
+    this.router.navigate(['/tabs/dashboard'], navigationExtras); 
+   }
 
+  createProject(){
+    this.router.navigate(["tabs/dashboard/create-project"])
+  }
 }

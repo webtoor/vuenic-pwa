@@ -61,13 +61,14 @@ export class CreateProjectPage implements OnInit {
     }
     //console.log(this.createProjectForm.value)
     this.loading.present();
-    this.httpService.PostRequest(this.createProjectForm.value, 'create-project').subscribe(res => {
+    this.httpService.PostRequest(this.createProjectForm.value, 'user-project').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
           replaceUrl: true,
           state: {
             refreshPage: 1,
+            userProjectID : res["data"]["id"]
           }
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);

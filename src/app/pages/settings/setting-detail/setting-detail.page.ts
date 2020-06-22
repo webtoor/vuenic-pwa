@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting-detail',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingDetailPage implements OnInit {
 
-  constructor() { }
+  constructor(public router : Router) { }
 
   ngOnInit() {
+  }
+
+
+  settingMyProfile(){
+    this.router.navigate(["settings/setting-detail/setting-account"])
   }
 
 }

@@ -17,4 +17,9 @@ export class SettingsPage implements OnInit {
     this.router.navigate(["settings/setting-detail"])
   }
 
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/signin'], {replaceUrl: true})
+  }
+
 }

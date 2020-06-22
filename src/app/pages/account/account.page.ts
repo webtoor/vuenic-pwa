@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountPage implements OnInit {
   fullName : String
-  constructor() { }
+  constructor(public router : Router) { }
 
   ngOnInit() {
     const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
     this.fullName = token["fullname"]
+  }
+
+  myProfile(){
+    this.router.navigate(["settings"])
   }
 }

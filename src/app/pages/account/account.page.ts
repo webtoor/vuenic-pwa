@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-
+  fullName : String
   constructor() { }
 
   ngOnInit() {
+    const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
+    this.fullName = token["fullname"]
   }
-
 }

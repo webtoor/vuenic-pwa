@@ -8,24 +8,26 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-text-center ion-padding-top">
-    <img src="/assets/images/logo-vuenic.png" height="70px;">
+  <div class="ion-text-center" style="margin-top:30px;">
+    <img src="/assets/images/logo-vuenic.png" height="100px;" width="100px;" style="border:1px solid #3dc2ff;  border-radius: 55%;">
   </div>
 
-  <ion-list lines="none">    
+  <ion-list lines="none" style="margin-top: 10px;">    
     <ion-item>
       <ion-label>
         <p>Nama Lengkap</p>
         <h2>{{infoUser?.fullname}}</h2>
       </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:boldl">Ubah</div>
     </ion-item>
   
     <ion-item>
       <ion-label>
         <p>Tanggal Lahir</p>
-        <h2 *ngIf="infoUser?.dateofbirth">{{infoUser?.dateofbirth}}</h2>
+        <h2 *ngIf="infoUser?.dateofbirth">{{infoUser?.dateofbirth | date: "dd-MMMM-yyy"}}</h2>
         <h2 *ngIf="!infoUser?.dateofbirth">N/A</h2>
       </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:boldl">Ubah</div>
     </ion-item>
 
     <ion-item>
@@ -34,6 +36,7 @@
         <h2 *ngIf="infoUser?.gender == 1">Pria</h2>
         <h2 *ngIf="infoUser?.gender == 0">Wanita</h2>
       </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:boldl">Ubah</div>
     </ion-item>
 
     <ion-item>
@@ -41,6 +44,7 @@
         <p>Email</p>
         <h2 *ngIf="infoUser?.email">{{infoUser?.email}}</h2>
       </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:boldl">Ubah</div>
     </ion-item>
 
     <ion-item>
@@ -48,6 +52,7 @@
         <p>Nomor HP</p>
         <h2 *ngIf="infoUser?.phonenumber">{{infoUser?.phonenumber}}</h2>
       </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:boldl">Ubah</div>
     </ion-item>
   </ion-list>
  

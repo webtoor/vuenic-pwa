@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -20,6 +20,7 @@ export class EditAddressPage implements OnInit {
   constructor(public formBuilder : FormBuilder, public router : Router, public route : ActivatedRoute, public httpService: AuthService) {
     this.user_address_id = this.route.snapshot.paramMap.get('user_address_id');
     this.editUserAddressForm = this.formBuilder.group({
+      'user_address_id' : [parseInt(this.user_address_id), [Validators.required]],
       'address_label' : [null, [Validators.required]],
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
@@ -45,7 +46,7 @@ export class EditAddressPage implements OnInit {
         return;
     }
     console.log(this.editUserAddressForm.value)
-   /*  this.httpService.PostRequest(this.editUserAddressForm.value, 'user-address').subscribe(res => {
+    this.httpService.PutRequest(this.editUserAddressForm.value, 'user-address').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
@@ -56,8 +57,11 @@ export class EditAddressPage implements OnInit {
         };
         this.router.navigate(['/settings/setting-detail/setting-address'], navigationExtras);
       }
-    }); */
+    });
   }
+
+  get f() { return this.editUserAddressForm.controls; }
+
 
   getUserAddress(){
     this.httpService.GetRequest('user-address/' + this.user_address_id).subscribe(res => {

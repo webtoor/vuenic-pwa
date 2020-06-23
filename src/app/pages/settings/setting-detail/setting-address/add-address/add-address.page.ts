@@ -55,6 +55,9 @@ export class AddAddressPage implements OnInit {
     });
   }
 
+  get f() { return this.addUserAddressForm.controls; }
+
+
   getProvince(){
     this.httpService.GetRequest('province').subscribe(res => {
       console.log(res);

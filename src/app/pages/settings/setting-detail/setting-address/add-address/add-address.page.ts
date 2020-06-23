@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-add-address',
@@ -6,10 +9,87 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-address.page.scss'],
 })
 export class AddAddressPage implements OnInit {
-
-  constructor() { }
+  addUserAddressForm : FormGroup;
+  submitted = false;
+  provinces;
+  cities;
+  districts;
+  constructor(public router : Router, private formBuilder: FormBuilder, public httpService: AuthService) { 
+    this.addUserAddressForm = this.formBuilder.group({
+      'address' : [null, [Validators.required]],
+      'province_id' : [null, [Validators.required]],
+      'city_id' : [{
+        value: null,
+        disabled : true
+      }, Validators.required],
+      'districts_id' : [{
+        value: null,
+        disabled : true
+      }, Validators.required],
+      'postal_code' : [null],
+    });
+  }
 
   ngOnInit() {
+    this.getProvince()
   }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.addUserAddressForm.invalid) {
+        return;
+    }
+    console.log(this.addUserAddressForm.value)
+   /*  this.httpService.PutRequest(this.addUserAddressForm.value, 'project-location').subscribe(res => {
+      console.log(res)
+      if(res.status == 200){
+        let navigationExtras: NavigationExtras = {
+          replaceUrl: true,
+          state: {
+            refreshPage: 1,
+            userProjectID : this.user_project_id
+          }
+        };
+        this.router.navigate(['/tabs/dashboard'], navigationExtras);
+      }
+    }); */
+  }
+
+  getProvince(){
+    this.httpService.GetRequest('province').subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+        this.provinces = res.data
+      }
+    });
+  }
+
+  getCity(event){
+    this.addUserAddressForm.get('city_id').reset();
+    this.addUserAddressForm.get('districts_id').reset();
+    this.httpService.GetRequest('city/'+ event.detail.value).subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+        this.addUserAddressForm.get('city_id').enable();
+        this.cities = res.data
+      }
+    });
+  }
+
+  getDistricts(event){
+    let city_id = event.detail.value
+    this.addUserAddressForm.get('districts_id').reset();
+    if(city_id){
+      this.httpService.GetRequest('district/'+ event.detail.value).subscribe(res => {
+        console.log(res);
+        if(res.status == 200){
+          this.addUserAddressForm.get('districts_id').enable();
+          this.districts = res.data
+        }
+      });
+    }
+  }
+
+  
 
 }

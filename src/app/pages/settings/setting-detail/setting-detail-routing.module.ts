@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'setting-account',
     loadChildren: () => import('./setting-account/setting-account.module').then( m => m.SettingAccountPageModule)
+  },
+  {
+    path: 'setting-address',
+    loadChildren: () => import('./setting-address/setting-address.module').then( m => m.SettingAddressPageModule)
   }
 ];
 

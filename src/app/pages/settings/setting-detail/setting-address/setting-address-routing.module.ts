@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'add-address',
     loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
+  },
+  {
+    path: 'edit-address',
+    loadChildren: () => import('./edit-address/edit-address.module').then( m => m.EditAddressPageModule)
   }
 ];
 

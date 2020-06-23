@@ -18,4 +18,8 @@ export class SettingDetailPage implements OnInit {
     this.router.navigate(["settings/setting-detail/setting-account"])
   }
 
+  settingMyAddress(){
+    this.router.navigate(["settings/setting-detail/setting-address"])
+  }
+
 }

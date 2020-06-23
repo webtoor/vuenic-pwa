@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -40,19 +40,18 @@ export class AddAddressPage implements OnInit {
         return;
     }
     console.log(this.addUserAddressForm.value)
-   /*  this.httpService.PutRequest(this.addUserAddressForm.value, 'project-location').subscribe(res => {
+    this.httpService.PostRequest(this.addUserAddressForm.value, 'user-address').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
           replaceUrl: true,
           state: {
             refreshPage: 1,
-            userProjectID : this.user_project_id
           }
         };
-        this.router.navigate(['/tabs/dashboard'], navigationExtras);
+        this.router.navigate(['/settings/setting-detail/setting-address'], navigationExtras);
       }
-    }); */
+    });
   }
 
   getProvince(){

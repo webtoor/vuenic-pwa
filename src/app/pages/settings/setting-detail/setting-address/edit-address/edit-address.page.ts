@@ -67,7 +67,7 @@ export class EditAddressPage implements OnInit {
     this.httpService.GetRequest('user-address/' + this.user_address_id).subscribe(res => {
       console.log(res);
       if(res.status == 200){
-        console.log("true")
+        if(res.data.postal_code != 0){
         this.editUserAddressForm.patchValue({
           'address_label' : res['data']['address_label'],
           'address' : res['data']['address'],
@@ -76,6 +76,16 @@ export class EditAddressPage implements OnInit {
           'districts_id' : res['data']['districts_id'],
           'postal_code' : res['data']['postal_code'],
         }) 
+      }else{
+        this.editUserAddressForm.patchValue({
+          'address_label' : res['data']['address_label'],
+          'address' : res['data']['address'],
+          'province_id' : res['data']['province_id'],
+          'city_id' : res['data']['city_id'],
+          'districts_id' : res['data']['districts_id'],
+          'postal_code' : null,
+        }) 
+      }
       }
     });
   }

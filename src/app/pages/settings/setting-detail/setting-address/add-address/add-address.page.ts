@@ -16,6 +16,7 @@ export class AddAddressPage implements OnInit {
   districts;
   constructor(public router : Router, private formBuilder: FormBuilder, public httpService: AuthService) { 
     this.addUserAddressForm = this.formBuilder.group({
+      'address_label' : [null, [Validators.required]],
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
       'city_id' : [{

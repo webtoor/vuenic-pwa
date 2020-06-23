@@ -10,6 +10,11 @@
 <ion-content class="ion-padding">
   <form [formGroup]="addUserAddressForm" (ngSubmit)="onSubmit()">
     <ion-item>
+      <ion-label position="stacked">Label Alamat <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" placeholder="Rumah/Kos/Apartemen/Kantor" formControlName="address_label"></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="stacked">Provinsi <ion-text color="danger">*</ion-text></ion-label>
       <ion-select (ionChange)="getCity($event)" formControlName="province_id" placeholder="Pilih Provinsi" okText="OK" cancelText="TUTUP" interface="action-sheet">
         <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.province}}</ion-select-option>

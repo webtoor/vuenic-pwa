@@ -65,7 +65,6 @@ export class DashboardPage implements OnInit {
   }
 
   getUserProject(){
-    console.log(this.user_project_id)
     this.httpService.getUserProject('user-project-loc/' + this.user_project_id).subscribe(res => {
       console.log(res);
       if((res.status == 200) && (Object.keys(res.data).length > 0)){
@@ -107,10 +106,11 @@ export class DashboardPage implements OnInit {
      console.log(res.data);
       if(res.status == 200){
         this.deviceSensor = res.data
-        if(this.deviceSensor.length == 0 || this.deviceSensor["data_sensor"] == null){
-          //console.log('sensor-false')
+        if((this.deviceSensor.length == 0) || (this.deviceSensor[0]["data_sensor"] == null)){
+          console.log('sensor-false')
           this.alive = false;
         }else{
+          console.log('sensor-true')
           this.alive = true;
         }
        /*  this._ngZone.run(() => {      

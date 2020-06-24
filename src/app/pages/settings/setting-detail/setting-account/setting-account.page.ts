@@ -16,7 +16,7 @@ export class SettingAccountPage implements OnInit {
 
   getInfoAccount(){
 
-    this.httpService.GetRequest('info-user').subscribe(res => {
+    this.httpService.GetRequest('user-info').subscribe(res => {
       console.log(res);
       if(res.status == 200){
         this.infoUser = res.data

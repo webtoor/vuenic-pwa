@@ -29,10 +29,10 @@ export class DashboardPage implements OnInit {
   public alive = true;
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
+    this.getUserProject()
    }
 
   ngOnInit() {
-    this.getUserProject()
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
@@ -41,19 +41,17 @@ export class DashboardPage implements OnInit {
     
       if(this.refreshPage == 1){
         if(this.user_project_id != 0){
-          console.log(this.user_project_id)
           this.projectDevice = null
           this.deviceSegment = [] 
         }
-        console.log("Refresh Page")
         this.getUserProject()
+        this.refreshPage = 0;
       }
     });
   }
 
   ionViewDidLeave(){
     this.alive = false;
-    this.refreshPage = 0;
     this.user_project_id = this.user_project_id
   }
 

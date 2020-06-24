@@ -10,10 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SettingAddressPage implements OnInit {
   refreshPage = 0
   userAddress;
-  constructor(public router : Router, public route : ActivatedRoute, public httpService: AuthService) { }
+  constructor(public router : Router, public route : ActivatedRoute, public httpService: AuthService) {
+    this.listUserAddress()
+   }
 
   ngOnInit() {
-    this.listUserAddress()
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
@@ -22,6 +23,7 @@ export class SettingAddressPage implements OnInit {
         console.log("Refresh Page")
         this.listUserAddress()
       }
+      this.refreshPage = 0;
     });
   }
 

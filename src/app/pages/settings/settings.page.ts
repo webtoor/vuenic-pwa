@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SettingsPage implements OnInit {
 
-  constructor(public router : Router) { }
+  constructor(public router : Router, public navCtrl : NavController) { }
 
   ngOnInit() {
   }
@@ -19,7 +20,6 @@ export class SettingsPage implements OnInit {
 
   logout(){
     localStorage.clear();
-    this.router.navigate(['/signin'], {replaceUrl: true})
+    this.navCtrl.navigateRoot ('/signin')
   }
-
 }

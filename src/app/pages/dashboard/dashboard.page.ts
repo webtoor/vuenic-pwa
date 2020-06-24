@@ -29,7 +29,6 @@ export class DashboardPage implements OnInit {
   public alive = true;
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
-    this.getUserProject()
    }
 
   ngOnInit() {
@@ -44,14 +43,16 @@ export class DashboardPage implements OnInit {
           this.projectDevice = null
           this.deviceSegment = [] 
         }
+        console.log("Refresh Page")
         this.getUserProject()
-        this.refreshPage = 0;
       }
     });
+    this.getUserProject()
   }
 
   ionViewDidLeave(){
     this.alive = false;
+    this.refreshPage = 0;
     this.user_project_id = this.user_project_id
   }
 

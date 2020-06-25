@@ -20,6 +20,7 @@ export class CreateProjectPage implements OnInit {
   project_types;
   commodities;
   commodity_types;
+  placeholder = "Pilih Jenis Komoditas"
   submitted = false;
   constructor(public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
@@ -167,6 +168,11 @@ export class CreateProjectPage implements OnInit {
         console.log(res);
         if(res.status == 200){
           this.createProjectForm.get('commodity_type_id').enable();
+          if(res.data.length > 0){
+            this.placeholder = "Pilih Jenis Komoditas"
+          }else{
+            this.placeholder = "-"
+          }
           this.commodity_types = res.data
         }
       });

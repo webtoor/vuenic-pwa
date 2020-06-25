@@ -16,28 +16,28 @@
 
     <ion-item>
       <ion-label position="stacked">Proyek <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select (ionChange)="getProjectType($event)" formControlName="project_id" okText="" placeholder="Pilih Proyek" cancelText="" interface="action-sheet">
+      <ion-select (ionChange)="getProjectType($event)" formControlName="project_id" placeholder="Pilih Proyek" okText="" cancelText="TUTUP" interface="action-sheet">
         <ion-select-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Jenis Proyek <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select disabled="{{project_typesIsEnabled}}" (ionChange)="getCommodity($event)" formControlName="project_type_id" okText="" placeholder="Pilih Jenis Projek" cancelText="" interface="action-sheet">
+      <ion-select disabled="{{project_typesIsEnabled}}" (ionChange)="getCommodity($event)" formControlName="project_type_id" placeholder="Pilih Jenis Projek" okText="" cancelText="TUTUP" interface="action-sheet">
         <ion-select-option *ngFor="let project_type of project_types" [value]="project_type.id">{{project_type.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Komoditas <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select disabled="{{commoditiesIsEnabled}}" (ionChange)="getCommodityType($event)" formControlName="commodity_id" okText="" placeholder="Pilih Komoditas" cancelText="" interface="action-sheet">
+      <ion-select disabled="{{commoditiesIsEnabled}}" (ionChange)="getCommodityType($event)" formControlName="commodity_id" placeholder="Pilih Komoditas" okText="" cancelText="TUTUP" interface="action-sheet">
         <ion-select-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Jenis Komoditas</ion-label>
-      <ion-select disabled="{{commodity_typesIsEnabled}}" formControlName="commodity_type_id" okText="" placeholder="Pilih Jenis Komoditas" cancelText="" interface="action-sheet">
+      <ion-select disabled="{{commodity_typesIsEnabled}}" formControlName="commodity_type_id" placeholder="{{placeholder}}" okText="" cancelText="TUTUP" interface="action-sheet">
         <ion-select-option *ngFor="let commodity_type of commodity_types" [value]="commodity_type.id">{{commodity_type.name}}</ion-select-option>
       </ion-select>
     </ion-item>

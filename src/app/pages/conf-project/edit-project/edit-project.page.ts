@@ -20,6 +20,7 @@ export class EditProjectPage implements OnInit {
   project_typesIsEnabled = true;
   commoditiesIsEnabled = true;
   commodity_typesIsEnabled = true;
+  placeholder = "Pilih Jenis Komoditas"
 
   constructor(public router: Router, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) { 
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
@@ -96,6 +97,10 @@ export class EditProjectPage implements OnInit {
     this.project_typesIsEnabled = true;
     this.commoditiesIsEnabled = true;
     this.commodity_typesIsEnabled = true;
+    this.EditUserProjectForm.get('project_type_id').reset();
+    this.EditUserProjectForm.get('commodity_id').reset();
+    this.EditUserProjectForm.get('commodity_type_id').reset();
+    this.placeholder = "Pilih Jenis Komoditas"
     this.commodities = this.project_types;
     this.httpService.GetRequest('project-type/' + this.project_id).subscribe(res => {
       //console.log(res);
@@ -134,8 +139,14 @@ export class EditProjectPage implements OnInit {
       this.httpService.GetRequest('commodity-type/' + commodity_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
-          this.commodity_typesIsEnabled = false;
-          this.commodity_types = res.data
+          if(res.data.length > 0){
+            this.commodity_typesIsEnabled = false;
+            this.placeholder = "Pilih Jenis Komoditas"
+            this.commodity_types = res.data
+          }else{
+            this.placeholder = "-"
+          }
+         
         }
       });
     }

@@ -167,13 +167,13 @@ export class CreateProjectPage implements OnInit {
       this.httpService.GetRequest('commodity-type/' + commodity_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
-          this.createProjectForm.get('commodity_type_id').enable();
           if(res.data.length > 0){
+            this.createProjectForm.get('commodity_type_id').enable();
             this.placeholder = "Pilih Jenis Komoditas"
+            this.commodity_types = res.data
           }else{
             this.placeholder = "-"
           }
-          this.commodity_types = res.data
         }
       });
     }

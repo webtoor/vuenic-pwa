@@ -41,7 +41,6 @@ export class EditUserInfoPage implements OnInit {
         case 2:
             this.labelName = "Tanggal Lahir";
             this.formName = "dateofbirth";
-            this.formType = "date";
             let now = new Date();
             this.dateNow = formatDate(now,"yyyy-MM-dd", "en");
             this.EditUserInfoForm = this.formBuilder.group({
@@ -51,7 +50,6 @@ export class EditUserInfoPage implements OnInit {
         case 3:
             this.labelName = "Jenis Kelamin";
             this.formName = "gender";
-            this.formType = "select";
             this.EditUserInfoForm = this.formBuilder.group({
               'gender' : [this.userInfoParams, [Validators.required]],
             });

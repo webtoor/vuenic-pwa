@@ -10,20 +10,31 @@
 <ion-content class="ion-padding">
   <form [formGroup]="EditUserInfoForm" (ngSubmit)="onSubmit()">
 
-    <div *ngIf="formType != 'date'">
-      <p *ngIf="formName == 'fullname'" style="font-size: 14px;">Kamu hanya dapat mengubah nama lengkap 1 kali, Pastikan nama lengkap sudah benar.</p>
+    <div *ngIf="formName !== 'dateofbirth' && formName !== 'gender'">
       <ion-item *ngIf="formType != 'date'">
         <ion-label position="stacked">{{labelName}} <ion-text color="danger">*</ion-text></ion-label>
         <ion-input type="{{formType}}" placeholder="Masukan {{labelName}}" formControlName="{{formName}}"></ion-input>
       </ion-item>
-  </div>
+    </div>
 
-    <div *ngIf="formType == 'date'">
-      <p style="font-size: 14px;">Kamu hanya dapat mengubah 1 kali, Pastikan {{labelName}} sudah benar.</p>
+    <div *ngIf="formName == 'dateofbirth'">
+      <p style="font-size: 14px;">Kamu hanya dapat mengisi 1 kali, Pastikan {{labelName}} sudah benar.</p>
       <ion-item *ngIf="formType == 'date'"> 
         <ion-label position="stacked">{{labelName}} <ion-text color="danger">*</ion-text></ion-label>
         <ion-datetime displayFormat="DD-MMM-YYYY"  min="1970-01-01" max="{{dateNow}}" formControlName="{{formName}}" placeholder="Masukan Tanggal lahir"></ion-datetime>
       </ion-item>
+    </div>
+
+    <div *ngIf="formName == 'gender'">
+      <p *ngIf="formName == 'gender'" style="font-size: 14px;">Kamu hanya dapat mengisi jenis kelamin lengkap 1 kali, Pastikan sudah benar.</p>
+      <ion-item>
+        <ion-label position="stacked">Jenis Kelamin <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select placeholder="Pilih" formControlName="{{formName}}">
+          <ion-select-option value="1">Wanita</ion-select-option>
+          <ion-select-option value="2">Pria</ion-select-option>
+        </ion-select>
+      </ion-item>
+
     </div>
     
     <div class="ion-text-center" style="margin-top:40px">

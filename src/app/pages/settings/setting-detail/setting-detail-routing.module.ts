@@ -9,8 +9,8 @@ const routes: Routes = [
     component: SettingDetailPage
   },
   {
-    path: 'setting-account',
-    loadChildren: () => import('./setting-account/setting-account.module').then( m => m.SettingAccountPageModule)
+    path: 'setting-user-info',
+    loadChildren: () => import('./setting-user-info/setting-user-info.module').then( m => m.SettingUserInfoPageModule)
   },
   {
     path: 'setting-address',

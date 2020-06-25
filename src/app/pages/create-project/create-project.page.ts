@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { Router, NavigationExtras } from '@angular/router';
-import { Location } from "@angular/common";
 
 
 @Component({
@@ -22,7 +21,7 @@ export class CreateProjectPage implements OnInit {
   commodities;
   commodity_types;
   submitted = false;
-  constructor(private location: Location, public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
+  constructor(public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
       'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],

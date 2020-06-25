@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SettingAccountPageRoutingModule } from './setting-account-routing.module';
+import { SettingUserInfoPageRoutingModule } from './setting-user-info-routing.module';
 
-import { SettingAccountPage } from './setting-account.page';
+import { SettingUserInfoPage } from './setting-user-info.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SettingAccountPageRoutingModule
+    SettingUserInfoPageRoutingModule
   ],
-  declarations: [SettingAccountPage]
+  declarations: [SettingUserInfoPage]
 })
-export class SettingAccountPageModule {}
+export class SettingUserInfoPageModule {}

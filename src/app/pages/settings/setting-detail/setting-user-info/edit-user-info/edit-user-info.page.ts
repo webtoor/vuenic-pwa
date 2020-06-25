@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-edit-user-info',
@@ -11,10 +12,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class EditUserInfoPage implements OnInit {
   EditUserInfoForm: FormGroup;
   formName;
+  formType;
   labelName;
   userInfoType;
   userInfoParams;
   submitted = false;
+  dateNow;
   constructor(private formBuilder: FormBuilder, public route : ActivatedRoute, public router: Router, public httpService: AuthService) { 
    
   }
@@ -30,6 +33,7 @@ export class EditUserInfoPage implements OnInit {
         case 1:
             this.labelName = "Nama Lengkap"
             this.formName = "fullname"
+            this.formType = "text";
             this.EditUserInfoForm = this.formBuilder.group({
               'fullname' : [this.userInfoParams, [Validators.required]],
             });
@@ -37,6 +41,9 @@ export class EditUserInfoPage implements OnInit {
         case 2:
             this.labelName = "Tanggal Lahir";
             this.formName = "dateofbirth";
+            this.formType = "date";
+            let now = new Date();
+            this.dateNow = formatDate(now,"yyyy-MM-dd", "en");
             this.EditUserInfoForm = this.formBuilder.group({
               'dateofbirth' : [this.userInfoParams, [Validators.required]],
             });
@@ -44,6 +51,7 @@ export class EditUserInfoPage implements OnInit {
         case 3:
             this.labelName = "Jenis Kelamin";
             this.formName = "gender";
+            this.formType = "select";
             this.EditUserInfoForm = this.formBuilder.group({
               'gender' : [this.userInfoParams, [Validators.required]],
             });
@@ -51,6 +59,7 @@ export class EditUserInfoPage implements OnInit {
         case 4:
             this.labelName = "Email";
             this.formName = "email";
+            this.formType = "email";
             this.EditUserInfoForm = this.formBuilder.group({
               'email' : [this.userInfoParams, [Validators.required, Validators.email]],
             });
@@ -58,6 +67,7 @@ export class EditUserInfoPage implements OnInit {
         case 5:
             this.labelName = "Nomor Ponsel";
             this.formName = "phonenumber";
+            this.formType = "number";
             this.EditUserInfoForm = this.formBuilder.group({
               'phonenumber' : [this.userInfoParams, [Validators.required]],
             });
@@ -65,6 +75,7 @@ export class EditUserInfoPage implements OnInit {
         default:
           this.labelName = "Nama Lengkap"
           this.formName = "fullname"
+          this.formType = "text";
           this.EditUserInfoForm = this.formBuilder.group({
             'fullname' : [null, [Validators.required]],
           });

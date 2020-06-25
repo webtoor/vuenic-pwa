@@ -27,16 +27,17 @@
         <h2 *ngIf="infoUser?.dateofbirth">{{infoUser?.dateofbirth | date: "dd-MMMM-yyy"}}</h2>
         <h2 *ngIf="!infoUser?.dateofbirth">N/A</h2>
       </ion-label>
-      <div *ngIf="infoUser?.dateofbirth === null" style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(2)">Ubah</div>
+      <div *ngIf="!infoUser?.dateofbirth" style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(2)">Ubah</div>
     </ion-item>
 
     <ion-item>
       <ion-label>
         <p>Jenis Kelamin</p>
-        <h2 *ngIf="infoUser?.gender == 1">Pria</h2>
-        <h2 *ngIf="infoUser?.gender == 0">Wanita</h2>
+        <h2 *ngIf="infoUser?.gender == 1">Wanita</h2>
+        <h2 *ngIf="infoUser?.gender == 2">Pria</h2>
+        <h2 *ngIf="!infoUser?.gender">N/A</h2>
       </ion-label>
-      <div *ngIf="infoUser?.gender === null" style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(3)">Ubah</div>
+      <div *ngIf="!infoUser?.gender" style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(3)">Ubah</div>
     </ion-item>
 
     <ion-item>

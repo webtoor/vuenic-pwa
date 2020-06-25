@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
@@ -10,10 +10,21 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class SettingUserInfoPage implements OnInit {
   infoUser
-  constructor(public router : Router, public loading: LoaderService, public httpService: AuthService) {
+  refreshPage = 0
+  constructor(public route : ActivatedRoute, public router : Router, public loading: LoaderService, public httpService: AuthService) {
   }
   ngOnInit() {
     this.getInfoAccount()
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
+      }
+      if(this.refreshPage == 1){
+        console.log("Refresh Page")
+        this.getInfoAccount()
+      }
+      this.refreshPage = 0;
+    });
   }
 
   getInfoAccount(){
@@ -26,10 +37,11 @@ export class SettingUserInfoPage implements OnInit {
     });
   }
 
-  editUserInfo(type){
+  editUserInfo(type, params){
     let navigationExtras: NavigationExtras = {
       state: {
-        userInfoType : type
+        userInfoType : type,
+        userInfoParams : params
       }
     };
     this.router.navigate(['/settings/setting-detail/setting-user-info/edit-user-info'], navigationExtras);

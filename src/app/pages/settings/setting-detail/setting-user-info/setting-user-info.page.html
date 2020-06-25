@@ -18,7 +18,7 @@
         <p>Nama Lengkap</p>
         <h2>{{infoUser?.fullname}}</h2>
       </ion-label>
-      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(1)">Ubah</div>
+      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(1, infoUser?.fullname)">Ubah</div>
     </ion-item>
   
     <ion-item>
@@ -44,7 +44,7 @@
         <p>Email</p>
         <h2 *ngIf="infoUser?.email">{{infoUser?.email}}</h2>
       </ion-label>
-      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(4)">Ubah</div>
+      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(4, infoUser?.email)">Ubah</div>
     </ion-item>
 
     <ion-item>
@@ -52,7 +52,7 @@
         <p>Nomor HP</p>
         <h2 *ngIf="infoUser?.phonenumber">+{{infoUser?.phonenumber}}</h2>
       </ion-label>
-      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(5)">Ubah</div>
+      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(5, infoUser?.phonenumber)">Ubah</div>
     </ion-item>
   </ion-list>
  

@@ -172,6 +172,7 @@ export class CreateProjectPage implements OnInit {
             this.placeholder = "Pilih Jenis Komoditas"
             this.commodity_types = res.data
           }else{
+            this.createProjectForm.get('commodity_type_id').disable();
             this.placeholder = "-"
           }
         }

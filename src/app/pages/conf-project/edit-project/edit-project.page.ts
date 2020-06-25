@@ -144,6 +144,7 @@ export class EditProjectPage implements OnInit {
             this.placeholder = "Pilih Jenis Komoditas"
             this.commodity_types = res.data
           }else{
+            this.commodity_typesIsEnabled = true;
             this.placeholder = "-"
           }
          

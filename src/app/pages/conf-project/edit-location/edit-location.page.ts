@@ -96,6 +96,8 @@ export class EditLocationPage implements OnInit {
     this.kotaIsEnabled = true;
     this.kecamatanIsEnabled = true;
     this.cities = null;
+    this.EditProjectLocationForm.get('city_id').reset();
+    this.EditProjectLocationForm.get('districts_id').reset();
     this.httpService.GetRequest('city/'+ event.detail.value).subscribe(res => {
       //console.log(res);
       if(res.status == 200){
@@ -111,6 +113,7 @@ export class EditLocationPage implements OnInit {
     this.kecamatanIsEnabled = true;
     this.districts = null;
     let city_id = event.detail.value
+    this.EditProjectLocationForm.get('districts_id').reset();
     if(city_id){
       this.httpService.GetRequest('district/'+ event.detail.value).subscribe(res => {
         //console.log(res);

@@ -1,9 +1,23 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>edit-user-info</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerDirection="back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ubah {{labelName}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <form [formGroup]="EditUserInfoForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">{{labelName}} <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" placeholder="Masukan {{labelName}}" formControlName="{{formName}}"></ion-input>
+    </ion-item>
 
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button [disabled]="EditUserInfoForm.invalid" expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
+    </div>
+  </form>
 </ion-content>
+  
+

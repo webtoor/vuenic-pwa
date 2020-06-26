@@ -138,6 +138,9 @@ export class CreateProjectPage implements OnInit {
     if(event.detail.value == 5){
       this.placeHDCommodity = "-"
       this.placeHDCommodityType = "-"
+    }else{
+      this.placeHDCommodity = "Pilih Komoditas"
+      this.placeHDCommodityType = "Pilih Jenis Komoditas"
     }
     this.httpService.GetRequest('project-type/' + project_id).subscribe(res => {
       //console.log(res);

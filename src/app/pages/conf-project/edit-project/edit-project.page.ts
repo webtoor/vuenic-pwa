@@ -12,7 +12,6 @@ export class EditProjectPage implements OnInit {
   EditUserProjectForm : FormGroup;
   user_project_id;
   submitted = false;
-  project_id;
   projects;
   project_types;
   commodities;
@@ -20,7 +19,8 @@ export class EditProjectPage implements OnInit {
   project_typesIsEnabled = true;
   commoditiesIsEnabled = true;
   commodity_typesIsEnabled = true;
-  placeholder = "Pilih Jenis Komoditas"
+  placeHDCommodity = "Pilih Komoditas"
+  placeHDCommodityType = "Pilih Jenis Komoditas"
 
   constructor(public router: Router, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) { 
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
@@ -29,7 +29,7 @@ export class EditProjectPage implements OnInit {
       'project_name' : [null, [Validators.required]],
       'project_id' : [null, [Validators.required]],
       'project_type_id' : [null, Validators.required],
-      'commodity_id' : [null, Validators.required],
+      'commodity_id' : [null],
       'commodity_type_id' : [null],
     });
   }
@@ -49,7 +49,7 @@ export class EditProjectPage implements OnInit {
         return;
     }
     console.log(this.EditUserProjectForm.value)
-    this.httpService.PutRequest(this.EditUserProjectForm.value, 'user-project').subscribe(res => {
+   /*  this.httpService.PutRequest(this.EditUserProjectForm.value, 'user-project').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
@@ -61,7 +61,7 @@ export class EditProjectPage implements OnInit {
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);
       }
-    });
+    }); */
   }
 
   get f() { return this.EditUserProjectForm.controls; }
@@ -92,19 +92,25 @@ export class EditProjectPage implements OnInit {
   }
 
   getProjectType(event){
-    console.log(event.detail.value)
-    this.project_id = event.detail.value
+    console.log("event.detail.value")
+    let project_id = event.detail.value
     this.project_typesIsEnabled = true;
     this.commoditiesIsEnabled = true;
     this.commodity_typesIsEnabled = true;
     this.EditUserProjectForm.get('project_type_id').reset();
     this.EditUserProjectForm.get('commodity_id').reset();
     this.EditUserProjectForm.get('commodity_type_id').reset();
-    this.placeholder = "Pilih Jenis Komoditas"
-    this.commodities = this.project_types;
-    this.httpService.GetRequest('project-type/' + this.project_id).subscribe(res => {
+    if(event.detail.value == 5){
+      this.placeHDCommodity = "-"
+      this.placeHDCommodityType = "-"
+    }else{
+      this.placeHDCommodity = "Pilih Komoditas"
+      this.placeHDCommodityType = "Pilih Jenis Komoditas"
+    }
+    this.httpService.GetRequest('project-type/' + project_id).subscribe(res => {
       //console.log(res);
       if(res.status == 200){
+       
         this.project_typesIsEnabled = false;
         this.project_types = res.data
       }
@@ -115,15 +121,21 @@ export class EditProjectPage implements OnInit {
     console.log(event.detail.value)
     this.commoditiesIsEnabled = true;
     this.commodity_typesIsEnabled = true;
-    this.commodities = null;
     let project_type_id = event.detail.value
     this.EditUserProjectForm.get('commodity_id').reset();
     if(project_type_id){
-      this.httpService.GetRequest('commodity/' + this.project_id + '/' + project_type_id).subscribe(res => {
+      this.httpService.GetRequest('commodity/' + project_type_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
-          this.commoditiesIsEnabled = false;
-          this.commodities = res.data
+          if(res.data.length > 0){
+            this.placeHDCommodity = "Pilih Komoditas"
+            this.commoditiesIsEnabled = false;
+            this.commodities = res.data
+          }else{
+            this.placeHDCommodity = "-"
+            this.placeHDCommodityType = "-"
+            this.commoditiesIsEnabled = true;
+          }
         }
       });
     }
@@ -132,7 +144,6 @@ export class EditProjectPage implements OnInit {
   getCommodityType(event){
     console.log(event.detail.value)
     this.commodity_typesIsEnabled = true;
-    this.commodity_typesIsEnabled = null;
     let commodity_id = event.detail.value
     this.EditUserProjectForm.get('commodity_type_id').reset();
     if(commodity_id){
@@ -141,11 +152,11 @@ export class EditProjectPage implements OnInit {
         if(res.status == 200){
           if(res.data.length > 0){
             this.commodity_typesIsEnabled = false;
-            this.placeholder = "Pilih Jenis Komoditas"
+            this.placeHDCommodityType = "Pilih Jenis Komoditas"
             this.commodity_types = res.data
           }else{
             this.commodity_typesIsEnabled = true;
-            this.placeholder = "-"
+            this.placeHDCommodityType = "-"
           }
          
         }

@@ -49,7 +49,7 @@ export class EditProjectPage implements OnInit {
         return;
     }
     console.log(this.EditUserProjectForm.value)
-   /*  this.httpService.PutRequest(this.EditUserProjectForm.value, 'user-project').subscribe(res => {
+    this.httpService.PutRequest(this.EditUserProjectForm.value, 'user-project').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
@@ -61,7 +61,7 @@ export class EditProjectPage implements OnInit {
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);
       }
-    }); */
+    });
   }
 
   get f() { return this.EditUserProjectForm.controls; }

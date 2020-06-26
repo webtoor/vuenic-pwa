@@ -16,11 +16,11 @@ export class CreateProjectPage implements OnInit {
   cities;
   districts;
   projects;
-  project_id;
   project_types;
   commodities;
   commodity_types;
-  placeholder = "Pilih Jenis Komoditas"
+  placeHDCommodity = "Pilih Komoditas"
+  placeHDCommodityType = "Pilih Jenis Komoditas"
   submitted = false;
   constructor(public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
@@ -43,7 +43,7 @@ export class CreateProjectPage implements OnInit {
       'commodity_id' : [{
         value: null,
         disabled : true
-      }, Validators.required],
+      }],
       'commodity_type_id' : [{
         value: null,
         disabled : true
@@ -131,11 +131,15 @@ export class CreateProjectPage implements OnInit {
 
   getProjectType(event){
     console.log(event.detail.value)
-    this.project_id = event.detail.value
+    let project_id = event.detail.value
     this.createProjectForm.get('project_type_id').reset();
     this.createProjectForm.get('commodity_id').reset();
     this.createProjectForm.get('commodity_type_id').reset();
-    this.httpService.GetRequest('project-type/' + this.project_id).subscribe(res => {
+    if(event.detail.value == 5){
+      this.placeHDCommodity = "-"
+      this.placeHDCommodityType = "-"
+    }
+    this.httpService.GetRequest('project-type/' + project_id).subscribe(res => {
       //console.log(res);
       if(res.status == 200){
         this.createProjectForm.get('project_type_id').enable();
@@ -149,11 +153,18 @@ export class CreateProjectPage implements OnInit {
     let project_type_id = event.detail.value
     this.createProjectForm.get('commodity_id').reset();
     if(project_type_id){
-      this.httpService.GetRequest('commodity/' + this.project_id + '/' + project_type_id).subscribe(res => {
+      this.httpService.GetRequest('commodity/' + project_type_id).subscribe(res => {
         console.log(res);
         if(res.status == 200){
-          this.createProjectForm.get('commodity_id').enable();
-          this.commodities = res.data
+          if(res.data.length > 0){
+            this.placeHDCommodity = "Pilih Komoditas"
+            this.createProjectForm.get('commodity_id').enable();
+            this.commodities = res.data
+          }else{
+            this.placeHDCommodity = "-"
+            this.placeHDCommodityType = "-"
+            this.createProjectForm.get('commodity_id').disable();
+          }
         }
       });
     }
@@ -168,12 +179,12 @@ export class CreateProjectPage implements OnInit {
         console.log(res);
         if(res.status == 200){
           if(res.data.length > 0){
+            this.placeHDCommodityType = "Pilih Jenis Komoditas"
             this.createProjectForm.get('commodity_type_id').enable();
-            this.placeholder = "Pilih Jenis Komoditas"
             this.commodity_types = res.data
           }else{
             this.createProjectForm.get('commodity_type_id').disable();
-            this.placeholder = "-"
+            this.placeHDCommodityType = "-"
           }
         }
       });

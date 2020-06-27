@@ -30,6 +30,10 @@ export class ConfDeviceSensorPage implements OnInit {
     this.router.navigate(["tabs/dashboard/conf-device-sensor/" + this.project_device_id + "/edit-device-sensor/" + this.project_device_id])
   }
 
+  linkDocAPI(){
+    window.open("https://documenter.getpostman.com/view/2465660/T17AjAcd?version=latest");
+  }
+
   copyTextButton(val: string){
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';

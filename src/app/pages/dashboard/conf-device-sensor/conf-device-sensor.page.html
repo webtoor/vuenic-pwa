@@ -10,7 +10,7 @@
 <ion-content color="grey-light">
   <ion-list lines="inset">
     <!-- <ion-item (click)="editDeviceSensor()"> -->
-      <ion-item>
+      <!-- <ion-item>
       <ion-label>
         <h3>Ubah Device & Sensor</h3>
       </ion-label>
@@ -19,8 +19,17 @@
           <ion-icon slot="icon-only" icon="arrow-forward-circle-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
+    </ion-item> -->
+    <ion-item (click)="linkDocAPI()">
+      <ion-label>
+        <h3>Dokumen Integrasi IoT Device</h3>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="danger">
+          <ion-icon slot="icon-only" icon="arrow-forward-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
-
     <ion-card>
       <ion-card-header>
         <ion-card-subtitle>

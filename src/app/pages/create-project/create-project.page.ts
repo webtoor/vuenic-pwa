@@ -65,7 +65,7 @@ export class CreateProjectPage implements OnInit {
     if (this.createProjectForm.invalid) {
         return;
     }
-    //console.log(this.createProjectForm.value)
+    console.log(this.createProjectForm.value)
     this.loading.present();
     this.httpService.PostRequest(this.createProjectForm.value, 'user-project').subscribe(res => {
       console.log(res)

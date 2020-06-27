@@ -68,7 +68,7 @@
     <ion-item>
       <ion-label position="stacked">Komoditas</ion-label>
       <ion-select (ionChange)="getCommodityType($event)" formControlName="commodity_id" placeholder="{{placeHDCommodity}}" okText="" cancelText="TUTUP" interface="action-sheet">
-        <ion-select-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.commodity.name}}</ion-select-option>
+        <ion-select-option *ngFor="let commodity of commodities" [value]="commodity.commodity.id">{{commodity.commodity.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 

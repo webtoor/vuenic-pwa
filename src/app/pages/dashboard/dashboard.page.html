@@ -79,7 +79,7 @@
       <ion-row>
         <ion-col size="6" *ngFor="let sensor of deviceSensor">
           <ion-card>
-            <ion-card-header style="padding:0">
+            <ion-card-header>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 1">Kelembaban</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 2">Kelembaban Tanah</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 3">Suhu</ion-card-subtitle>
@@ -110,9 +110,9 @@
                     <ion-img *ngIf="sensor.sensor_id == 8" src="/assets/images/sensor/distance.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 9" src="/assets/images/sensor/uv.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 10" src="/assets/images/sensor/light.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 11" src="/assets/images/sensor/gas.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 12" src="/assets/images/sensor/gas.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 13" src="/assets/images/sensor/gas.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 11" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 12" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 13" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
 
                   </ion-col>
                   <ion-col>

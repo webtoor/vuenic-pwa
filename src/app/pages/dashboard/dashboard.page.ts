@@ -71,7 +71,9 @@ export class DashboardPage implements OnInit {
         this.projectName = res.data.project_name;
         this.project = res.data.project.name;
         this.projectType = res.data.project_type.name;
-        this.commodityName = res.data.commodity.name;
+        if(res.data.commodity){
+          this.commodityName = res.data.commodity.name;
+        }
         if(res.data.commodity_type){
           this.commodityTypeName = res.data.commodity_type.name;
         }

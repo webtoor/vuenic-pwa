@@ -17,10 +17,7 @@
     <ion-card-header>
       <ion-card-subtitle color="primary"><b>I. Lokasi Proyek <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
     </ion-card-header>
-    <ion-item>
-      <ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input type="text" placeholder="Masukan Alamat" formControlName="address"></ion-input>
-    </ion-item>
+  
 
     <ion-item>
       <ion-label position="stacked">Provinsi <ion-text color="danger">*</ion-text></ion-label>
@@ -43,9 +40,15 @@
       </ion-select>
     </ion-item>
 
-    <ion-card-header>
+    <ion-item>
+      <ion-label position="stacked">Alamat Lengkap <ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea rows="3" type="text" placeholder="Contoh : Jl Setiabudi No 5" formControlName="address"></ion-textarea>
+    </ion-item>
+
+    <ion-card-header style="margin-top:10px;">
       <ion-card-subtitle color="primary"><b>II. Informasi Proyek <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
     </ion-card-header>
+
     <ion-item>
       <ion-label position="stacked">Nama Proyek <ion-text color="danger">*</ion-text></ion-label>
       <ion-input type="text" placeholder="Masukan Nama Proyek" formControlName="project_name"></ion-input>

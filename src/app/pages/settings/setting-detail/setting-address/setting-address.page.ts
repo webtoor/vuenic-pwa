@@ -66,7 +66,10 @@ export class SettingAddressPage implements OnInit {
           text: 'YAKIN',
           handler: () => {
             this.httpService.deleteRequest('user-address/' + user_address_id).subscribe(res => {
-              console.log(res);
+            console.log(res);
+              if(res.status == 200){
+                this.listUserAddress()
+              }
             });
           }
         }

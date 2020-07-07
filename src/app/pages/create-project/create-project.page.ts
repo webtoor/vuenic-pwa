@@ -24,7 +24,6 @@ export class CreateProjectPage implements OnInit {
   submitted = false;
   constructor(public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
-      'address' : [null, [Validators.required]],
       'province_id' : [null, [Validators.required]],
       'city_id' : [{
         value: null,
@@ -48,6 +47,7 @@ export class CreateProjectPage implements OnInit {
         value: null,
         disabled : true
       }],
+      'address' : [null, [Validators.required]],
     });
    }
 

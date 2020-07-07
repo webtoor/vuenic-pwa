@@ -60,12 +60,14 @@ export class SettingAddressPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            console.log('Confirm Gak Jadi');
           }
         }, {
           text: 'YAKIN',
           handler: () => {
-            console.log('Confirm Okay');
+            this.httpService.deleteRequest('user-address/' + user_address_id).subscribe(res => {
+              console.log(res);
+            });
           }
         }
       ]

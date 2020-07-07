@@ -55,8 +55,8 @@ export class AuthService {
     );
   }
 
-  deleteRequest(data, type): Observable<any> {
-    return this.http.put<any>(apiUrl+type, data)
+  deleteRequest(type): Observable<any> {
+    return this.http.delete<any>(apiUrl+type)
     .pipe(
       tap(_ => this.log('delete-http-request')),
       catchError(this.handleError('delete-http-request', []))

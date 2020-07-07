@@ -4,9 +4,9 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 //LOCAL
-//let apiUrl = "http://localhost:8080/v1/";  
+let apiUrl = "http://localhost:8080/v1/";  
 //PROD
-let apiUrl = "https://api.vuenic.com/v1/";  
+/* let apiUrl = "https://api.vuenic.com/v1/";  */ 
 
 @Injectable({
   providedIn: 'root'

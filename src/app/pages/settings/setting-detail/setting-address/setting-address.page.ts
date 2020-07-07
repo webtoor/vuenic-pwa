@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-setting-address',
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SettingAddressPage implements OnInit {
   refreshPage = 0
   userAddress;
-  constructor(public router : Router, public route : ActivatedRoute, public httpService: AuthService) {
+  constructor(public router : Router, public route : ActivatedRoute, public httpService: AuthService, public alertController : AlertController) {
     this.listUserAddress()
    }
 
@@ -48,4 +49,28 @@ export class SettingAddressPage implements OnInit {
     this.router.navigate(["settings/setting-detail/setting-address/edit-address/" + user_address_id])
   }
 
+  async deleteMyAddress(user_address_id, address_label){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Hello!',
+      message: 'Apa kamu yakin untuk hapus alamat <b>' + address_label + '</b>?',
+      buttons: [
+        {
+          text: 'GAK JADI',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'YAKIN',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

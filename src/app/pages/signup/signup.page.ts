@@ -32,7 +32,7 @@ export class SignupPage implements OnInit {
   accountType(event){
     switch (event.detail.value) {
       case 1:
-          this.hidden = true;
+          this.hidden = false;
           this.placeName = "Lengkap";
           break;
       case 2:

@@ -41,7 +41,9 @@
         </ion-card-header>
 
         <ion-card-content>
-          {{info?.length}}
+          <div class="ion-text-center">
+            <b style="color:red; font-size: 25px;">{{info?.length}}</b>
+          </div>
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -52,10 +54,9 @@
         </ion-card-header>
 
         <ion-card-content>
-          <div *ngFor="let device of info">
-            {{device.project_device.length}} 
+          <div *ngFor="let device of info" class="ion-text-center">
+            <b style="color:red; font-size: 25px;">{{device.project_device?.length}} </b>
           </div>
-
         </ion-card-content>
       </ion-card>
     </ion-col>

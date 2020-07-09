@@ -13,6 +13,8 @@ import { ToastController, MenuController } from '@ionic/angular';
 export class SignupPage implements OnInit {
   signupForm: FormGroup;
   submitted = false;
+  hidden = false;
+  placeName = "Lengkap";
   constructor(public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
     this.menu.enable(false);
     this.signupForm = this.formBuilder.group({
@@ -25,6 +27,26 @@ export class SignupPage implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  accountType(event){
+    switch (event.detail.value) {
+      case 1:
+          this.hidden = true;
+          this.placeName = "Lengkap";
+          break;
+      case 2:
+          this.hidden = false;
+          this.placeName = "UMKM";
+          break;
+      case 3:
+          this.hidden = false;
+          this.placeName = "Perusahaan"
+          break;
+      default:
+          this.hidden = true;
+          break;
+    }
   }
 
   ionViewDidEnter(){

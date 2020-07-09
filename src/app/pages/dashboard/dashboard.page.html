@@ -46,23 +46,25 @@
 </div>
 </ion-header>
 
-<!-- Scrollable Segment -->
-<!-- class="ion-padding-start ion-padding-end" -->
-<div *ngIf="projectDevice">
-<ion-segment scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
-  <div *ngFor="let device of deviceSegment; let i=index;">
-    <ion-segment-button value="{{device.id}}" layout="icon-end">
-      <sup>
-        <ion-badge color="danger">{{i+1}}</ion-badge>
-      </sup>
-      <ion-label>IoT-Device</ion-label>
-    </ion-segment-button>
-  </div>
-</ion-segment>
-</div>
+
 
 
 <ion-content>
+<!-- Scrollable Segment -->
+<!-- class="ion-padding-start ion-padding-end" -->
+<div *ngIf="projectDevice">
+  <ion-segment scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
+    <div *ngFor="let device of deviceSegment; let i=index;">
+      <ion-segment-button value="{{device.id}}" layout="icon-end">
+        <sup>
+          <ion-badge color="danger">{{i+1}}</ion-badge>
+        </sup>
+        <ion-label>IoT-Device</ion-label>
+      </ion-segment-button>
+    </div>
+  </ion-segment>
+  </div>
+
   <div *ngIf="projectName; else emptyProject">
   <ion-grid>
     <div *ngIf="projectDevice; else emptyDevice">

@@ -26,6 +26,7 @@ export class DashboardPage implements OnInit {
   deviceSensor; 
   refreshPage = 0;
   user_project_id = 0;
+  device_last = 0;
   public alive = true;
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
@@ -36,6 +37,7 @@ export class DashboardPage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
         this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
         this.user_project_id = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
+        this.device_last = parseInt(this.router.getCurrentNavigation().extras.state.deviceLast);
       }
     
       if(this.refreshPage == 1){
@@ -82,7 +84,11 @@ export class DashboardPage implements OnInit {
           localStorage.setItem('vuenic-dev-key', JSON.stringify(res.data.project_device));
           this.projectDevice = res.data.project_device.length;
           this.deviceSegment = res.data.project_device;
-          this.segmentDefault = res.data.project_device[0]["id"]
+          if(this.device_last == 1){
+            this.segmentDefault = res.data.project_device[res.data.project_device.length - 1]["id"]
+          }else{
+            this.segmentDefault = res.data.project_device[0]["id"]
+          }
           this.getSensorData(this.segmentDefault);
         }
       }

@@ -12,6 +12,17 @@
     <img src="/assets/images/logo-with-text.png" height="80px;" style="margin-bottom:5px;">
   </div>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+  <ion-item class="marginTop">
+    <ion-label position="stacked">Pilih Tipe Akun</ion-label>
+    <ion-select formControlName="role" placeholder="Pilih Tipe Akun" okText="" cancelText="TUTUP" interface="action-sheet">
+      <ion-select-option [value]="1">Personal</ion-select-option>
+      <ion-select-option [value]="2">UMKM</ion-select-option>
+      <ion-select-option [value]="3">Perusahaan</ion-select-option>
+      <ion-select-option [value]="4">Kementrian</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
   <ion-item class="marginTop">
     <ion-label position="stacked">Nama Lengkap</ion-label>
     <ion-input type="email" placeholder="Masukan Nama Lengkap" formControlName="fullname"></ion-input>

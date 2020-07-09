@@ -15,7 +15,7 @@
     
     <ion-item>
       <ion-label position="stacked">Device <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select formControlName="device_id" okText="" placeholder="Pilih Device" cancelText="" interface="action-sheet">
+      <ion-select formControlName="device_id" okText="" placeholder="Pilih Device" cancelText="TUTUP" interface="action-sheet">
         <ion-select-option *ngFor="let device of devices" [value]="device.id">{{device.device_name}}</ion-select-option>
       </ion-select>
     </ion-item>

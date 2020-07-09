@@ -16,6 +16,7 @@ export class SignupPage implements OnInit {
   constructor(public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
     this.menu.enable(false);
     this.signupForm = this.formBuilder.group({
+      'role' : [null, Validators.required],
       'fullname' : [null, Validators.required],
       'phonenumber' : [null, Validators.required],
       'email' : [null, [Validators.required, Validators.email]],

@@ -80,7 +80,7 @@
     <div *ngIf="deviceSensor?.length > 0; else emptySensorData">
       <ion-row>
         <ion-col size="6" *ngFor="let sensor of deviceSensor">
-          <ion-card>
+          <ion-card (click)="chart(projectID, sensor.sensor_id)">
             <ion-card-header>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 1">Kelembaban</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 2">Kelembaban Tanah</ion-card-subtitle>

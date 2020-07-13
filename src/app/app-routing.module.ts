@@ -42,12 +42,12 @@ const routes: Routes = [
     canActivate : [AuthGuardService]
   },
   {
-    path: '**',
-    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+    path: 'chart/:projectID/:sensorID',
+    loadChildren: () => import('./pages/chart/chart.module').then( m => m.ChartPageModule)
   },
   {
-    path: 'chart',
-    loadChildren: () => import('./pages/chart/chart.module').then( m => m.ChartPageModule)
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   }
  /*  {
     path: 'dashboard',

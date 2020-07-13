@@ -152,5 +152,9 @@ export class DashboardPage implements OnInit {
     this.router.navigate(["list-project"])
   }
 
+  chart(projectID, sensorID){
+    this.router.navigate(["/chart/" + projectID + "/" + sensorID])
+  }
+
 
 }

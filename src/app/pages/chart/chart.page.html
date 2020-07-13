@@ -7,15 +7,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <ion-list-header color="light">Line Chart</ion-list-header>
-  <ion-card class="welcome-card">
+  <ion-card class="welcome-card" style="padding:0px;">
     <ion-card-header>
       <ion-card-subtitle>Line</ion-card-subtitle>
       <ion-card-title>Line  </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <canvas #barChart></canvas>
+    <ion-card-content style="padding:0px;">
+      <canvas #barChart>
+        <ion-spinner></ion-spinner>
+      </canvas>
     </ion-card-content>
   </ion-card>
 </ion-content>

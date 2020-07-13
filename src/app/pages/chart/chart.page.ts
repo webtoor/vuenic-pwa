@@ -20,10 +20,10 @@ export class ChartPage {
     this.bars = new Chart(this.barChart.nativeElement, {
       type: 'line',
       data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: ['1', '2', '3', '4', '5', '6', '7'],
           datasets: [
               {
-                  label: 'My First dataset',
+                  label: 'Kelembaban',
                   fill: false,
                   lineTension: 0.1,
                   backgroundColor: 'rgba(75,192,192,0.4)',

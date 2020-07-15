@@ -22,6 +22,8 @@ export class CreateProjectPage implements OnInit {
   placeHDCommodity = "Pilih Komoditas"
   placeHDCommodityType = "Pilih Jenis Komoditas"
   submitted = false;
+  commodityHidden = false;
+  commodityTypeHidden = false;
   constructor(public router : Router, public loading: LoaderService, private formBuilder: FormBuilder, public httpService: AuthService) {
     this.createProjectForm = this.formBuilder.group({
       'province_id' : [null, [Validators.required]],
@@ -136,9 +138,13 @@ export class CreateProjectPage implements OnInit {
     this.createProjectForm.get('commodity_id').reset();
     this.createProjectForm.get('commodity_type_id').reset();
     if(event.detail.value == 5){
+      this.commodityHidden = true;
+      this.commodityTypeHidden = true;
       this.placeHDCommodity = "-"
       this.placeHDCommodityType = "-"
     }else{
+      this.commodityHidden = false;
+      this.commodityTypeHidden = false;
       this.placeHDCommodity = "Pilih Komoditas"
       this.placeHDCommodityType = "Pilih Jenis Komoditas"
     }
@@ -161,9 +167,12 @@ export class CreateProjectPage implements OnInit {
         if(res.status == 200){
           if(res.data.length > 0){
             this.placeHDCommodity = "Pilih Komoditas"
+            this.commodityHidden = false;
             this.createProjectForm.get('commodity_id').enable();
             this.commodities = res.data
           }else{
+            this.commodityHidden = true;
+            this.commodityTypeHidden = true;
             this.placeHDCommodity = "-"
             this.placeHDCommodityType = "-"
             this.createProjectForm.get('commodity_id').disable();
@@ -182,10 +191,12 @@ export class CreateProjectPage implements OnInit {
         console.log(res);
         if(res.status == 200){
           if(res.data.length > 0){
+            this.commodityTypeHidden = false;
             this.placeHDCommodityType = "Pilih Jenis Komoditas"
             this.createProjectForm.get('commodity_type_id').enable();
             this.commodity_types = res.data
           }else{
+            this.commodityTypeHidden = true;
             this.createProjectForm.get('commodity_type_id').disable();
             this.placeHDCommodityType = "-"
           }

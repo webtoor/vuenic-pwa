@@ -119,7 +119,7 @@ export class DashboardPage implements OnInit {
 
   setInterval(){
     console.log("Activate Interval")
-    const intervallTimer = interval(5000);
+    const intervallTimer = interval(60000 * 5);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 

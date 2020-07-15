@@ -21,7 +21,8 @@ export class EditProjectPage implements OnInit {
   commodity_typesIsEnabled = true;
   placeHDCommodity = "Pilih Komoditas"
   placeHDCommodityType = "Pilih Jenis Komoditas"
-
+  commodityHidden = false;
+  commodityTypeHidden = false;
   constructor(public router: Router, private formBuilder: FormBuilder, public httpService: AuthService, public route : ActivatedRoute) { 
     this.user_project_id = this.route.snapshot.paramMap.get('user_project_id');
     this.EditUserProjectForm = this.formBuilder.group({
@@ -101,9 +102,13 @@ export class EditProjectPage implements OnInit {
     this.EditUserProjectForm.get('commodity_id').reset();
     this.EditUserProjectForm.get('commodity_type_id').reset();
     if(event.detail.value == 5){
+      this.commodityHidden = true;
+      this.commodityTypeHidden = true;
       this.placeHDCommodity = "-"
       this.placeHDCommodityType = "-"
     }else{
+      this.commodityHidden = false;
+      this.commodityTypeHidden = false;
       this.placeHDCommodity = "Pilih Komoditas"
       this.placeHDCommodityType = "Pilih Jenis Komoditas"
     }
@@ -128,10 +133,13 @@ export class EditProjectPage implements OnInit {
         console.log(res);
         if(res.status == 200){
           if(res.data.length > 0){
+            this.commodityHidden = false;
             this.placeHDCommodity = "Pilih Komoditas"
             this.commoditiesIsEnabled = false;
             this.commodities = res.data
           }else{
+            this.commodityHidden = true;
+            this.commodityTypeHidden = true;
             this.placeHDCommodity = "-"
             this.placeHDCommodityType = "-"
             this.commoditiesIsEnabled = true;
@@ -151,10 +159,12 @@ export class EditProjectPage implements OnInit {
         console.log(res);
         if(res.status == 200){
           if(res.data.length > 0){
+            this.commodityTypeHidden = false;
             this.commodity_typesIsEnabled = false;
             this.placeHDCommodityType = "Pilih Jenis Komoditas"
             this.commodity_types = res.data
           }else{
+            this.commodityTypeHidden = true;
             this.commodity_typesIsEnabled = true;
             this.placeHDCommodityType = "-"
           }

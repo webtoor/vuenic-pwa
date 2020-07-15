@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone} from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { UserProjectService } from '../../services/user-project.service';
 import { MenuController } from '@ionic/angular';
 import { DeviceSensorService } from '../../services/device-sensor.service';
@@ -27,7 +27,8 @@ export class DashboardPage implements OnInit {
   refreshPage = 0;
   user_project_id = 0;
   device_last = 0;
-  public alive = true;
+  alive = true;
+  backButton = 0;
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
    }
@@ -36,6 +37,7 @@ export class DashboardPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
+        this.backButton = parseInt(this.router.getCurrentNavigation().extras.state.backButton);
         this.user_project_id = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
         this.device_last = parseInt(this.router.getCurrentNavigation().extras.state.deviceLast);
       }
@@ -44,26 +46,39 @@ export class DashboardPage implements OnInit {
         if(this.user_project_id != 0){
           this.projectDevice = null
           this.deviceSegment = [] 
+          this.ionViewWillEnter()
         }
-        console.log("Refresh Page")
+        console.log("RefreshPage")
         this.getUserProject()
       }
+
+      if(this.backButton == 1){
+        console.log("backButton")
+        this.ionViewWillEnter()
+      }
+    
     });
     this.getUserProject()
   }
+  
 
-  ionViewDidLeave(){
-    this.alive = false;
-    this.refreshPage = 0;
-    this.user_project_id = this.user_project_id
-  }
-
-  ionViewDidEnter(){
+  ionViewWillEnter(){
+    console.log("ionViewWillEnter")
+    console.log(this.projectName, this.projectDevice)
     if(this.projectName && this.projectDevice){
       this.alive = true;
       this.setInterval()
     }
   }
+
+  ionViewWillLeave(){
+    console.log("ionViewWillLeave")
+    this.alive = false;
+    this.refreshPage = 0;
+    this.user_project_id = this.user_project_id
+  }
+
+ 
 
   getUserProject(){
     this.httpService.getUserProject('user-project-loc/' + this.user_project_id).subscribe(res => {
@@ -104,7 +119,7 @@ export class DashboardPage implements OnInit {
 
   setInterval(){
     console.log("Activate Interval")
-    const intervallTimer = interval(60000 * 10);
+    const intervallTimer = interval(5000);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
@@ -134,12 +149,13 @@ export class DashboardPage implements OnInit {
   }
 
   createDeviceSensor(projectID){
-    console.log(projectID)
+    //console.log(projectID)
     this.router.navigate(["tabs/dashboard/create-device-sensor/" + projectID])
   }
 
   settingUserProject(ProjectID){
-    console.log(ProjectID)
+    this.ionViewWillLeave()
+    //console.log(ProjectID)
     this.router.navigate(["conf-project/" + ProjectID])
   }
 
@@ -149,10 +165,12 @@ export class DashboardPage implements OnInit {
   }
 
   listProject(){
+    this.ionViewWillLeave()
     this.router.navigate(["list-project"])
   }
 
   chart(projectID, sensorID){
+    this.ionViewWillLeave()
     this.router.navigate(["/chart/" + projectID + "/" + sensorID])
   }
 

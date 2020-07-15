@@ -14,6 +14,16 @@ export class ListProjectPage implements OnInit {
   ngOnInit() {
     this.getListUserProject()
   }
+  
+  backButton(){
+    let navigationExtras: NavigationExtras = {
+      replaceUrl: true,
+      state: {
+        backButton: 1,
+      }
+    };
+    this.router.navigate(['/tabs/dashboard'], navigationExtras);
+  }
 
   getListUserProject(){
     this.httpService.GetRequest('list-user-project').subscribe(res => {

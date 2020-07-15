@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { Chart } from 'chart.js';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-chart',
@@ -10,10 +11,20 @@ export class ChartPage {
   @ViewChild('barChart', {static: true}) barChart : ElementRef;
   bars: any;
   colorArray: any;
-  constructor() { }
+  constructor(public router : Router) { }
 
   ionViewDidEnter() {
     this.createBarChart();
+  }
+
+  backButton(){
+    let navigationExtras: NavigationExtras = {
+      replaceUrl: true,
+      state: {
+        backButton: 1,
+      }
+    };
+    this.router.navigate(['/tabs/dashboard'], navigationExtras);
   }
 
   createBarChart() {

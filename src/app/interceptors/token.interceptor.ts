@@ -65,7 +65,7 @@ isLoading = false;
             }
         }
         if(error.status === 0){
-            this.presentToast("Gangguan Koneksi, Pastikan anda terkoneksi dengan internet");
+            this.presentToast("Maaf. Vuenic sedang dalam pemeliharaan sistem, silahkan coba lagi nanti :(");
         }
         //this.hideLoader();
         return throwError(error);

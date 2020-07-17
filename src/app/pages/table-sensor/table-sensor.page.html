@@ -21,12 +21,12 @@
               <b>Nilai Sensor</b>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngFor="let data of arraySensor">
           <ion-col>
-              Tanggal & Jam
+              {{data.created_at | date: "dd MMM yyy HH:mm" }}
           </ion-col>
           <ion-col>
-              Nilai Sensor
+             {{data.sensor_value}}
           </ion-col>
         </ion-row>
       </ion-grid>

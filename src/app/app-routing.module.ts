@@ -46,9 +46,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/chart/chart.module').then( m => m.ChartPageModule)
   },
   {
+    path: 'table-sensor/:projectID/:sensorID',
+    loadChildren: () => import('./pages/table-sensor/table-sensor.module').then( m => m.TableSensorPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  }
+  },
+ 
  /*  {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule),

@@ -174,5 +174,10 @@ export class DashboardPage implements OnInit {
     this.router.navigate(["/chart/" + projectID + "/" + sensorID])
   }
 
+  tableSensor(projectID, sensorID){
+    this.ionViewWillLeave()
+    this.router.navigate(["/table-sensor/" + projectID + "/" + sensorID])
+  }
+
 
 }

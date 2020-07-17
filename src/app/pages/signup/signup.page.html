@@ -13,22 +13,22 @@
   </div>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
-  <ion-item class="marginTop">
+  <!-- <ion-item class="marginTop">
     <ion-label position="stacked">Pilih Tipe Akun</ion-label>
     <ion-select (ionChange)="accountType($event)" formControlName="role" placeholder="Pilih Tipe Akun" okText="" cancelText="TUTUP" interface="action-sheet">
       <ion-select-option [value]="1">Personal</ion-select-option>
       <ion-select-option [value]="2">UMKM</ion-select-option>
       <ion-select-option [value]="3">Perusahaan</ion-select-option>
-      <!-- <ion-select-option [value]="4">Kementrian</ion-select-option> -->
+      <ion-select-option [value]="4">Kementrian</ion-select-option>
     </ion-select>
-  </ion-item>
+  </ion-item> -->
 
-  <ion-item class="marginTop" *ngIf="hidden == false">
-    <ion-label position="stacked">Nama {{placeName}}</ion-label>
-    <ion-input type="text" placeholder="Masukan Nama {{placeName}}" formControlName="fullname"></ion-input>
+  <ion-item class="marginTop">
+    <ion-label position="stacked">Nama Lengkap</ion-label>
+    <ion-input type="text" placeholder="Masukan Nama Lengkap" formControlName="fullname"></ion-input>
   </ion-item>
   <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback" style="margin-top:-10px;">
-    <div *ngIf="f.fullname.errors.required">Nama {{placeName}} harus diisi guys :(</div>
+    <div *ngIf="f.fullname.errors.required">Nama Lengkap harus diisi guys :(</div>
   </div>
 
   <ion-item class="marginTop">

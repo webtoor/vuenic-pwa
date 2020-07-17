@@ -14,11 +14,10 @@ export class SignupPage implements OnInit {
   signupForm: FormGroup;
   submitted = false;
   hidden = false;
-  placeName = "Lengkap";
   constructor(public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
     this.menu.enable(false);
     this.signupForm = this.formBuilder.group({
-      'role' : [null, Validators.required],
+      'role' : [1, Validators.required],
       'fullname' : [null, Validators.required],
       'phonenumber' : [null, Validators.required],
       'email' : [null, [Validators.required, Validators.email]],
@@ -29,27 +28,7 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
 
-  accountType(event){
-    switch (event.detail.value) {
-      case 1:
-          this.hidden = false;
-          this.placeName = "Lengkap";
-          break;
-      case 2:
-          this.hidden = false;
-          this.placeName = "UMKM";
-          break;
-      case 3:
-          this.hidden = false;
-          this.placeName = "Perusahaan"
-          break;
-      default:
-          this.hidden = true;
-          break;
-    }
-  }
-
-  ionViewDidEnter(){
+  ionViewWillEnter(){
     const check = JSON.parse(localStorage.getItem('vuenic-pwa'));
     if(check){
       this.router.navigate(["tabs/dashboard"])

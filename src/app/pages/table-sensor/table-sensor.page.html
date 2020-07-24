@@ -9,7 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="grey-light">
+  <div  class="ion-padding">
+    <ion-button expand="block" color="danger" fill="outline">Lihat Grafik
+      <ion-icon slot="start" icon="bar-chart-sharp"></ion-icon>
+    </ion-button>
+  </div>
+  
   <ion-card>
     <ion-card-content>
       <ion-grid>
@@ -17,7 +23,7 @@
           <ion-col>
               <b>Tanggal & Jam</b>
           </ion-col>
-          <ion-col>
+          <ion-col class="ion-text-center">
             <b *ngIf="sensorID == 1">Kelembaban</b>
             <b *ngIf="sensorID == 2">Kelembaban Tanah</b>
             <b *ngIf="sensorID == 3">Suhu</b>
@@ -37,7 +43,7 @@
           <ion-col>
               {{data.created_at | date: "dd MMM yyy HH:mm" }}
           </ion-col>
-          <ion-col>
+          <ion-col class="ion-text-center">
             <b *ngIf="sensorID != null;">{{data.sensor_value|number:'0.0-1'}}</b>
             <b *ngIf="(sensorID == 1) && (sensorID != null)"><sup> %</sup></b>
             <b *ngIf="(sensorID == 2) && (sensorID != null)"><sup> %</sup></b>

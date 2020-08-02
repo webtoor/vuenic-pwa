@@ -1,7 +1,7 @@
 {
   "name": "Vuenic",
   "short_name": "Vuenic",
-  "theme_color": "#1976d2",
+  "theme_color": "#17a9d0",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

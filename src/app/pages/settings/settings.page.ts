@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -8,7 +8,6 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-
   constructor(public router : Router, public navCtrl : NavController) { }
 
   ngOnInit() {
@@ -18,8 +17,13 @@ export class SettingsPage implements OnInit {
     this.router.navigate(["settings/setting-detail"])
   }
 
-  logout(){
+  signOut(){
     localStorage.clear();
-    this.navCtrl.navigateRoot ('/signin')
+    let navigationExtras: NavigationExtras = {
+      state : {
+        clear : 1
+      }
+    };
+    this.navCtrl.navigateRoot('/signin', navigationExtras)
   }
 }

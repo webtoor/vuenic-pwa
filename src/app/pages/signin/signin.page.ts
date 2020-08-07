@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { EventsService } from '../../services/events.service';
 import { SocialAuthService } from "angularx-social-login";
@@ -25,7 +25,8 @@ export class SigninPage implements OnInit {
     social_id: '',
     token: ''
   }
-  constructor(private authSocial: SocialAuthService,public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
+  clear;
+  constructor(public route : ActivatedRoute, private authSocial: SocialAuthService,public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
 
@@ -34,11 +35,22 @@ export class SigninPage implements OnInit {
       'email' : [null, [Validators.required, Validators.email]],
       'password' : [null, Validators.required],
     });
-    this.authSocial.authState.subscribe(data => {
-      this.socialUser = data;
-      console.log(data)
-      this.postSocialGoogleAuth(data)
-    });
+
+    this.route.queryParams.subscribe(params => {
+      if(this.router.getCurrentNavigation().extras.state) {
+         this.clear = parseInt(this.router.getCurrentNavigation().extras.state.clear);
+      }
+        this.authSocial.authState.subscribe(data => {
+          if(this.clear != 1){
+            console.log(data)
+            this.socialUser = data;
+            this.postSocialGoogleAuth(data)
+          }else{
+            this.authSocial.signOut()
+          }
+        }); 
+    })
+    
   }
 
   ionViewDidEnter(){

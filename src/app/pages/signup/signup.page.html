@@ -8,9 +8,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="ion-text-center" style="margin-top: 0px;">
-    <img src="/assets/images/logo-with-text.png" height="50px;" style="margin-bottom:0px;">
-  </div>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
   <!-- <ion-item class="marginTop">
@@ -23,7 +20,7 @@
     </ion-select>
   </ion-item> -->
 
-  <ion-item class="marginTop">
+  <ion-item style="margin-top:-10px;">
     <ion-label position="stacked">Nama Lengkap</ion-label>
     <ion-input type="text" placeholder="Masukan Nama Lengkap" formControlName="fullname"></ion-input>
   </ion-item>
@@ -65,6 +62,13 @@
     <ion-button expand="block" color="medium" fill="outline" style="height:50px" (click)="signUpWithGoogle()">
       <img src="/assets/images/google.jpg" height="30px;" style="margin-right: 5px;">
       <b>Daftar dengan Google</b>
+    </ion-button>
+  </div>
+
+  <div class="ion-text-center" style="margin-top:10px">
+    <ion-button expand="block" color="medium" fill="outline" style="height:50px" (click)="signUpWithGithub()">
+      <img src="/assets/images/github.png" height="25px;" style="margin-right: 8px;">
+      <b>Masuk dengan Github</b>
     </ion-button>
   </div>
 </ion-content>

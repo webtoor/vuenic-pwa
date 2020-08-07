@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { ToastController, MenuController } from '@ionic/angular';
 import { EventsService } from '../../services/events.service';
@@ -25,7 +25,17 @@ export class SignupPage implements OnInit {
     social_id: '',
     token: ''
   }
-  constructor(private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
+  githubParams = {
+    client_id : '2510ae126aed8ad39ed9',
+    client_secret : '617a3cf58ed707dc548772bbc8045a8aec1a23e6',
+    code : '',
+    redirect_uri : 'http://localhost:8100/signup',
+  }
+  clear;
+  githubCode;
+  socialToken;
+  socialProvider;
+  constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
     this.menu.enable(false);
     this.signupForm = this.formBuilder.group({
       'role' : [1, Validators.required],
@@ -39,8 +49,16 @@ export class SignupPage implements OnInit {
   ngOnInit() {
     this.authSocial.authState.subscribe(data => {
         this.socialUser = data;
-        this.postSocialGoogleAuth(data)
+        this.postSocialAuth(data)
     }); 
+    this.route.queryParams.subscribe(params => {
+      this.githubCode = params['code'];
+      this.githubParams.code = this.githubCode
+      console.log(this.githubParams)
+      if(this.githubCode){
+        this.githubLogin()
+      }
+    })  
   }
 
   ionViewWillEnter(){
@@ -50,13 +68,43 @@ export class SignupPage implements OnInit {
     }
   }
 
-  postSocialGoogleAuth(data){
+  signUpWithGithub(){
+    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=2510ae126aed8ad39ed9&redirect_uri=http://localhost:8100/signup';
+  }
+
+  githubLogin(){
+    this.loading.present();
+    this.authService.GithubPost(this.githubParams, 'login/oauth/access_token').subscribe(res => {
+      //console.log(res)
+      if(res.access_token){
+        this.socialToken = res.access_token;
+        localStorage.setItem('vuenic-github', JSON.stringify(res));
+        this.getGithubUserInfo()
+        this.loading.dismiss();
+      }
+    });
+  }
+
+  getGithubUserInfo(){
+    this.loading.present();
+    this.authService.GithubGet('user').subscribe(res => {
+      //console.log(res)
+      if(res.login){
+        this.socialProvider = "GITHUB";
+        this.postSocialAuth(res)
+        this.loading.dismiss();
+        localStorage.removeItem('vuenic-github')
+      }
+    });
+  }
+
+  postSocialAuth(data){
     //console.log(data.email)
     this.socialLogin.email = data.email;
     this.socialLogin.fullname = data.name;
-    this.socialLogin.provider = data.provider;
-    this.socialLogin.social_id = data.id;
-    this.socialLogin.token = data.idToken
+    this.socialLogin.provider = this.socialProvider;
+    this.socialLogin.social_id = data.id.toString();
+    this.socialLogin.token = this.socialToken;
 
     //console.log(this.socialLogin)
     this.loading.present();

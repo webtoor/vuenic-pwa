@@ -47,7 +47,7 @@ export class SigninPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.githubCode = params['code'];
       this.githubParams.code = this.githubCode
-      //console.log(this.githubParams)
+      console.log(this.githubParams)
       if(this.githubCode){
         this.githubLogin()
       }
@@ -72,10 +72,10 @@ export class SigninPage implements OnInit {
   githubLogin(){
     this.loading.present();
     this.authService.GithubPost(this.githubParams, 'login/oauth/access_token').subscribe(res => {
-      //console.log(res)
+      console.log(res)
       if(res.access_token){
         this.socialToken = res.access_token;
-        localStorage.setItem('vuenic-pwa-github', JSON.stringify(res));
+        localStorage.setItem('vuenic-github', JSON.stringify(res));
         this.getGithubUserInfo()
         this.loading.dismiss();
       }
@@ -85,11 +85,12 @@ export class SigninPage implements OnInit {
   getGithubUserInfo(){
     this.loading.present();
     this.authService.GithubGet('user').subscribe(res => {
-      //console.log(res)
+      console.log(res)
       if(res.login){
         this.socialProvider = "GITHUB";
         this.postSocialAuth(res)
         this.loading.dismiss();
+        localStorage.removeItem('vuenic-github')
       }
     });
   }

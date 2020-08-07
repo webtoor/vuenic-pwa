@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   GithubGet(type): Observable<any> {
-    const githubToken = JSON.parse(localStorage.getItem('vuenic-pwa-github'));
+    const githubToken = JSON.parse(localStorage.getItem('vuenic-github'));
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization' : 'token '+ githubToken['access_token']

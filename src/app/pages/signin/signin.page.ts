@@ -5,6 +5,8 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { EventsService } from '../../services/events.service';
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +17,15 @@ import { EventsService } from '../../services/events.service';
 export class SigninPage implements OnInit {
   loginForm: FormGroup;
   submitted = false;
-  constructor(public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
+  socialUser: SocialUser;
+  socialLogin = {
+    email: '',
+    fullname: '',
+    provider: '',
+    social_id: '',
+    token: ''
+  }
+  constructor(private authSocial: SocialAuthService,public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
 
@@ -23,6 +33,11 @@ export class SigninPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       'email' : [null, [Validators.required, Validators.email]],
       'password' : [null, Validators.required],
+    });
+    this.authSocial.authState.subscribe(data => {
+      this.socialUser = data;
+      console.log(data)
+      this.postSocialLogin(data)
     });
   }
 
@@ -32,6 +47,18 @@ export class SigninPage implements OnInit {
       this.router.navigate(["tabs/dashboard"])
     }
   }
+
+  signInWithGoogle(): void {
+    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  postSocialLogin(data){
+    this.socialLogin.email = data.email;
+    this.socialLogin.fullname = data.name;
+    this.socialLogin.provider = data.provider;
+    this.socialLogin.social_id = data.id;
+    this.socialLogin.token = data.idToken
+}
 
   onSubmit() {
     this.submitted = true;

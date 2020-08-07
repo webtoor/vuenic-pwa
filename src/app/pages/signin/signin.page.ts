@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { EventsService } from '../../services/events.service';
 import { SocialAuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +17,6 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx
 export class SigninPage implements OnInit {
   loginForm: FormGroup;
   submitted = false;
-  socialUser: SocialUser;
   socialLogin = {
     email: '',
     fullname: '',
@@ -26,7 +25,7 @@ export class SigninPage implements OnInit {
     token: ''
   }
   clear;
-  constructor(public route : ActivatedRoute, private authSocial: SocialAuthService,public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
+  constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
 
@@ -40,15 +39,6 @@ export class SigninPage implements OnInit {
       if(this.router.getCurrentNavigation().extras.state) {
          this.clear = parseInt(this.router.getCurrentNavigation().extras.state.clear);
       }
-        this.authSocial.authState.subscribe(data => {
-          if(this.clear != 1){
-            console.log(data)
-            this.socialUser = data;
-            this.postSocialGoogleAuth(data)
-          }else{
-            this.authSocial.signOut()
-          }
-        }); 
     })
     
   }
@@ -62,6 +52,9 @@ export class SigninPage implements OnInit {
 
   signInWithGoogle(): void {
     this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authSocial.authState.subscribe(data => {
+      this.postSocialGoogleAuth(data)
+    }); 
   }
 
   postSocialGoogleAuth(data){
@@ -73,6 +66,7 @@ export class SigninPage implements OnInit {
     this.socialLogin.token = data.idToken
 
     //console.log(this.socialLogin)
+    this.loading.present();
     this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
       console.log(res)
       if(res.access_token) {

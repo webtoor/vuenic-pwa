@@ -44,12 +44,10 @@ export class SigninPage implements OnInit {
       'password' : [null, Validators.required],
     });
 
-    //this.getGithubUserInfo()
-
     this.route.queryParams.subscribe(params => {
       this.githubCode = params['code'];
       this.githubParams.code = this.githubCode
-      console.log(this.githubParams)
+      //console.log(this.githubParams)
       if(this.githubCode){
         this.githubLogin()
       }
@@ -57,11 +55,7 @@ export class SigninPage implements OnInit {
       /* if(this.router.getCurrentNavigation().extras.state) {
          this.clear = parseInt(this.router.getCurrentNavigation().extras.state.clear);
       } */
-    })
-
-   // this.githubLogin()
-
-    
+    })    
   }
 
   ionViewDidEnter(){
@@ -71,23 +65,31 @@ export class SigninPage implements OnInit {
     }
   }
 
+  signInWithGithub(){
+    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=e9a252050722608e005f&redirect_uri=http://localhost:8100/signin';
+  }
+
   githubLogin(){
+    this.loading.present();
     this.authService.GithubPost(this.githubParams, 'login/oauth/access_token').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.access_token){
         this.socialToken = res.access_token;
         localStorage.setItem('vuenic-pwa-github', JSON.stringify(res));
         this.getGithubUserInfo()
+        this.loading.dismiss();
       }
     });
   }
 
   getGithubUserInfo(){
+    this.loading.present();
     this.authService.GithubGet('user').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.login){
         this.socialProvider = "GITHUB";
         this.postSocialAuth(res)
+        this.loading.dismiss();
       }
     });
   }

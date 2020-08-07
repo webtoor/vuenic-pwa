@@ -54,9 +54,17 @@
         </ion-card-header>
 
         <ion-card-content>
-          <div *ngFor="let device of info" class="ion-text-center">
-            <b style="color:red; font-size: 25px;">{{device.project_device?.length}} </b>
+          <div  *ngIf="info?.length > 0; else emptyDevice">
+            <div *ngFor="let device of info" class="ion-text-center">
+              <b style="color:red; font-size: 25px;">{{device.project_device?.length}} </b>
+            </div>
           </div>
+          
+          <ng-template #emptyDevice>
+            <div class="ion-text-center">
+              <b style="color:red; font-size: 25px;">0</b>
+            </div>
+          </ng-template>
         </ion-card-content>
       </ion-card>
     </ion-col>

@@ -24,7 +24,6 @@ isLoading = false;
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
-    const githubToken = JSON.parse(localStorage.getItem('vuenic-pwa-github'));
 
     //console.log(token)
 
@@ -34,15 +33,6 @@ isLoading = false;
             'Authorization': 'Bearer ' + token['access_token']
         }
         });
-    }
-
-    if (githubToken) {
-      console.log()
-        request = request.clone({
-        setHeaders: {
-            'Authorization': 'token ' + githubToken['access_token']
-        }
-      });
     }
 
     if (!request.headers.has('Content-Type')) {

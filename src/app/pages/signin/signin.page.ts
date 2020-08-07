@@ -24,15 +24,16 @@ export class SigninPage implements OnInit {
     social_id: '',
     token: ''
   }
-  githubUserInfo = {
+  githubParams = {
     client_id : 'e9a252050722608e005f',
     client_secret : '61040071f17a4f9003ff5b3bdea64387d6627c45',
-    code : 'ac45dbdd2de4b758abc7',
+    code : '',
     redirect_uri : 'http://localhost:8100/signin',
   }
   clear;
   githubCode;
   socialToken;
+  socialProvider;
   constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
@@ -43,20 +44,20 @@ export class SigninPage implements OnInit {
       'password' : [null, Validators.required],
     });
 
-    this.getGithubUserInfo()
+    //this.getGithubUserInfo()
 
-    /* this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.githubCode = params['code'];
-      this.githubUserInfo.code = this.githubCode
-      console.log(this.githubCode)
+      this.githubParams.code = this.githubCode
+      console.log(this.githubParams)
       if(this.githubCode){
         this.githubLogin()
       }
 
-      if(this.router.getCurrentNavigation().extras.state) {
+      /* if(this.router.getCurrentNavigation().extras.state) {
          this.clear = parseInt(this.router.getCurrentNavigation().extras.state.clear);
-      }
-    }) */
+      } */
+    })
 
    // this.githubLogin()
 
@@ -70,40 +71,42 @@ export class SigninPage implements OnInit {
     }
   }
 
-  signInWithGoogle(): void {
-    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.authSocial.authState.subscribe(data => {
-      this.socialToken = data.idToken;
-      this.postSocialAuth(data)
-    }); 
-  }
-
   githubLogin(){
-    this.authService.GithubPost(this.githubUserInfo).subscribe(res => {
+    this.authService.GithubPost(this.githubParams, 'login/oauth/access_token').subscribe(res => {
       console.log(res)
       if(res.access_token){
         this.socialToken = res.access_token;
         localStorage.setItem('vuenic-pwa-github', JSON.stringify(res));
+        this.getGithubUserInfo()
       }
     });
   }
 
   getGithubUserInfo(){
-    console.log("test")
     this.authService.GithubGet('user').subscribe(res => {
       console.log(res)
       if(res.login){
+        this.socialProvider = "GITHUB";
         this.postSocialAuth(res)
       }
     });
+  }
+
+  signInWithGoogle(): void {
+    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authSocial.authState.subscribe(data => {
+      this.socialToken = data.idToken
+      this.socialProvider = "GITHUB";
+      this.postSocialAuth(data)
+    }); 
   }
 
   postSocialAuth(data){
     //console.log(data.email)
     this.socialLogin.email = data.email;
     this.socialLogin.fullname = data.name;
-    this.socialLogin.provider = data.provider;
-    this.socialLogin.social_id = data.id;
+    this.socialLogin.provider = this.socialProvider;
+    this.socialLogin.social_id = data.id.toString();
     this.socialLogin.token = this.socialToken;
 
     //console.log(this.socialLogin)

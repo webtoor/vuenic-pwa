@@ -31,8 +31,8 @@ export class AuthService {
     );
   }
 
-  GithubPost(data): Observable<any> {
-    return this.http.post<any>("https://github.com/login/oauth/access_token", data)
+  GithubPost(data,type): Observable<any> {
+    return this.http.post<any>("https://cors-anywhere.herokuapp.com/https://github.com/"+type, data)
     .pipe(
       tap(_ => this.log('github-post')),
       catchError(this.handleError('github-post', []))
@@ -40,7 +40,13 @@ export class AuthService {
   }
 
   GithubGet(type): Observable<any> {
-    return this.http.get<any>("https://api.github.com/"+type)
+    const githubToken = JSON.parse(localStorage.getItem('vuenic-pwa-github'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization' : 'token '+ githubToken['access_token']
+      })
+    };
+    return this.http.get<any>("https://api.github.com/"+type, httpOptions)
     .pipe(
       tap(_ => this.log('get-github-req')),
       catchError(this.handleError('get-github-req', []))

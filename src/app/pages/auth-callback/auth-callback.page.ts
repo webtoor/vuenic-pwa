@@ -44,14 +44,12 @@ export class AuthCallbackPage implements OnInit {
   }
 
   githubLogin(){
-    this.loading.present();
     this.authService.GithubPost(this.githubParams, 'login/oauth/access_token').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.access_token){
         this.socialToken = res.access_token;
         localStorage.setItem('vuenic-github', JSON.stringify(res));
         this.getGithubUserInfo()
-        this.loading.dismiss();
       }
     });
   }
@@ -59,12 +57,11 @@ export class AuthCallbackPage implements OnInit {
   getGithubUserInfo(){
     this.loading.present();
     this.authService.GithubGet('user').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.login){
         this.socialProvider = "GITHUB";
         this.postSocialAuth(res)
         this.loading.dismiss();
-        localStorage.removeItem('vuenic-github')
       }
     });
   }

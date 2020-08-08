@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
   },
   {
+    path: 'auth/:provider/callback',
+    loadChildren: () => import('./pages/auth-callback/auth-callback.module').then( m => m.AuthCallbackPageModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
     canActivate : [AuthGuardService]
@@ -53,6 +57,8 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+
+ 
  
  /*  {
     path: 'dashboard',

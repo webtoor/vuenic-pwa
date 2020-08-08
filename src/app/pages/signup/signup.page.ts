@@ -25,14 +25,6 @@ export class SignupPage implements OnInit {
     social_id: '',
     token: ''
   }
-  githubParams = {
-    client_id : '2510ae126aed8ad39ed9',
-    client_secret : '617a3cf58ed707dc548772bbc8045a8aec1a23e6',
-    code : '',
-    redirect_uri : 'http://localhost:8100/signup',
-  }
-  clear;
-  githubCode;
   socialToken;
   socialProvider;
   constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
@@ -49,16 +41,10 @@ export class SignupPage implements OnInit {
   ngOnInit() {
     this.authSocial.authState.subscribe(data => {
         this.socialUser = data;
-        this.postSocialAuth(data)
+        if(this.socialUser){
+          this.postSocialAuth(data)
+        }
     }); 
-    this.route.queryParams.subscribe(params => {
-      this.githubCode = params['code'];
-      this.githubParams.code = this.githubCode
-      console.log(this.githubParams)
-      if(this.githubCode){
-        this.githubLogin()
-      }
-    })  
   }
 
   ionViewWillEnter(){
@@ -69,34 +55,14 @@ export class SignupPage implements OnInit {
   }
 
   signUpWithGithub(){
-    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=2510ae126aed8ad39ed9&redirect_uri=http://localhost:8100/signup';
+    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=e9a252050722608e005f&redirect_uri=http://localhost:8100/auth/github/callback';
   }
 
-  githubLogin(){
-    this.loading.present();
-    this.authService.GithubPost(this.githubParams, 'login/oauth/access_token').subscribe(res => {
-      //console.log(res)
-      if(res.access_token){
-        this.socialToken = res.access_token;
-        localStorage.setItem('vuenic-github', JSON.stringify(res));
-        this.getGithubUserInfo()
-        this.loading.dismiss();
-      }
-    });
+
+  signUpWithGoogle(): void {
+    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  getGithubUserInfo(){
-    this.loading.present();
-    this.authService.GithubGet('user').subscribe(res => {
-      //console.log(res)
-      if(res.login){
-        this.socialProvider = "GITHUB";
-        this.postSocialAuth(res)
-        this.loading.dismiss();
-        localStorage.removeItem('vuenic-github')
-      }
-    });
-  }
 
   postSocialAuth(data){
     //console.log(data.email)
@@ -166,9 +132,5 @@ export class SignupPage implements OnInit {
 
   signinPage(){
     this.router.navigate(['/signin'])
-  }
-
-  signUpWithGoogle(): void {
-    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 }

@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="ion-text-center" style="margin-top: 50px;">
-    <img src="/assets/images/logo-with-text.png" height="80px;" style="margin-bottom:10px;">
+  <div class="ion-text-center" style="margin-top: 20px;">
+    <img src="/assets/images/logo-with-text.png" height="60px;" style="margin-bottom:0px;">
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
@@ -33,9 +33,22 @@
   <div class="ion-text-center" style="margin-top:40px">
     <ion-button [disabled]="loginForm.invalid" expand="block" type="submit" style="height:40px" >Masuk</ion-button>
   </div>
-
-  <div class="ion-text-center" style="margin-top:40px">
-    <ion-button expand="block" style="height:40px" (click)="signInWithGoogle()">Masuk dengan Google</ion-button>
-  </div>
   </form>
+  <div class="ion-text-center" style="margin-top:40px">
+    <ion-button expand="block" color="medium" fill="outline" style="height:50px" (click)="signInWithGoogle()">
+      <img src="/assets/images/google.jpg" height="30px;" style="margin-right: 5px;">
+      <b>Masuk dengan Google</b>
+    </ion-button>
+  </div>
+
+  <div class="ion-text-center" style="margin-top:10px">
+    <ion-button expand="block" color="medium" fill="outline" style="height:50px" (click)="signInWithGithub()">
+      <img src="/assets/images/github.png" height="25px;" style="margin-right: 8px;">
+      <b>Masuk dengan Github</b>
+    </ion-button>
+  </div>
+
+ <!--  <div class="ion-text-center" style="margin-top:40px">
+    <a href="https://github.com/login/oauth/authorize?scope=user&email&client_id=e9a252050722608e005f&redirect_uri=http://localhost:8100/signin">Github</a>
+  </div> -->
 </ion-content>

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { LoaderService } from '../../services/loader.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController, MenuController } from '@ionic/angular';
+import { EventsService } from 'src/app/services/events.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { SocialAuthService } from "angularx-social-login";
+import { GoogleLoginProvider, SocialUser } from "angularx-social-login";
+
 
 @Component({
   selector: 'app-signup',
@@ -12,9 +16,19 @@ import { ToastController, MenuController } from '@ionic/angular';
 })
 export class SignupPage implements OnInit {
   signupForm: FormGroup;
+  socialUser: SocialUser;
   submitted = false;
   hidden = false;
-  constructor(public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
+  socialLogin = {
+    email: '',
+    fullname: '',
+    provider: '',
+    social_id: '',
+    token: ''
+  }
+  socialToken;
+  socialProvider;
+  constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
     this.menu.enable(false);
     this.signupForm = this.formBuilder.group({
       'role' : [1, Validators.required],
@@ -26,6 +40,12 @@ export class SignupPage implements OnInit {
    }
 
   ngOnInit() {
+    this.authSocial.authState.subscribe(data => {
+        this.socialUser = data;
+        if(this.socialUser){
+          this.postSocialAuth(data)
+        }
+    }); 
   }
 
   ionViewWillEnter(){
@@ -33,6 +53,40 @@ export class SignupPage implements OnInit {
     if(check){
       this.router.navigate(["tabs/dashboard"])
     }
+  }
+
+  signUpWithGithub(){
+    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=e9a252050722608e005f&redirect_uri=http://localhost:8100/auth/github/callback';
+  }
+
+
+  signUpWithGoogle(): void {
+    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+
+  postSocialAuth(data){
+    //console.log(data.email)
+    this.socialLogin.email = data.email;
+    this.socialLogin.fullname = data.name;
+    this.socialLogin.provider = this.socialProvider;
+    this.socialLogin.social_id = data.id.toString();
+    this.socialLogin.token = this.socialToken;
+
+    //console.log(this.socialLogin)
+    this.loading.present();
+    this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
+      console.log(res)
+      if(res.access_token) {
+        localStorage.setItem('vuenic-pwa', JSON.stringify(res));
+        this.events.publish('email', res.email);
+        this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
+        this.loading.dismiss();
+      }else if(res.error){
+        this.presentToast('Invalid Token', "bottom");
+        this.loading.dismiss();
+      }
+    });
   }
 
   onSubmit() {

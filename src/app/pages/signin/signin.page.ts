@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { EventsService } from '../../services/events.service';
 import { SocialAuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +17,6 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialUser } from "angularx
 export class SigninPage implements OnInit {
   loginForm: FormGroup;
   submitted = false;
-  socialUser: SocialUser;
   socialLogin = {
     email: '',
     fullname: '',
@@ -25,8 +24,9 @@ export class SigninPage implements OnInit {
     social_id: '',
     token: ''
   }
-  clear;
-  constructor(public route : ActivatedRoute, private authSocial: SocialAuthService,public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
+  socialToken;
+  socialProvider;
+  constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
 
@@ -34,23 +34,7 @@ export class SigninPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       'email' : [null, [Validators.required, Validators.email]],
       'password' : [null, Validators.required],
-    });
-
-    this.route.queryParams.subscribe(params => {
-      if(this.router.getCurrentNavigation().extras.state) {
-         this.clear = parseInt(this.router.getCurrentNavigation().extras.state.clear);
-      }
-        this.authSocial.authState.subscribe(data => {
-          if(this.clear != 1){
-            console.log(data)
-            this.socialUser = data;
-            this.postSocialGoogleAuth(data)
-          }else{
-            this.authSocial.signOut()
-          }
-        }); 
-    })
-    
+    });  
   }
 
   ionViewDidEnter(){
@@ -60,19 +44,29 @@ export class SigninPage implements OnInit {
     }
   }
 
-  signInWithGoogle(): void {
-    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
+  signInWithGithub(){
+    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=e9a252050722608e005f&redirect_uri=http://localhost:8100/auth/github/callback';
   }
 
-  postSocialGoogleAuth(data){
+  signInWithGoogle(): void {
+    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authSocial.authState.subscribe(data => {
+      this.socialToken = data.idToken
+      this.socialProvider = "GITHUB";
+      this.postSocialAuth(data)
+    }); 
+  }
+
+  postSocialAuth(data){
     //console.log(data.email)
     this.socialLogin.email = data.email;
     this.socialLogin.fullname = data.name;
-    this.socialLogin.provider = data.provider;
-    this.socialLogin.social_id = data.id;
-    this.socialLogin.token = data.idToken
+    this.socialLogin.provider = this.socialProvider;
+    this.socialLogin.social_id = data.id.toString();
+    this.socialLogin.token = this.socialToken;
 
     //console.log(this.socialLogin)
+    this.loading.present();
     this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
       console.log(res)
       if(res.access_token) {

@@ -52,6 +52,7 @@
       <ion-label>
         <p>Nomor HP</p>
         <h2 *ngIf="infoUser?.phonenumber">+{{infoUser?.phonenumber}}</h2>
+        <h2 *ngIf="!infoUser?.phonenumber">N/A</h2>
       </ion-label>
       <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(5, infoUser?.phonenumber)">Ubah</div>
     </ion-item>

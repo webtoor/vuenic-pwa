@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -28,6 +28,28 @@ export class AuthService {
     .pipe(
       tap(_ => this.log('signup')),
       catchError(this.handleError('signup', []))
+    );
+  }
+
+  GithubPost(data,type): Observable<any> {
+    return this.http.post<any>("https://cors-anywhere.herokuapp.com/https://github.com/"+type, data)
+    .pipe(
+      tap(_ => this.log('github-post')),
+      catchError(this.handleError('github-post', []))
+    );
+  }
+
+  GithubGet(type): Observable<any> {
+    const githubToken = JSON.parse(localStorage.getItem('vuenic-github'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization' : 'token '+ githubToken['access_token']
+      })
+    };
+    return this.http.get<any>("https://api.github.com/"+type, httpOptions)
+    .pipe(
+      tap(_ => this.log('get-github-req')),
+      catchError(this.handleError('get-github-req', []))
     );
   }
 

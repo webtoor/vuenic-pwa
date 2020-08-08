@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoaderService } from '../../services/loader.service';
 import { ToastController, MenuController } from '@ionic/angular';
-import { EventsService } from '../../services/events.service';
+import { EventsService } from 'src/app/services/events.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { SocialAuthService } from "angularx-social-login";
 import { GoogleLoginProvider, SocialUser } from "angularx-social-login";
+
 
 @Component({
   selector: 'app-signup',

@@ -22,7 +22,7 @@ export class AuthCallbackPage implements OnInit {
     client_id : 'e9a252050722608e005f',
     client_secret : '61040071f17a4f9003ff5b3bdea64387d6627c45',
     code : '',
-    redirect_uri : 'http://localhost:8100/auth/github/callback',
+    redirect_uri : 'https://apps.vuenic.com/auth/github/callback',
   }
   clear;
   githubCode;

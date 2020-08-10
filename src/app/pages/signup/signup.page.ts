@@ -56,7 +56,7 @@ export class SignupPage implements OnInit {
   }
 
   signUpWithGithub(){
-    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=e9a252050722608e005f&redirect_uri=http://localhost:8100/auth/github/callback';
+    window.location.href='https://github.com/login/oauth/authorize?scope=user&email&client_id=e9a252050722608e005f&redirect_uri=https://apps.vuenic.com/auth/github/callback';
   }
 
 

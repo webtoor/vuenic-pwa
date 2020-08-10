@@ -43,6 +43,7 @@ export class SignupPage implements OnInit {
     this.authSocial.authState.subscribe(data => {
         this.socialUser = data;
         if(this.socialUser){
+          this.socialProvider = "GOOGLE";
           this.postSocialAuth(data)
         }
     }); 

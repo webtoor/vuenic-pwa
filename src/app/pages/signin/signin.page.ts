@@ -45,14 +45,14 @@ export class SigninPage implements OnInit {
   }
 
   signInWithGithub(){
-    window.location.href='https://github.com/login/oauth/authorize?scope=user%20email&client_id=da7543902b55fa4b7a03&redirect_uri=http://localhost:8100/auth/github/callback';
+    window.location.href='https://github.com/login/oauth/authorize?scope=user%20email&client_id=e9a252050722608e005f&redirect_uri=https://apps.vuenic.com/auth/github/callback';
   }
 
   signInWithGoogle(): void {
     this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.authSocial.authState.subscribe(data => {
       this.socialToken = data.idToken
-      this.socialProvider = "GITHUB";
+      this.socialProvider = "GOOGLE";
       this.postSocialAuth(data)
     }); 
   }

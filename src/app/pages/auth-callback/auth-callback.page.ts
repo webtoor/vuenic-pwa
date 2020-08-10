@@ -19,10 +19,10 @@ export class AuthCallbackPage implements OnInit {
     token: ''
   }
   githubParams = {
-    client_id : 'da7543902b55fa4b7a03',
-    client_secret : '77782e8009de57654a571f4ce63b1b6fcded8a0c',
+    client_id : 'e9a252050722608e005f',
+    client_secret : '61040071f17a4f9003ff5b3bdea64387d6627c45',
     code : '',
-    redirect_uri : 'http://localhost:8100/auth/github/callback',
+    redirect_uri : 'https://apps.vuenic.com/auth/github/callback',
   }
   socialToken;
   socialProvider;
@@ -90,7 +90,7 @@ export class AuthCallbackPage implements OnInit {
     this.socialLogin.social_id = this.socialID;
     this.socialLogin.token = this.socialToken;
 
-    console.log(this.socialLogin)
+    //console.log(this.socialLogin)
     this.loading.present();
     this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
       console.log(res)

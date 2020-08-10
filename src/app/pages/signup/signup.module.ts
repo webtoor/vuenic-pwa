@@ -10,8 +10,6 @@ import { SignupPage } from './signup.page';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
-  FacebookLoginProvider,
-  AmazonLoginProvider,
 } from 'angularx-social-login';
 
 @NgModule({
@@ -33,17 +31,7 @@ import {
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '28911267521-igsc2gsbecdu8hqf3tad8c4ellb87lrq.apps.googleusercontent.com'
-            ),
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('clientId'),
-          },
-          {
-            id: AmazonLoginProvider.PROVIDER_ID,
-            provider: new AmazonLoginProvider(
-              'clientId'
+              '28911267521-014hfelmlqsiduntf6vb4aqc783j40s5.apps.googleusercontent.com'
             ),
           },
         ],

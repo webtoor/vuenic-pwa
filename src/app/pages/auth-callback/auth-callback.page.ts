@@ -19,25 +19,25 @@ export class AuthCallbackPage implements OnInit {
     token: ''
   }
   githubParams = {
-    client_id : 'e9a252050722608e005f',
-    client_secret : '61040071f17a4f9003ff5b3bdea64387d6627c45',
+    client_id : 'da7543902b55fa4b7a03',
+    client_secret : '77782e8009de57654a571f4ce63b1b6fcded8a0c',
     code : '',
-    redirect_uri : 'https://apps.vuenic.com/auth/github/callback',
+    redirect_uri : 'http://localhost:8100/auth/github/callback',
   }
-  clear;
-  githubCode;
   socialToken;
   socialProvider;
+  socialEmail;
+  socialFullName;
+  socialID;
   constructor(public router : Router, public route : ActivatedRoute, public authService: AuthService, public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, ) {
     this.menu.enable(false);
    }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.githubCode = params['code'];
-      this.githubParams.code = this.githubCode
-      console.log(this.githubParams)
-      if(this.githubCode){
+      this.githubParams.code = params['code'];
+      //console.log(this.githubParams)
+      if(params['code']){
         this.githubLogin()
       }
     }) 
@@ -60,21 +60,37 @@ export class AuthCallbackPage implements OnInit {
       //console.log(res)
       if(res.login){
         this.socialProvider = "GITHUB";
-        this.postSocialAuth(res)
+        this.socialID = res.id.toString();
+        this.socialFullName = res.name
+        this.socialEmail = res.email;
+        if(res.email){
+          this.postSocialAuth()
+        }else{
+          this.getGithubUserEmail();
+        }
         this.loading.dismiss();
       }
     });
   }
 
-  postSocialAuth(data){
-    //console.log(data.email)
-    this.socialLogin.email = data.email;
-    this.socialLogin.fullname = data.name;
+  getGithubUserEmail(){
+    this.authService.GithubGet('user/emails').subscribe(res => {
+      //console.log(res)
+      if(res.length > 0){
+        this.socialEmail = res[0].email;
+        this.postSocialAuth()
+      }
+    });
+  }
+
+  postSocialAuth(){
+    this.socialLogin.email = this.socialEmail;
+    this.socialLogin.fullname = this.socialFullName;
     this.socialLogin.provider = this.socialProvider;
-    this.socialLogin.social_id = data.id.toString();
+    this.socialLogin.social_id = this.socialID;
     this.socialLogin.token = this.socialToken;
 
-    //console.log(this.socialLogin)
+    console.log(this.socialLogin)
     this.loading.present();
     this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
       console.log(res)
@@ -85,6 +101,7 @@ export class AuthCallbackPage implements OnInit {
         this.loading.dismiss();
       }else if(res.error){
         this.presentToast('Invalid Token',);
+        this.router.navigate(['/signin'], {replaceUrl: true});
         this.loading.dismiss();
       }
     });

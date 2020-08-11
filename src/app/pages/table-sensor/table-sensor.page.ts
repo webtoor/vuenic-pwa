@@ -42,6 +42,12 @@ export class TableSensorPage {
 
   deleteSensor(sensor_id){
     console.log(sensor_id)
+    let navigationExtras: NavigationExtras = {
+      state: {
+       funcStatus : "deleteSensor"
+      }
+    };
+    this.router.navigate(['/delete-confirm'], navigationExtras)
   }
 
 }

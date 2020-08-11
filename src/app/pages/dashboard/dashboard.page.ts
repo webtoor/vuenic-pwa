@@ -48,7 +48,7 @@ export class DashboardPage implements OnInit {
           this.deviceSegment = [] 
           this.ionViewWillEnter()
         }
-        console.log("RefreshPage")
+        console.log("RefreshPage", this.user_project_id)
         this.getUserProject()
       }
 
@@ -176,8 +176,6 @@ export class DashboardPage implements OnInit {
 
   tableSensor(projectID, sensorID){
     this.ionViewWillLeave()
-    this.router.navigate(["/table-sensor/" + projectID + "/" + sensorID])
+    this.router.navigate(["/table-sensor/" + projectID + "/" + sensorID + "/" + this.projectID])
   }
-
-
 }

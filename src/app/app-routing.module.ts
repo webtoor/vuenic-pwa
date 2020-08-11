@@ -50,7 +50,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/chart/chart.module').then( m => m.ChartPageModule)
   },
   {
-    path: 'table-sensor/:projectDeviceID/:sensorID',
+    path: 'table-sensor/:projectDeviceID/:sensorID/:userProjectID',
     loadChildren: () => import('./pages/table-sensor/table-sensor.module').then( m => m.TableSensorPageModule)
   },
   {

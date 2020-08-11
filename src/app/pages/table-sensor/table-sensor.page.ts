@@ -8,16 +8,18 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./table-sensor.page.scss'],
 })
 export class TableSensorPage {
+  userProjectID
   projectDeviceID;
   sensorID;
   arraySensor;
   constructor(public router : Router, public route : ActivatedRoute, public httpService: AuthService,) { 
+    this.userProjectID = this.route.snapshot.paramMap.get('userProjectID');
     this.projectDeviceID = this.route.snapshot.paramMap.get('projectDeviceID');
     this.sensorID = this.route.snapshot.paramMap.get('sensorID');
   }
 
   ionViewWillEnter(){
-    console.log(this.projectDeviceID, this.sensorID)
+    console.log(this.projectDeviceID, this.sensorID, this.userProjectID)
     this.getSensorData()
   }
 
@@ -44,7 +46,10 @@ export class TableSensorPage {
     console.log(sensor_id)
     let navigationExtras: NavigationExtras = {
       state: {
-       funcStatus : "deleteSensor"
+       funcStatus : "deleteSensor",
+       sensorID : sensor_id,
+       projectDeviceID : this.projectDeviceID,
+       userProjectID : this.userProjectID
       }
     };
     this.router.navigate(['/delete-confirm'], navigationExtras)

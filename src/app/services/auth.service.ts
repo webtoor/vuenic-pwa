@@ -86,6 +86,21 @@ export class AuthService {
     
   }
 
+  deletePostRequest(data,type): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      body : data
+    };
+    return this.http.delete<any>(apiUrl+type, options)
+    .pipe(
+      tap(_ => this.log('delete-post-http-request')),
+      catchError(this.handleError('delete-post-http-request', []))
+    );
+    
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

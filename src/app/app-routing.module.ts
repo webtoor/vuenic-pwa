@@ -57,6 +57,10 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+  {
+    path: 'delete-confirm',
+    loadChildren: () => import('./pages/delete-confirm/delete-confirm.module').then( m => m.DeleteConfirmPageModule)
+  },
 
  
  

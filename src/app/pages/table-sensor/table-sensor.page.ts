@@ -40,4 +40,8 @@ export class TableSensorPage {
     this.router.navigate(['/tabs/dashboard'], navigationExtras);
   }
 
+  deleteSensor(sensor_id){
+    console.log(sensor_id)
+  }
+
 }

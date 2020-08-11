@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-delete-confirm',
@@ -7,8 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./delete-confirm.page.scss'],
 })
 export class DeleteConfirmPage implements OnInit {
+  deleteConfirmForm: FormGroup;
   funcStatus
-  constructor(public route : ActivatedRoute, public router: Router) {}
+  constructor(private formBuilder: FormBuilder, public route : ActivatedRoute, public router: Router) {
+    this.deleteConfirmForm = this.formBuilder.group({
+      'password' : [null, Validators.required],
+    });  
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

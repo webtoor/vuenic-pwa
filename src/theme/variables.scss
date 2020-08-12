@@ -314,3 +314,12 @@
   font-weight: normal;
   src: url('../assets/fonts/OpenSans-Regular.ttf');
 }
+
+ion-alert.select-alert {
+  .alert-checkbox-group {
+    /* overflow-y: scroll;
+    overflow: auto; */
+    max-height: 400px;
+    width: 500px;
+  }
+}

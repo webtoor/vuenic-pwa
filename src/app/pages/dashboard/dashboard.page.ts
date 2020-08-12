@@ -155,13 +155,16 @@ export class DashboardPage implements OnInit {
   }
 
   addSensor(projectDeviceID){
-    //console.log(projectID)
+    console.log(projectDeviceID)
     let arrSensor = []
     for (let item of this.deviceSensor) {
      arrSensor.push(item.sensor_id)
     }
     let navigationExtras: NavigationExtras = {
-      queryParams : arrSensor
+      queryParams : arrSensor,
+      state : {
+       userProjectID : this.projectID
+      }
     };
     this.router.navigate(["add-sensor/" + projectDeviceID], navigationExtras)
   }

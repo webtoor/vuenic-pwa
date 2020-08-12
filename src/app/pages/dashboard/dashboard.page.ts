@@ -153,6 +153,11 @@ export class DashboardPage implements OnInit {
     this.router.navigate(["create-device-sensor/" + projectID])
   }
 
+  addSensor(projectDeviceID){
+    //console.log(projectID)
+    this.router.navigate(["add-sensor/" + projectDeviceID])
+  }
+
   settingUserProject(ProjectID){
     this.ionViewWillLeave()
     //console.log(ProjectID)

@@ -63,13 +63,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/delete-confirm/delete-confirm.module').then( m => m.DeleteConfirmPageModule)
   },
   {
+    path: 'add-sensor/:projectDeviceID',
+    loadChildren: () => import('./pages/add-sensor/add-sensor.module').then( m => m.AddSensorPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
-  {
-    path: 'add-sensor',
-    loadChildren: () => import('./pages/add-sensor/add-sensor.module').then( m => m.AddSensorPageModule)
-  }
  /*  {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule),

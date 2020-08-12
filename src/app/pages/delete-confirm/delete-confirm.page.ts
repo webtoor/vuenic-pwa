@@ -17,6 +17,7 @@ export class DeleteConfirmPage implements OnInit {
   projectDeviceID;
   sensorID;
   userProjectID;
+  urlPath : String;
   constructor(public toastController: ToastController, public loading: LoaderService, private formBuilder: FormBuilder, public route : ActivatedRoute, public router: Router, public httpService : AuthService) {
     this.deleteConfirmForm = this.formBuilder.group({
       'sensor_id' : null,
@@ -32,11 +33,19 @@ export class DeleteConfirmPage implements OnInit {
         this.projectDeviceID = parseInt(this.router.getCurrentNavigation().extras.state.projectDeviceID);
         this.sensorID = parseInt(this.router.getCurrentNavigation().extras.state.sensorID);
         this.userProjectID = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
-
-        this.deleteConfirmForm.patchValue({
-          sensor_id : this.sensorID,
-          project_device_id : this.projectDeviceID
-        })
+        if(this.funcStatus === "deleteSensor"){
+          this.urlPath = "sensor";
+          this.deleteConfirmForm.patchValue({
+            sensor_id : this.sensorID,
+            project_device_id : this.projectDeviceID
+          })
+        }else if(this.funcStatus === "deleteDevice"){
+          console.log("deleteDevice")
+          this.deleteConfirmForm.patchValue({
+            project_device_id : this.projectDeviceID
+          })
+        }
+      
       }
     });
   }
@@ -48,8 +57,8 @@ export class DeleteConfirmPage implements OnInit {
     }
     
     console.log(this.deleteConfirmForm.value)
-    this.loading.present();
-    this.httpService.deletePostRequest(this.deleteConfirmForm.value, 'sensor').subscribe(res => {
+    /* this.loading.present();
+    this.httpService.deletePostRequest(this.deleteConfirmForm.value, this.urlPath).subscribe(res => {
       console.log(res)
       if(res.status == 200){
         let navigationExtras: NavigationExtras = {
@@ -65,7 +74,7 @@ export class DeleteConfirmPage implements OnInit {
       }else{
         this.presentToast("Anda memasukkan Password yang salah. Isi dengan benar dan coba lagi")
       }
-    });
+    }); */
   }
 
   async presentToast(msg) {

@@ -25,4 +25,9 @@ export class ConfProjectPage implements OnInit {
   editUserProject(){
     this.router.navigate(["/conf-project/" + this.user_project_id + "/edit-project/" + this.user_project_id])
   }
+
+  createDeviceSensor(){
+    //console.log(projectID)
+    this.router.navigate(["create-device-sensor/" + this.user_project_id])
+  }
 }

@@ -36,6 +36,11 @@ const routes: Routes = [
     canActivate : [AuthGuardService]
   },
   {
+    path: 'create-device-sensor/:user_project_id',
+    loadChildren: () => import('./pages/create-device-sensor/create-device-sensor.module').then( m => m.CreateDeviceSensorPageModule),
+    canActivate : [AuthGuardService]
+  },
+  {
     path: 'conf-project/:user_project_id',
     loadChildren: () => import('./pages/conf-project/conf-project.module').then( m => m.ConfProjectPageModule),
     canActivate : [AuthGuardService]

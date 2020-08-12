@@ -9,10 +9,6 @@ const routes: Routes = [
     component: DashboardPage
   },
   {
-    path: 'create-device-sensor/:user_project_id',
-    loadChildren: () => import('./create-device-sensor/create-device-sensor.module').then( m => m.CreateDeviceSensorPageModule)
-  },
-  {
     path: 'conf-device-sensor/:project_device_id',
     loadChildren: () => import('./conf-device-sensor/conf-device-sensor.module').then( m => m.ConfDeviceSensorPageModule)
   }

@@ -47,9 +47,6 @@
 </ion-header>
 
 
-
-
-<ion-content>
 <!-- Scrollable Segment -->
 <!-- class="ion-padding-start ion-padding-end" -->
 <div *ngIf="projectDevice">
@@ -65,6 +62,7 @@
   </ion-segment>
   </div>
 
+<ion-content>
   <div *ngIf="projectName; else emptyProject">
   <ion-grid>
     <div *ngIf="projectDevice; else emptyDevice">

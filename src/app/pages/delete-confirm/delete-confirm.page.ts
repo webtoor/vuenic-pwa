@@ -33,6 +33,7 @@ export class DeleteConfirmPage implements OnInit {
         this.projectDeviceID = parseInt(this.router.getCurrentNavigation().extras.state.projectDeviceID);
         this.sensorID = parseInt(this.router.getCurrentNavigation().extras.state.sensorID);
         this.userProjectID = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
+        console.log(this.userProjectID)
         if(this.funcStatus === "deleteSensor"){
           this.urlPath = "sensor";
           this.deleteConfirmForm.patchValue({
@@ -41,9 +42,13 @@ export class DeleteConfirmPage implements OnInit {
           })
         }else if(this.funcStatus === "deleteDevice"){
           console.log("deleteDevice")
+          this.urlPath = "device";
+
           this.deleteConfirmForm.patchValue({
             project_device_id : this.projectDeviceID
           })
+
+          this.projectDeviceID = 0
         }
       
       }
@@ -57,7 +62,7 @@ export class DeleteConfirmPage implements OnInit {
     }
     
     console.log(this.deleteConfirmForm.value)
-    /* this.loading.present();
+    this.loading.present();
     this.httpService.deletePostRequest(this.deleteConfirmForm.value, this.urlPath).subscribe(res => {
       console.log(res)
       if(res.status == 200){
@@ -74,7 +79,7 @@ export class DeleteConfirmPage implements OnInit {
       }else{
         this.presentToast("Anda memasukkan Password yang salah. Isi dengan benar dan coba lagi")
       }
-    }); */
+    });
   }
 
   async presentToast(msg) {

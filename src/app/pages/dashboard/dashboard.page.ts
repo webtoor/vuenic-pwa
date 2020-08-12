@@ -45,8 +45,10 @@ export class DashboardPage implements OnInit {
       }
     
       if(this.refreshPage == 1){
-        if(this.user_project_id != 0){
-          this.projectDevice = null
+        if(this.user_project_id !== 0){
+          if(this.devicePosition !== 0){
+            this.projectDevice = null
+          }
           this.deviceSegment = [] 
           this.ionViewWillEnter()
         }
@@ -54,7 +56,7 @@ export class DashboardPage implements OnInit {
         this.getUserProject()
       }
 
-      if(this.backButton == 1){
+      if(this.backButton === 1){
         console.log("backButton")
         this.ionViewWillEnter()
       }

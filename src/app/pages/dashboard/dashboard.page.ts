@@ -160,7 +160,6 @@ export class DashboardPage implements OnInit {
     for (let item of this.deviceSensor) {
      arrSensor.push(item.sensor_id)
     }
-    console.log(arrSensor)
     let navigationExtras: NavigationExtras = {
       queryParams : arrSensor
     };

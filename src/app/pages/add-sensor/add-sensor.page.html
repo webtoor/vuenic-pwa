@@ -13,7 +13,7 @@
     <ion-item>
       <ion-label position="stacked">Sensor <ion-text color="danger">*</ion-text></ion-label>
       <ion-select interface="alert" class="my-custom-interface" multiple="true" formControlName="sensor_id" okText="OK" placeholder="Pilih Sensor" cancelText="Tutup">
-        <ion-select-option>1</ion-select-option>
+        <ion-select-option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.sensor_name}}</ion-select-option>
       </ion-select>
     </ion-item>
 

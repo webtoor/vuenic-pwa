@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-add-sensor',
@@ -10,7 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddSensorPage implements OnInit {
   addSensorForm : FormGroup
   useSensor;
-  constructor(public route : ActivatedRoute, public router : Router, private formBuilder: FormBuilder) {
+  sensors;
+  constructor(public httpService: AuthService, public route : ActivatedRoute, public router : Router, private formBuilder: FormBuilder) {
     this.addSensorForm = this.formBuilder.group({
       'sensor_id' : [null, [Validators.required]],
     });
@@ -18,9 +20,19 @@ export class AddSensorPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-        console.log(Object.values(params))
+      this.useSensor = Object.values(params).map(function(v){return +v})
+        console.log(this.useSensor)
     });
+    this.getSensor()
   }
   
+  getSensor(){
+    this.httpService.GetRequest('sensor').subscribe(res => {
+      console.log(res);
+      if(res.status == 200){
+        this.sensors = res.data.filter(item => !this.useSensor.includes(item.id))
+      }
+    });
+  }
 
 }

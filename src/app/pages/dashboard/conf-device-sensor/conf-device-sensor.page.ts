@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-conf-device-sensor',
@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ConfDeviceSensorPage implements OnInit {
   project_device_id
   apiDevKey;
+  userProjectID;
   constructor(public router: Router,public httpService: AuthService, public route : ActivatedRoute,) { 
     this.project_device_id = this.route.snapshot.paramMap.get('project_device_id');
   }
@@ -20,6 +21,7 @@ export class ConfDeviceSensorPage implements OnInit {
     for(var j=0; j < params.length; j++){
       if(params[j]["id"] == this.project_device_id){
         //console.log(params[j]["id"])
+        this.userProjectID = params[j]["user_project_id"]
         this.apiDevKey = params[j]["key"]
       }
     }
@@ -46,6 +48,17 @@ export class ConfDeviceSensorPage implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+  }
+
+  deleteDevice(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+       funcStatus : "deleteDevice",
+       projectDeviceID : this.project_device_id,
+       userProjectID : this.userProjectID
+      }
+    };
+    this.router.navigate(['/delete-confirm'], navigationExtras)
   }
 
 }

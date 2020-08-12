@@ -65,6 +65,10 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: 'add-sensor',
+    loadChildren: () => import('./pages/add-sensor/add-sensor.module').then( m => m.AddSensorPageModule)
   }
  /*  {
     path: 'dashboard',

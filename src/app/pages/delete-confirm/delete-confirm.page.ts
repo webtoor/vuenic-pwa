@@ -55,7 +55,8 @@ export class DeleteConfirmPage implements OnInit {
           replaceUrl: true,
           state: {
             refreshPage: 1,
-            userProjectID : this.userProjectID
+            userProjectID : this.userProjectID,
+            devicePosition : this.projectDeviceID
           }
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);

@@ -29,6 +29,7 @@ export class DashboardPage implements OnInit {
   device_last = 0;
   alive = true;
   backButton = 0;
+  devicePosition = 0;
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
    }
@@ -40,6 +41,7 @@ export class DashboardPage implements OnInit {
         this.backButton = parseInt(this.router.getCurrentNavigation().extras.state.backButton);
         this.user_project_id = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
         this.device_last = parseInt(this.router.getCurrentNavigation().extras.state.deviceLast);
+        this.devicePosition = parseInt(this.router.getCurrentNavigation().extras.state.devicePosition);
       }
     
       if(this.refreshPage == 1){
@@ -101,6 +103,8 @@ export class DashboardPage implements OnInit {
           this.deviceSegment = res.data.project_device;
           if(this.device_last == 1){
             this.segmentDefault = res.data.project_device[res.data.project_device.length - 1]["id"]
+          }else if(this.devicePosition != 0){
+            this.segmentDefault = this.devicePosition
           }else{
             this.segmentDefault = res.data.project_device[0]["id"]
           }
@@ -112,6 +116,7 @@ export class DashboardPage implements OnInit {
 
   segmentChanged(value){
     console.log('segmentChanged')
+    console.log(value)
     this.segmentDefault = value
     this.getSensorData(this.segmentDefault);
     this.setInterval();

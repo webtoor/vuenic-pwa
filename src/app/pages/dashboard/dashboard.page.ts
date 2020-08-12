@@ -4,7 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { DeviceSensorService } from '../../services/device-sensor.service';
 import { interval, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -150,12 +150,21 @@ export class DashboardPage implements OnInit {
 
   createDeviceSensor(projectID){
     //console.log(projectID)
+   
     this.router.navigate(["create-device-sensor/" + projectID])
   }
 
   addSensor(projectDeviceID){
     //console.log(projectID)
-    this.router.navigate(["add-sensor/" + projectDeviceID])
+    let arrSensor = []
+    for (let item of this.deviceSensor) {
+     arrSensor.push(item.sensor_id)
+    }
+    console.log(arrSensor)
+    let navigationExtras: NavigationExtras = {
+      queryParams : arrSensor
+    };
+    this.router.navigate(["add-sensor/" + projectDeviceID], navigationExtras)
   }
 
   settingUserProject(ProjectID){

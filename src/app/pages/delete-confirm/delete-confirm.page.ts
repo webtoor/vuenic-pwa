@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,7 +17,7 @@ export class DeleteConfirmPage implements OnInit {
   projectDeviceID;
   sensorID;
   userProjectID;
-  constructor(public loading: LoaderService, private formBuilder: FormBuilder, public route : ActivatedRoute, public router: Router, public httpService : AuthService) {
+  constructor(public toastController: ToastController, public loading: LoaderService, private formBuilder: FormBuilder, public route : ActivatedRoute, public router: Router, public httpService : AuthService) {
     this.deleteConfirmForm = this.formBuilder.group({
       'sensor_id' : null,
       'project_device_id' : null,
@@ -61,7 +62,18 @@ export class DeleteConfirmPage implements OnInit {
         };
         this.router.navigate(['/tabs/dashboard'], navigationExtras);
         this.loading.dismiss();
+      }else{
+        this.presentToast("Anda memasukkan Password yang salah. Isi dengan benar dan coba lagi")
       }
     });
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 }

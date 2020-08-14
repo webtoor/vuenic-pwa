@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-setting-detail',
@@ -7,10 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./setting-detail.page.scss'],
 })
 export class SettingDetailPage implements OnInit {
-
-  constructor(public router : Router) { }
+  password = null;
+  constructor(public router : Router, public httpService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.getUserInfo();
   }
 
 
@@ -23,7 +28,25 @@ export class SettingDetailPage implements OnInit {
   }
 
   settingPassword(){
-    this.router.navigate(["settings/setting-detail/setting-password"])
+    let navigationExtras: NavigationExtras = {
+      state : {
+       statusPWD : this.password
+      }
+    };
+    this.router.navigate(["settings/setting-detail/setting-password"], navigationExtras)
+  }
+
+  getUserInfo(){
+    this.httpService.GetRequest('user-info').subscribe(res => {
+      console.log(res);
+      if (res.status == 200) {
+        if (res.data.password) {
+          this.password = "update-password"
+        }else{
+          this.password = "set-password"
+        }
+      }
+    });
   }
 
 }

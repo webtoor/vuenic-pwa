@@ -17,27 +17,10 @@ export class SettingPasswordPage implements OnInit {
    
   }
 
-
   ngOnInit() {
     this.settingPasswordForm = this.formBuilder.group({
       'old_password' : [null, [Validators.required]],
       'new_password' : [null, [Validators.required]],
-    });
-  }
-
-  ionViewDidEnter(){
-    this.getUserInfo()
-
-  }
-
-  getUserInfo(){
-    this.httpService.GetRequest('user-info').subscribe(res => {
-      console.log(res);
-      if (res.status == 200) {
-        if (res.data.password) {
-         
-        }
-      }
     });
   }
 

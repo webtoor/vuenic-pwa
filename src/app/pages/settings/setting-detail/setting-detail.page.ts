@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-setting-detail',
@@ -9,9 +10,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SettingDetailPage implements OnInit {
   password = null;
-  constructor(public router : Router, public httpService: AuthService) { }
+  message;
+  constructor(public toastController : ToastController, public route : ActivatedRoute, public router : Router, public httpService: AuthService) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.message = this.router.getCurrentNavigation().extras.state.message;
+      }
+      if(this.message){
+        this.presentToast(this.message)
+      }
+    });
   }
 
   ionViewWillEnter(){
@@ -47,6 +57,15 @@ export class SettingDetailPage implements OnInit {
         }
       }
     });
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }

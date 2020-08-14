@@ -39,7 +39,7 @@ export class SigninPage implements OnInit {
 
   ionViewDidEnter(){
     const check = JSON.parse(localStorage.getItem('vuenic-pwa'));
-    if(check.access_token){
+    if(check){
       this.router.navigate(["tabs/dashboard"])
     }
   }
@@ -51,6 +51,7 @@ export class SigninPage implements OnInit {
   signInWithGoogle(): void {
     this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.authSocial.authState.subscribe(data => {
+      console.log(data)
       this.socialToken = data.idToken
       this.socialProvider = "GOOGLE";
       this.postSocialAuth(data)

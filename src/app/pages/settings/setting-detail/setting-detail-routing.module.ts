@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'setting-address',
     loadChildren: () => import('./setting-address/setting-address.module').then( m => m.SettingAddressPageModule)
+  },
+  {
+    path: 'setting-password',
+    loadChildren: () => import('./setting-password/setting-password.module').then( m => m.SettingPasswordPageModule)
   }
 ];
 

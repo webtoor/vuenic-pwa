@@ -11,8 +11,8 @@ const routes: Routes = [
   {
     path: 'setting-detail',
     loadChildren: () => import('./setting-detail/setting-detail.module').then( m => m.SettingDetailPageModule)
-  }
-];
+  },
+ ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -22,4 +22,8 @@ export class SettingDetailPage implements OnInit {
     this.router.navigate(["settings/setting-detail/setting-address"])
   }
 
+  settingPassword(){
+    this.router.navigate(["settings/setting-detail/setting-password"])
+  }
+
 }

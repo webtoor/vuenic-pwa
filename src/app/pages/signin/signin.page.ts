@@ -39,7 +39,7 @@ export class SigninPage implements OnInit {
 
   ionViewDidEnter(){
     const check = JSON.parse(localStorage.getItem('vuenic-pwa'));
-    if(check){
+    if(check.access_token){
       this.router.navigate(["tabs/dashboard"])
     }
   }

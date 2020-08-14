@@ -13,14 +13,41 @@ export class SettingPasswordPage implements OnInit {
   userInfo
   settingPasswordForm: FormGroup;
   submitted;
+  statusPWD;
+  setPWD;
   constructor(private formBuilder: FormBuilder, public route : ActivatedRoute, public router : Router, public loading: LoaderService, public httpService: AuthService) {
-   
+    
   }
 
   ngOnInit() {
-    this.settingPasswordForm = this.formBuilder.group({
-      'old_password' : [null, [Validators.required]],
-      'new_password' : [null, [Validators.required]],
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.statusPWD = this.router.getCurrentNavigation().extras.state.statusPWD;
+      }
+
+      console.log(this.statusPWD)
+
+      switch (this.statusPWD) {
+        case "update-password":
+          this.setPWD = 0
+          this.settingPasswordForm = this.formBuilder.group({
+            'old_password' : [null, [Validators.required]],
+            'new_password' : [null, [Validators.required]],
+          });
+            break;
+        case "set-password":
+          this.setPWD = 1
+          this.settingPasswordForm = this.formBuilder.group({
+            'password' : [null, [Validators.required]],
+          });
+            break;
+        default:
+          this.setPWD = 1;
+          this.settingPasswordForm = this.formBuilder.group({
+            'password' : [null, [Validators.required]],
+          });
+          break;            
+      }
     });
   }
 

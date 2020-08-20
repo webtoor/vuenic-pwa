@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AccountPage implements OnInit {
   fullName : String
   info
+  deviceInfo
   constructor(public router : Router, public httpService: AuthService) { }
 
   ngOnInit() {
@@ -20,9 +21,11 @@ export class AccountPage implements OnInit {
 
   getProjectDeviceInfo(){
     this.httpService.GetRequest('account-project-device').subscribe(res => {
-      console.log(res);
+      //console.log(res);
       if(res.status == 200){
         this.info = res.data
+        this.deviceInfo = res.data[0].project_device
+        console.log(this.deviceInfo)
       }
     });
   }

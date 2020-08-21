@@ -26,6 +26,8 @@ export class SigninPage implements OnInit {
   }
   socialToken;
   socialProvider;
+  showPassword = false;
+  passwordToggleIcon = "eye";
   constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
@@ -120,5 +122,14 @@ export class SigninPage implements OnInit {
 
   resetPWD(){
     this.router.navigate(['/reset-password'])
+  }
+
+  togglePassword():void{
+    this.showPassword = !this.showPassword
+    if(this.passwordToggleIcon == "eye"){
+      this.passwordToggleIcon = "eye-off";
+    }else{
+      this.passwordToggleIcon = "eye";
+    }
   }
 }

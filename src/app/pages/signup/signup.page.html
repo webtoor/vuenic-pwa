@@ -47,7 +47,8 @@
 
   <ion-item class="marginTop">
     <ion-label position="stacked">Password</ion-label>
-    <ion-input type="password" placeholder=" Masukan Password" formControlName="password"></ion-input>
+    <ion-input [type]="showPassword ? 'text' : 'password'" placeholder="Masukan Password" formControlName="password"></ion-input>
+    <ion-icon slot="end" [name]="passwordToggleIcon" style="margin-top: 25px;" (click)="togglePassword()"></ion-icon>
   </ion-item>
   <div *ngIf="submitted && f.password.errors" class="invalid-feedback" style="margin-top:-10px;">
     <div *ngIf="f.password.errors.required">Password harus diisi guys :(</div>

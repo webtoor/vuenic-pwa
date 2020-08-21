@@ -28,6 +28,8 @@ export class SignupPage implements OnInit {
   }
   socialToken;
   socialProvider;
+  showPassword = false;
+  passwordToggleIcon = "eye";
   constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
     this.menu.enable(false);
     this.signupForm = this.formBuilder.group({
@@ -134,5 +136,14 @@ export class SignupPage implements OnInit {
 
   signinPage(){
     this.router.navigate(['/signin'])
+  }
+
+  togglePassword():void{
+    this.showPassword = !this.showPassword
+    if(this.passwordToggleIcon == "eye"){
+      this.passwordToggleIcon = "eye-off";
+    }else{
+      this.passwordToggleIcon = "eye";
+    }
   }
 }

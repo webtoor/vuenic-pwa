@@ -117,4 +117,8 @@ export class SigninPage implements OnInit {
   signupPage(){
     this.router.navigate(['/signup'])
   }
+
+  resetPWD(){
+    this.router.navigate(['/reset-password'])
+  }
 }

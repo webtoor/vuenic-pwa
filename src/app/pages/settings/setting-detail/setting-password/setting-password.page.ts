@@ -18,6 +18,8 @@ export class SettingPasswordPage implements OnInit {
   setPWD;
   stateMessage;
   urlPath : String;
+  showOldPassword = false;
+  passwordOldToggleIcon = "eye";
   constructor(public toastController : ToastController, private formBuilder: FormBuilder, public route : ActivatedRoute, public router : Router, public loading: LoaderService, public httpService: AuthService) {
     
   }
@@ -93,5 +95,14 @@ export class SettingPasswordPage implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  toggleOldPassword():void{
+    this.showOldPassword = !this.showOldPassword
+    if(this.passwordOldToggleIcon == "eye"){
+      this.passwordOldToggleIcon = "eye-off";
+    }else{
+      this.passwordOldToggleIcon = "eye";
+    }
   }
 }

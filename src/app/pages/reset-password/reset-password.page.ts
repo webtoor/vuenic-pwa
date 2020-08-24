@@ -10,6 +10,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class ResetPasswordPage implements OnInit {
   resetPWDForm: FormGroup;
+  resetCodeForm: FormGroup;
+
   submitted;
   resetPassword = true
   verifyEmail = false
@@ -18,6 +20,10 @@ export class ResetPasswordPage implements OnInit {
   ngOnInit() {
     this.resetPWDForm = this.formBuilder.group({
       'email' : [null, [Validators.required, Validators.email]],
+    });
+    this.resetCodeForm = this.formBuilder.group({
+      'email' : [null, [Validators.required, Validators.email]],
+      'code' : [null, [Validators.required]],
     });
   }
 

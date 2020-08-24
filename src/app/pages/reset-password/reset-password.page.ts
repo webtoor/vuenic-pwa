@@ -99,8 +99,6 @@ export class ResetPasswordPage implements OnInit {
         this.resetPassword = false
         this.verifyEmail = false
         this.setPassword = true
-
-
         
       }else{
         this.presentToast(res.message)
@@ -117,20 +115,15 @@ export class ResetPasswordPage implements OnInit {
         return;
     }
     console.log(this.setPasswordForm.value)
-  /*   this.httpService.PostRequest(this.setPasswordForm.value, 'verify-code-pwd').subscribe(res => {
+    this.httpService.PutRequest(this.setPasswordForm.value, 'reset-password').subscribe(res => {
       console.log(res)
       if(res.status == 200){
-        this.email = res.email  
-        this.setPasswordForm.patchValue({
-          'email' : res['email'],
-        }) 
-        this.setPassword = true
         
       }else{
         this.presentToast(res.message)
       }
   
-    }); */
+    });
   }
   
   get h() { return this.resetCodeForm.controls; }

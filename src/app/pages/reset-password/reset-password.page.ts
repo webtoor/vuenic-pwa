@@ -27,7 +27,7 @@ export class ResetPasswordPage implements OnInit {
         return;
     }
     console.log(this.resetPWDForm.value)
-    this.httpService.PostRequest(this.resetPWDForm.value, 'check-email').subscribe(res => {
+    this.httpService.PostRequest(this.resetPWDForm.value, 'verify-code-reset').subscribe(res => {
       console.log(res)
       if(res.status == 200){
         this.resetPassword = false

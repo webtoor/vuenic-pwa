@@ -91,7 +91,7 @@ export class SigninPage implements OnInit {
     }
     //console.log(this.loginForm.value)
     this.loading.present();
-    this.authService.Postlogin(this.loginForm.value, 'login').subscribe(res => {
+    this.authService.Postlogin(this.loginForm.value, 'signin').subscribe(res => {
       console.log(res)
       if(res.access_token) {
         localStorage.setItem('vuenic-pwa', JSON.stringify(res));

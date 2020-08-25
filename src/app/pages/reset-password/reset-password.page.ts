@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -23,7 +24,7 @@ export class ResetPasswordPage implements OnInit {
   showConfirmPassword = false;
   passwordConfirmToggleIcon = "eye";
 
-  constructor(public toastController : ToastController, private formBuilder: FormBuilder, public httpService : AuthService) { }
+  constructor(public router: Router, public toastController : ToastController, private formBuilder: FormBuilder, public httpService : AuthService) { }
 
   ngOnInit() {
     this.resetPWDForm = this.formBuilder.group({
@@ -117,8 +118,10 @@ export class ResetPasswordPage implements OnInit {
     console.log(this.setPasswordForm.value)
     this.httpService.PutRequest(this.setPasswordForm.value, 'reset-password').subscribe(res => {
       console.log(res)
-      if(res.status == 200){
-        
+      if(res.status == 200){  
+        this.presentToast("Berhasil memperbarui password, Silakan Masuk kembali")
+        this.router.navigate(['/signup'], {replaceUrl : true})
+
       }else{
         this.presentToast(res.message)
       }

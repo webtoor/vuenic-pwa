@@ -46,6 +46,7 @@ export class CreateDeviceSensorPage implements OnInit {
           replaceUrl: true,
           state : {
             refreshPage: 1,
+            devicePosition : null,
             deviceLast : 1,
             userProjectID : this.user_project_id
           }

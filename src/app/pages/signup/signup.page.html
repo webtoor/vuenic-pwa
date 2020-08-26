@@ -38,7 +38,7 @@
 
   <ion-item class="marginTop">
     <ion-label position="stacked">Email</ion-label>
-    <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+    <ion-input type="email" placeholder="Masukan Email" formControlName="email"></ion-input>
   </ion-item>
   <div *ngIf="submitted && f.email.errors" class="invalid-feedback" style="margin-top:-10px;">
     <div *ngIf="f.email.errors.required">Email harus diisi guys :(</div>
@@ -47,7 +47,8 @@
 
   <ion-item class="marginTop">
     <ion-label position="stacked">Password</ion-label>
-    <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+    <ion-input [type]="showPassword ? 'text' : 'password'" placeholder="Masukan Password" formControlName="password"></ion-input>
+    <ion-icon slot="end" [name]="passwordToggleIcon" style="margin-top: 25px;" (click)="togglePassword()"></ion-icon>
   </ion-item>
   <div *ngIf="submitted && f.password.errors" class="invalid-feedback" style="margin-top:-10px;">
     <div *ngIf="f.password.errors.required">Password harus diisi guys :(</div>
@@ -73,7 +74,7 @@
   <div class="ion-text-center" style="margin-top:10px">
     <ion-button expand="block" color="medium" fill="outline" style="height:50px" (click)="signUpWithGithub()">
       <img src="/assets/images/github.png" height="25px;" style="margin-right: 8px;">
-      <b>Masuk dengan Github</b>
+      <b>Daftar dengan Github</b>
     </ion-button>
   </div>
 </ion-content>

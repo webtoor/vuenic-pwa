@@ -26,10 +26,10 @@ export class DashboardPage implements OnInit {
   deviceSensor; 
   refreshPage = 0;
   user_project_id = 0;
-  device_last = 0;
+  deviceLast = 0;
   alive = true;
   backButton = 0;
-  devicePosition = 0;
+  devicePosition = 0
   constructor(public route : ActivatedRoute, public router: Router, public menu: MenuController, public httpService : UserProjectService, public httpDeviceSensor : DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
    }
@@ -40,8 +40,8 @@ export class DashboardPage implements OnInit {
         this.refreshPage = parseInt(this.router.getCurrentNavigation().extras.state.refreshPage);
         this.backButton = parseInt(this.router.getCurrentNavigation().extras.state.backButton);
         this.user_project_id = parseInt(this.router.getCurrentNavigation().extras.state.userProjectID);
-        this.device_last = parseInt(this.router.getCurrentNavigation().extras.state.deviceLast);
-        this.devicePosition = parseInt(this.router.getCurrentNavigation().extras.state.devicePosition);
+        this.deviceLast = parseInt(this.router.getCurrentNavigation().extras.state.deviceLast);
+        this.devicePosition = this.router.getCurrentNavigation().extras.state.devicePosition;
       }
     
       if(this.refreshPage == 1){
@@ -99,15 +99,25 @@ export class DashboardPage implements OnInit {
           this.commodityTypeName = res.data.commodity_type.name;
         }
         this.projectLocation = res.data.project_location;
+        console.log("proj")
+
         if(res.data.project_device){
           localStorage.setItem('vuenic-dev-key', JSON.stringify(res.data.project_device));
           this.projectDevice = res.data.project_device.length;
           this.deviceSegment = res.data.project_device;
-          if(this.device_last == 1){
+          console.log("proj")
+
+          if(this.deviceLast === 1 && this.devicePosition === null){
+            // Add Device - Last Device 
+            console.log("1", this.deviceLast, this.devicePosition)
             this.segmentDefault = res.data.project_device[res.data.project_device.length - 1]["id"]
-          }else if(this.devicePosition != 0){
+          }else if(this.deviceLast === 0 && this.devicePosition !== 0 && this.devicePosition !== null){
+            // Delete Sensor 
+            console.log("2", this.deviceLast, this.devicePosition)
             this.segmentDefault = this.devicePosition
           }else{
+            // Delete Device or Default
+            console.log("3", this.deviceLast, this.devicePosition)
             this.segmentDefault = res.data.project_device[0]["id"]
           }
           this.getSensorData(this.segmentDefault);
@@ -157,7 +167,6 @@ export class DashboardPage implements OnInit {
 
   createDeviceSensor(projectID){
     //console.log(projectID)
-   
     this.router.navigate(["create-device-sensor/" + projectID])
   }
 

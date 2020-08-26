@@ -26,6 +26,8 @@ export class SigninPage implements OnInit {
   }
   socialToken;
   socialProvider;
+  showPassword = false;
+  passwordToggleIcon = "eye";
   constructor(public route : ActivatedRoute, private authSocial: SocialAuthService, public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
     this.menu.enable(false);
   }
@@ -89,7 +91,7 @@ export class SigninPage implements OnInit {
     }
     //console.log(this.loginForm.value)
     this.loading.present();
-    this.authService.Postlogin(this.loginForm.value, 'login').subscribe(res => {
+    this.authService.Postlogin(this.loginForm.value, 'signin').subscribe(res => {
       console.log(res)
       if(res.access_token) {
         localStorage.setItem('vuenic-pwa', JSON.stringify(res));
@@ -116,5 +118,18 @@ export class SigninPage implements OnInit {
 
   signupPage(){
     this.router.navigate(['/signup'])
+  }
+
+  resetPWD(){
+    this.router.navigate(['/reset-password'])
+  }
+
+  togglePassword():void{
+    this.showPassword = !this.showPassword
+    if(this.passwordToggleIcon == "eye"){
+      this.passwordToggleIcon = "eye-off";
+    }else{
+      this.passwordToggleIcon = "eye";
+    }
   }
 }

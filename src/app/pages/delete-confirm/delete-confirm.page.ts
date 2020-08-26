@@ -18,6 +18,9 @@ export class DeleteConfirmPage implements OnInit {
   sensorID;
   userProjectID;
   urlPath : String;
+  deviceLast 
+  showPassword = false;
+  passwordToggleIcon = "eye";
   constructor(public toastController: ToastController, public loading: LoaderService, private formBuilder: FormBuilder, public route : ActivatedRoute, public router: Router, public httpService : AuthService) {
     this.deleteConfirmForm = this.formBuilder.group({
       'sensor_id' : null,
@@ -40,6 +43,7 @@ export class DeleteConfirmPage implements OnInit {
             sensor_id : this.sensorID,
             project_device_id : this.projectDeviceID
           })
+          this.deviceLast = 0
         }else if(this.funcStatus === "deleteDevice"){
           console.log("deleteDevice")
           this.urlPath = "device";
@@ -47,8 +51,8 @@ export class DeleteConfirmPage implements OnInit {
           this.deleteConfirmForm.patchValue({
             project_device_id : this.projectDeviceID
           })
-
-          this.projectDeviceID = 0
+          this.deviceLast = 1
+          this.projectDeviceID = null
         }
       
       }
@@ -71,6 +75,7 @@ export class DeleteConfirmPage implements OnInit {
           state: {
             refreshPage: 1,
             userProjectID : this.userProjectID,
+            deviceLast : this.deviceLast,
             devicePosition : this.projectDeviceID
           }
         };
@@ -89,5 +94,14 @@ export class DeleteConfirmPage implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  togglePassword():void{
+    this.showPassword = !this.showPassword
+    if(this.passwordToggleIcon == "eye"){
+      this.passwordToggleIcon = "eye-off";
+    }else{
+      this.passwordToggleIcon = "eye";
+    }
   }
 }

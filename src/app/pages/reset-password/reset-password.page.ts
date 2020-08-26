@@ -120,7 +120,7 @@ export class ResetPasswordPage implements OnInit {
       console.log(res)
       if(res.status == 200){  
         this.presentToast("Berhasil memperbarui password, Silakan Masuk kembali")
-        this.router.navigate(['/signup'], {replaceUrl : true})
+        this.router.navigate(['/signin'], {replaceUrl : true})
 
       }else{
         this.presentToast(res.message)

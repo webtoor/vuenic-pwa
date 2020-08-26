@@ -99,11 +99,13 @@ export class DashboardPage implements OnInit {
           this.commodityTypeName = res.data.commodity_type.name;
         }
         this.projectLocation = res.data.project_location;
+        console.log("proj")
+
         if(res.data.project_device){
           localStorage.setItem('vuenic-dev-key', JSON.stringify(res.data.project_device));
           this.projectDevice = res.data.project_device.length;
           this.deviceSegment = res.data.project_device;
-          console.log(this.deviceLast, this.devicePosition)
+          console.log("proj")
 
           if(this.deviceLast === 1 && this.devicePosition === null){
             // Add Device - Last Device 

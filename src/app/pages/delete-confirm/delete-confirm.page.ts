@@ -19,6 +19,8 @@ export class DeleteConfirmPage implements OnInit {
   userProjectID;
   urlPath : String;
   deviceLast 
+  showPassword = false;
+  passwordToggleIcon = "eye";
   constructor(public toastController: ToastController, public loading: LoaderService, private formBuilder: FormBuilder, public route : ActivatedRoute, public router: Router, public httpService : AuthService) {
     this.deleteConfirmForm = this.formBuilder.group({
       'sensor_id' : null,
@@ -92,5 +94,14 @@ export class DeleteConfirmPage implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  togglePassword():void{
+    this.showPassword = !this.showPassword
+    if(this.passwordToggleIcon == "eye"){
+      this.passwordToggleIcon = "eye-off";
+    }else{
+      this.passwordToggleIcon = "eye";
+    }
   }
 }

@@ -40,7 +40,7 @@ export class ListProjectPage implements OnInit {
       replaceUrl: true,
       state: {
         refreshPage: 1,
-        devicePosition : 0,
+        devicePosition : null,
         deviceLast : 0,
         userProjectID : user_project_id
       }

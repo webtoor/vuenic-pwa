@@ -11,6 +11,7 @@ import { ToastController } from '@ionic/angular';
 export class SettingDetailPage implements OnInit {
   password = null;
   message;
+  statusSandi
   constructor(public toastController : ToastController, public route : ActivatedRoute, public router : Router, public httpService: AuthService) { }
 
   ngOnInit() {
@@ -51,9 +52,11 @@ export class SettingDetailPage implements OnInit {
       console.log(res);
       if (res.status == 200) {
         if (res.data.password) {
+          this.statusSandi = "Ubah"
           this.password = "update-password"
         }else{
           this.password = "set-password"
+          this.statusSandi = "Atur"
         }
       }
     });

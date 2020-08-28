@@ -52,12 +52,12 @@ export class DashboardPage implements OnInit {
           this.deviceSegment = [] 
           this.ionViewWillEnter()
         }
-        console.log("RefreshPage", this.user_project_id)
+        //console.log("RefreshPage", this.user_project_id)
         this.getUserProject()
       }
 
       if(this.backButton === 1){
-        console.log("backButton")
+        //console.log("backButton")
         this.ionViewWillEnter()
       }
     
@@ -67,8 +67,8 @@ export class DashboardPage implements OnInit {
   
 
   ionViewWillEnter(){
-    console.log("ionViewWillEnter")
-    console.log(this.projectName, this.projectDevice)
+    //console.log("ionViewWillEnter")
+    //console.log(this.projectName, this.projectDevice)
     if(this.projectName && this.projectDevice){
       this.alive = true;
       this.setInterval()
@@ -76,7 +76,7 @@ export class DashboardPage implements OnInit {
   }
 
   ionViewWillLeave(){
-    console.log("ionViewWillLeave")
+    //console.log("ionViewWillLeave")
     this.alive = false;
     this.refreshPage = 0;
     this.user_project_id = this.user_project_id
@@ -86,7 +86,7 @@ export class DashboardPage implements OnInit {
 
   getUserProject(){
     this.httpService.getUserProject('user-project-loc/' + this.user_project_id).subscribe(res => {
-      console.log(res);
+      //console.log(res);
       if((res.status == 200) && (Object.keys(res.data).length > 0)){
         this.projectID = res.data.id;
         this.projectName = res.data.project_name;
@@ -99,25 +99,23 @@ export class DashboardPage implements OnInit {
           this.commodityTypeName = res.data.commodity_type.name;
         }
         this.projectLocation = res.data.project_location;
-        console.log("proj")
 
         if(res.data.project_device){
           localStorage.setItem('vuenic-dev-key', JSON.stringify(res.data.project_device));
           this.projectDevice = res.data.project_device.length;
           this.deviceSegment = res.data.project_device;
-          console.log("proj")
 
           if(this.deviceLast === 1 && this.devicePosition === null){
             // Add Device - Last Device 
-            console.log("1", this.deviceLast, this.devicePosition)
+            //console.log("1", this.deviceLast, this.devicePosition)
             this.segmentDefault = res.data.project_device[res.data.project_device.length - 1]["id"]
           }else if(this.deviceLast === 0 && this.devicePosition !== 0 && this.devicePosition !== null){
             // Delete Sensor 
-            console.log("2", this.deviceLast, this.devicePosition)
+            //console.log("2", this.deviceLast, this.devicePosition)
             this.segmentDefault = this.devicePosition
           }else{
             // Delete Device or Default
-            console.log("3", this.deviceLast, this.devicePosition)
+            //console.log("3", this.deviceLast, this.devicePosition)
             this.segmentDefault = res.data.project_device[0]["id"]
           }
           this.getSensorData(this.segmentDefault);
@@ -127,22 +125,22 @@ export class DashboardPage implements OnInit {
   }
 
   segmentChanged(value){
-    console.log('segmentChanged')
-    console.log(value)
+    //console.log('segmentChanged')
+   //console.log(value)
     this.segmentDefault = value
     this.getSensorData(this.segmentDefault);
     this.setInterval();
   }
 
   setInterval(){
-    console.log("Activate Interval")
+    //console.log("Activate Interval")
     const intervallTimer = interval(60000 * 5);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
   getSensorData(device_id){
     this.httpDeviceSensor.getDeviceSensor('device-sensor/'+ device_id).subscribe(res => {
-     console.log(res.data);
+     //console.log(res.data);
       if(res.status == 200){
         this.deviceSensor = res.data
         if((this.deviceSensor.length == 0) || (this.deviceSensor[0]["data_sensor"] == null)){
@@ -171,7 +169,7 @@ export class DashboardPage implements OnInit {
   }
 
   addSensor(projectDeviceID){
-    console.log(projectDeviceID)
+    //console.log(projectDeviceID)
     let arrSensor = []
     for (let item of this.deviceSensor) {
      arrSensor.push(item.sensor_id)

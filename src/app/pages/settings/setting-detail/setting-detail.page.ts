@@ -49,7 +49,7 @@ export class SettingDetailPage implements OnInit {
 
   getUserInfo(){
     this.httpService.GetRequest('user-info').subscribe(res => {
-      console.log(res);
+      //console.log(res);
       if (res.status == 200) {
         if (res.data.password) {
           this.statusSandi = "Ubah"

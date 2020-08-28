@@ -79,7 +79,7 @@ export class SignupPage implements OnInit {
     //console.log(this.socialLogin)
     this.loading.present();
     this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.access_token) {
         localStorage.setItem('vuenic-pwa', JSON.stringify(res));
         this.events.publish('email', res.email);
@@ -107,10 +107,10 @@ export class SignupPage implements OnInit {
       })
     }
     
-    console.log(this.signupForm.value)
+    //console.log(this.signupForm.value)
     this.loading.present();
     this.authService.Postsignup(this.signupForm.value, 'signup').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.status == 201) {
         this.submitted = false;
         this.signupForm.reset()

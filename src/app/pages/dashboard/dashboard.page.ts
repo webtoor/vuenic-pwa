@@ -134,13 +134,13 @@ export class DashboardPage implements OnInit {
 
   setInterval(){
     //console.log("Activate Interval")
-    const intervallTimer = interval(60000 * 5);
+    const intervallTimer = interval(10000);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
   getSensorData(device_id){
     this.httpDeviceSensor.getDeviceSensor('device-sensor/'+ device_id).subscribe(res => {
-     //console.log(res.data);
+     console.log(res.data);
       if(res.status == 200){
         this.deviceSensor = res.data
         if((this.deviceSensor.length == 0) || (this.deviceSensor[0]["data_sensor"] == null)){

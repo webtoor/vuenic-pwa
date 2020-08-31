@@ -71,7 +71,7 @@ export class SigninPage implements OnInit {
     //console.log(this.socialLogin)
     this.loading.present();
     this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.access_token) {
         localStorage.setItem('vuenic-pwa', JSON.stringify(res));
         this.events.publish('email', res.email);
@@ -92,7 +92,7 @@ export class SigninPage implements OnInit {
     //console.log(this.loginForm.value)
     this.loading.present();
     this.authService.Postlogin(this.loginForm.value, 'signin').subscribe(res => {
-      console.log(res)
+      //console.log(res)
       if(res.access_token) {
         localStorage.setItem('vuenic-pwa', JSON.stringify(res));
         this.events.publish('email', res.email);

@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <div *ngIf="projectName">
+  <div *ngIf="projectName; else emptyProjectHeader">
   <ion-toolbar color="primary" style="height: 150px;">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -44,6 +44,19 @@
     </ion-card>
   </ion-toolbar>
 </div>
+
+<!-- EMPTY PROJECT HEADER-->
+<ng-template #emptyProjectHeader>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <img src="/assets/images/text-white.png" height="28px;" style="margin-top: 4px; margin-right: 35px;">
+    </ion-title>
+  </ion-toolbar>
+</ng-template>
+<!-- EMPTY PROJECT HEADER-->
 </ion-header>
 
 
@@ -143,7 +156,7 @@
     <ng-template #emptySensorData>
       <div style="text-align: center;">
         <ion-img src="/assets/images/logo-vuenic.png" style="height: 100px; margin-top: 18%;"></ion-img>
-        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="danger">Sensor Anda Masih Kosong</ion-badge></h5>
+        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="danger">Anda belum memiliki sensor pada device ini</ion-badge></h5>
       </div>
     </ng-template>
     </div>

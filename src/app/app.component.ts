@@ -24,11 +24,11 @@ export class AppComponent implements OnInit {
       url: '/tabs/account',
       icon: 'person-circle'
     },
-    {
+    /* {
       title: 'About',
       url: '/tabs/about',
       icon: 'information-circle'
-    },
+    }, */
    /*  {
       title: 'Archived',
       url: '/folder/Archived',

@@ -1,5 +1,6 @@
 # vuenic-pwa [STOP DEVELOPMENT]
-IoT Platform (Monitoring, Data Analysis, Control)
+
+Monitoring, Data Analysis and Control for IoT Projects
 
 - API : https://github.com/webtoor/vuenic-go
 - PWA : https://github.com/webtoor/vuenic-pwa
